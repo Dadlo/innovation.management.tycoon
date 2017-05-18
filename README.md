@@ -5,9 +5,11 @@ Innovation Management Tycoon
 
 Projeto em Unity3D de Serious Game de Gerenciamento de Projetos de Inovação.
 
+Este jogo tem como foco o build para Tablets, inicialmente o desenvolvimento para Smartphones de Tela Grande e Tablets Android.
+
 ### Instalação
 
-Basta clonar o repositório ou baixar o pacote e descompactar e abrir em versão compatível do Unity 3D.
+Basta clonar o repositório ou baixar o pacote e descompactar e abrir em versão compatível do Unity 3D, com SDK configurado para build Android.
 Projeto criado com versão 5.5.0 (5.5.0xf3Linux)
 
 ### Referências
