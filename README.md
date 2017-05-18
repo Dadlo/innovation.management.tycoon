@@ -8,7 +8,7 @@ Projeto em Unity3D de Serious Game de Gerenciamento de Projetos de Inovação.
 ### Instalação
 
 Basta clonar o repositório ou baixar o pacote e descompactar e abrir em versão compatível do Unity 3D.
-Projeto criado com versão 
+Projeto criado com versão 5.5.0 (5.5.0xf3Linux)
 
 ### Referências
 
