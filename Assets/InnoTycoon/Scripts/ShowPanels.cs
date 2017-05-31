@@ -7,7 +7,8 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject optionsTint;							//Store a reference to the Game Object OptionsTint 
 	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
 	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
-	public GameObject HUDPanel;								//Store a reference to the Game Object PausePanel 
+	public GameObject HUDPanel;								//Store a reference to the Game Object HUD 
+	public GameObject ScrollerPanel;						//Store a reference to the Game Object Scroller 
 
 
 
@@ -37,6 +38,18 @@ public class ShowPanels : MonoBehaviour {
 		menuPanel.SetActive (false);
 	}
 	
+	//Call this function to activate and display the scroll menu panel during the main menu
+	public void ShowScroll()
+	{
+		ScrollerPanel.SetActive (true);
+	}
+
+	//Call this function to deactivate and hide the scroll menu panel during the main menu
+	public void HideScroll()
+	{
+		ScrollerPanel.SetActive (false);
+	}
+
 	//Call this function to activate and display the Pause panel during game play
 	public void ShowPausePanel()
 	{
