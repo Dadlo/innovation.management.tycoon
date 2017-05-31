@@ -1,0 +1,50 @@
+<productMonetization>
+	<monetization>
+ 		<title>Campanha Básica</title>
+		<id>mkt_01</id>
+		<requisitions>0</requisitions>
+		<multiplier>2</multiplier>
+		<cost>1000</cost>
+		<active>false</active>
+	</monetization>
+	<monetization>
+		<title>Análise de Mercado</title>
+		<id>mkt_02</id>
+		<requisitions>1</requisitions>
+		<multiplier>2</multiplier>
+		<cost>3000</cost>
+		<active>false</active>
+	</monetization>
+	<monetization>
+		<title>Planejamento de Vendas</title>
+		<id>mkt_03</id>
+		<requisitions>1</requisitions>
+		<multiplier>2</multiplier>
+		<cost>3000</cost>
+		<active>false</active>
+	</monetization>
+	<monetization>
+		<title>Mídias Digitais</title>
+		<id>mkt_04</id>
+		<requisitions>2</requisitions>
+		<multiplier>3</multiplier>
+		<cost>5000</cost>
+		<active>false</active>
+	</monetization>
+	<monetization>
+		<title>Pós-Venda</title>
+		<id>ana_01</id>
+		<requisitions>0</requisitions>
+		<multiplier>3</multiplier>
+		<cost>7000</cost>
+		<active>false</active>
+	</monetization>
+	<monetization>
+		<title>Comunicação Interna</title>
+		<id>ana_01</id>
+		<requisitions>0</requisitions>
+		<multiplier>3</multiplier>
+		<cost>7000</cost>
+		<active>false</active>
+	</monetization>
+</productMonetization>
