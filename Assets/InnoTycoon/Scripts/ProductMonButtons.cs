@@ -11,15 +11,16 @@ using System.IO;
 public class ProductMonButtons : UIBuilder
 {
     public Button prefab;
+    public TextAsset textAsset;
 
     protected override void Awake()
     {
         base.Awake();
-        var xml = new XmlDocument(); 
         //if (Application.systemLanguage.ToString() == "Portuguese"){ // referencia posterior para internalizar
-        
-        xml.Load("Assets/InnoTycoon/Schemas/productMonetization.xml");
+        // xml.Load(UnityEngine.Application.dataPath + "/InnoTycoon/Schemas/productMonetization.xml");
 
+        XmlDocument xml = new XmlDocument ();
+        xml.LoadXml (textAsset.text);
         XmlNode root = xml.FirstChild;
 
         for (int i = 0; i < root.SelectNodes("descendant::monetization").Count; i++) {
