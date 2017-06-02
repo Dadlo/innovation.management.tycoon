@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 using UnityEngine;
 
 /// <summary>
-/// This script controls all the saving and loading procedures called by the other scripts from this mod.
+/// This script controls all the saving and loading procedures that require XML stuff
 /// </summary>
 public class PersistenceHandler {
 	public static T LoadFromFile<T>(string fileName) {
@@ -45,7 +45,7 @@ public class PersistenceHandler {
 			}
 		}
 		catch (Exception e) {
-			Debug.LogError("an error occurred while trying to save gang mod data! error: " + e.ToString());
+			Debug.LogError("an error occurred while trying to save game data! error: " + e.ToString());
 		}
 
 	}
