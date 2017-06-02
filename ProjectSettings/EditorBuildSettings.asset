@@ -6,4 +6,4 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/InnoTycoon/Scenes/MainMenu.unity
+    path: Assets/InnoTycoon/Scenes/TestScenes/PersistenceTestScene.unity
