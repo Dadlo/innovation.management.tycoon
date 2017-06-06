@@ -8,12 +8,15 @@ public class PersistenceActivator : MonoBehaviour {
 	public int day;
 	public static PersistenceActivator instance;
 	public Text diaCalendario;
-	private StartOptions startoptions;	
+	private StartOptions startoptions;
+	private UseModalWindow usemodalwindow;
 
 	// Use this for initialization
 	void Awake () {
 		instance = this;
 		startoptions = GetComponent<StartOptions> ();
+		usemodalwindow = GetComponent<UseModalWindow> ();
+
 	}
 
 
@@ -22,6 +25,7 @@ public class PersistenceActivator : MonoBehaviour {
 		day++;
 		newSave.day = day;
 		PersistenceHandler.SaveToFile(newSave, "save01", false);
+		// usemodalwindow.TestOk();
 		LoadAllData();
 	}
 
