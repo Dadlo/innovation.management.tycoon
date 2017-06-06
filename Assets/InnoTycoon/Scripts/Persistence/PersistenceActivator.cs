@@ -9,26 +9,44 @@ public class PersistenceActivator : MonoBehaviour {
 	public static PersistenceActivator instance;
 	public Text diaCalendario;
 	private StartOptions startoptions;
-	private UseModalWindow usemodalwindow;
+	private ModalPanel ModalPanel;           //reference to the ModalPanel Class
 
 	// Use this for initialization
 	void Awake () {
 		instance = this;
 		startoptions = GetComponent<StartOptions> ();
-		usemodalwindow = GetComponent<UseModalWindow> ();
-
+		ModalPanel = ModalPanel.Instance();         //Instantiate the panel
 	}
-
 
 	public void SaveAllData() {
 		SavedGame newSave = new SavedGame();
 		day++;
 		newSave.day = day;
 		PersistenceHandler.SaveToFile(newSave, "save01", false);
-		// usemodalwindow.TestOk();
+		Sprite icon = null;
+		ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", TestYesFunction, TestNoFunction, TestCancelFunction, TestOkFunction, false, "Ok");
 		LoadAllData();
 	}
-
+	//Test function:  Do something if the "Yes" button is clicked.
+	void TestYesFunction()
+	  {
+		//
+	  }
+	//Test function:  Do something if the "No" button is clicked.
+	void TestNoFunction()
+	  {
+		//
+	  }
+	//Test function:  Do something if the "Cancel" button is clicked.
+	void TestCancelFunction()
+	  {
+		//
+	  }
+	//Test function:  Do something if the "Ok" button is clicked.
+	void TestOkFunction()
+	  {
+		//
+	  }
 
 	/// <summary>
 	/// destroi todas as entradas da lista de saves e cria novas para cada save que for encontrado

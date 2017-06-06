@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
 
+// nao usado
+// serve de exemplo para retirar as funcoes dos botoes de alerta ate ter todos os padroes no codigo
+
 public class UseModalWindow : MonoBehaviour
   {
 	private ModalPanel ModalPanel;           //reference to the ModalPanel Class
