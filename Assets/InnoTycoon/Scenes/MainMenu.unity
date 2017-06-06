@@ -1773,7 +1773,7 @@ GameObject:
   - component: {fileID: 517619168}
   - component: {fileID: 517619167}
   m_Layer: 5
-  m_Name: DateText (2)
+  m_Name: costText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1831,7 +1831,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.85
-  m_Text: '- 2.000,00 / dia'
+  m_Text: 2000
 --- !u!222 &517619168
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6860,7 +6860,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToStart: 1
   day: 1
-  diaCalendario: {fileID: 1965844742}
+  capital: 20000
+  cost: 2000
+  studiesList: 
+  studyDoing: 
+  productsList: 
+  productDoing: 
+  conceptStep: 0
+  conceptStepTotal: 0
+  devStep: 0
+  devStepTotal: 0
+  monetStep: 0
+  monetStepTotal: 0
+  diaCalendarioUI: {fileID: 1965844742}
+  capitalUI: {fileID: 2035555705}
+  costUI: {fileID: 517619167}
 --- !u!1 &1786284203
 GameObject:
   m_ObjectHideFlags: 0
@@ -7868,7 +7882,7 @@ GameObject:
   - component: {fileID: 2035555706}
   - component: {fileID: 2035555705}
   m_Layer: 5
-  m_Name: DateText (1)
+  m_Name: capitalText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7926,7 +7940,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.85
-  m_Text: R$ 20.000,00
+  m_Text: 20000
 --- !u!222 &2035555706
 CanvasRenderer:
   m_ObjectHideFlags: 0
