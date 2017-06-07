@@ -110,6 +110,19 @@ public class StartOptions : MonoBehaviour {
 		showPanels.ShowHUD();
 	}
 
+	public void HideHUD()
+	{
+		//Hide the HUD
+		showPanels.HideHUD();
+		showPanels.HidePausePanel();
+	}
+
+	public void ShowMainMenu()
+	{
+		//show the main menu
+		showPanels.ShowMenu();
+	}
+
 	public void StartGameInScene()
 	{
 		//Pause button now works if escape is pressed since we are no longer in Main menu.
@@ -123,15 +136,22 @@ public class StartOptions : MonoBehaviour {
 			Invoke ("PlayNewMusic", fadeAlphaAnimationClip.length);
 		}
 		//Set trigger for animator to start animation fading out Menu UI
-		animMenuAlpha.SetTrigger ("fade");
 		Invoke("HideDelayed", fadeAlphaAnimationClip.length);
-		Debug.Log ("Game started in same scene! Put your game starting stuff here.");
+		Debug.Log ("Game started in same scene!");
 
 
 		//Set trigger for animator to start animation fading in HUD UI
 		Invoke("ShowDelayed", fadeAlphaAnimationClip.length);
 	}
 
+	public void ReturnToMenu()
+	{
+		inMainMenu = true;
+		HideHUD();
+		ShowMainMenu();
+		Debug.Log ("Game returned to menu!");
+
+	}
 
 	public void PlayNewMusic()
 	{

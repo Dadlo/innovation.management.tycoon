@@ -63,6 +63,12 @@ public class ShowPanels : MonoBehaviour {
 		HUDPanel.SetActive (true);
 	}
 
+	//Call this function to activate and display the HUD during game play
+	public void HideHUD()
+	{
+		HUDPanel.SetActive (false);
+	}
+
 	//Call this function to deactivate and hide the Pause panel during game play
 	public void HidePausePanel()
 	{

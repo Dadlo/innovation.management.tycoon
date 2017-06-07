@@ -46,32 +46,35 @@ public class PersistenceActivator : MonoBehaviour {
 		// Increase Day
 		day++;
 		// Take cost from capital
-		capital=capital-cost;
 		// EndGame Conditional
-		if(capital <= 0) {
+		if(capital <= cost) {
 			EndGame();
-		}
-		// Save Data
-		newSave.day = day;
-		newSave.capital = capital;
-		newSave.cost = cost;
-		newSave.studiesList = studiesList;
-		newSave.studyDoing = studyDoing;
-		newSave.productsList = productsList;
-		newSave.productDoing = productDoing;
-		newSave.conceptStep = conceptStep;
-		newSave.conceptStepTotal = conceptStepTotal;
-		newSave.devStep = devStep;
-		newSave.devStepTotal = devStepTotal;
-		newSave.monetStep = monetStep;
-		newSave.monetStepTotal = monetStepTotal;
+			Debug.Log("Game Over");
+		} else {
+			capital=capital-cost;
 
-		PersistenceHandler.SaveToFile(newSave, "save01", false);
-		ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
-		LoadAllData();
+			// Save Data
+			newSave.day = day;
+			newSave.capital = capital;
+			newSave.cost = cost;
+			newSave.studiesList = studiesList;
+			newSave.studyDoing = studyDoing;
+			newSave.productsList = productsList;
+			newSave.productDoing = productDoing;
+			newSave.conceptStep = conceptStep;
+			newSave.conceptStepTotal = conceptStepTotal;
+			newSave.devStep = devStep;
+			newSave.devStepTotal = devStepTotal;
+			newSave.monetStep = monetStep;
+			newSave.monetStepTotal = monetStepTotal;
+
+			PersistenceHandler.SaveToFile(newSave, "save01", false);
+			ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
+			LoadAllData();
+		}
 	}
 	public void EndGame() {
-		ModalPanel.MessageBox(icon, "Game Over", "You have gone bankrupted !\nYou Lost!", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
+		ModalPanel.MessageBox(icon, "Game Over", "You have gone bankrupted ! You've Lost!\n\nYou can see your status from this game,\nbut you'll need to start a new game from the\nmenu to play again.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
 	}
 	// Do nothing on ok
 	void NothingFunction()
@@ -81,7 +84,30 @@ public class PersistenceActivator : MonoBehaviour {
 	void StartGameFunction()
 	{
 		startoptions.StartGameInScene();
-		//showPanels.ShowPausePanel();
+	}
+	void StartNewGameFunction()
+	{
+		ResetAllValues();
+		RenderAllChanges();
+		startoptions.StartGameInScene();
+	}
+
+	void ResetAllValues()
+	{
+		// reset values
+		day = 1;
+		capital = 20000;
+		cost = 2000;
+		studiesList = "";
+		studyDoing = "";
+		productsList = "";
+		productDoing = "";
+		conceptStep = 0;
+		conceptStepTotal = 0;
+		devStep = 0;
+		devStepTotal = 0;
+		monetStep = 0;
+		monetStepTotal = 0;
 	}
 
 	/// <summary>
@@ -108,10 +134,12 @@ public class PersistenceActivator : MonoBehaviour {
 	public void NewGame() {
 		SavedGame loadedGame = PersistenceHandler.LoadFromFile<SavedGame>("save01");
 		if(loadedGame == null) { // no data saved - start a new game
-			StartGameFunction();
+			ResetAllValues();
+			RenderAllChanges();
+			StartNewGameFunction();
 		}
 		else { // there is a save - confirmation to button to remove data, if no: nothing, if yes: new game
-			ModalPanel.MessageBox(icon, "There is a saved file", "Do you want to start a New Game?\n\nAll data will be lost if you do!", StartGameFunction, NothingFunction, NothingFunction, NothingFunction, false, "YesNo");
+			ModalPanel.MessageBox(icon, "There is a saved file", "Do you want to start a New Game?\n\nAll data will be lost if you do!", StartNewGameFunction, NothingFunction, NothingFunction, NothingFunction, false, "YesNo");
 		}
 	}
 
@@ -131,9 +159,13 @@ public class PersistenceActivator : MonoBehaviour {
 		monetStep = theSave.monetStep;
 		monetStepTotal = theSave.monetStepTotal;
 
+		// render all ui
+		RenderAllChanges();
+	}
+	public void RenderAllChanges() {
 		// update UI
 		diaCalendarioUI.text = day.ToString(); // atualiza dia do calendario
 		capitalUI.text = capital.ToString(); // atualiza capital total
-		costUI.text = cost.ToString(); // atualiza custo
+		costUI.text = cost.ToString(); // atualiza custo	
 	}
 }
