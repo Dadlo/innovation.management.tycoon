@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PersistenceActivator : MonoBehaviour {
 
@@ -13,8 +14,8 @@ public class PersistenceActivator : MonoBehaviour {
 	public int cost;
 	public string studiesList;
 	public string studyDoing;
-	public string productsList;
-	public string productDoing;
+	public List<Product> productsList;
+	public Product productDoing;
 	public int conceptStep;
 	public int conceptStepTotal;
 	public int devStep;
@@ -100,8 +101,13 @@ public class PersistenceActivator : MonoBehaviour {
 		cost = 2000;
 		studiesList = "";
 		studyDoing = "";
-		productsList = "";
-		productDoing = "";
+		if(productsList != null) {
+			productsList.Clear();
+		}
+		else {
+			productsList = new List<Product>();
+		}
+		productDoing = null;
 		conceptStep = 0;
 		conceptStepTotal = 0;
 		devStep = 0;
