@@ -29,13 +29,23 @@ public class PersistenceActivator : MonoBehaviour {
 
 	public static PersistenceActivator instance;
 	private StartOptions startoptions;
+	private DevSteps DevSteps;
 	private ModalPanel ModalPanel;           //reference to the ModalPanel Class
 	private ShowPanels showPanels;
 	private Sprite icon = null;
 
+
+	public float nextAmountCon;
+	public float nextAmountDev;
+	public float nextAmountMon;
+	public bool CovActive;
+	public bool DevActive;
+	public bool MonActive;
+
 	// Use this for initialization
 	void Awake () {
 		instance = this;
+		DevSteps = DevSteps.Instance();
 		startoptions = GetComponent<StartOptions> ();
 		ModalPanel = ModalPanel.Instance();         //Instantiate the panel
 		showPanels = GetComponent<ShowPanels> ();
@@ -52,7 +62,7 @@ public class PersistenceActivator : MonoBehaviour {
 			Debug.Log("Game Over");
 		} else {
 			capital=capital-cost;
-
+			DevSteps.SetData(true,true,true,day*10,day*20,day*30);
 			// Save Data
 			newSave.day = day;
 			newSave.capital = capital;
@@ -70,6 +80,12 @@ public class PersistenceActivator : MonoBehaviour {
 
 			PersistenceHandler.SaveToFile(newSave, "save01", false);
 			ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
+			nextAmountCon = 20;
+			nextAmountDev = 20;
+			nextAmountMon = 20;
+			CovActive = true;
+			DevActive = true;
+			MonActive = true;
 			LoadAllData();
 		}
 	}
