@@ -38,7 +38,7 @@ public class PersistenceActivator : MonoBehaviour {
 	public float nextAmountCon;
 	public float nextAmountDev;
 	public float nextAmountMon;
-	public bool CovActive;
+	public bool ConActive;
 	public bool DevActive;
 	public bool MonActive;
 
@@ -62,7 +62,10 @@ public class PersistenceActivator : MonoBehaviour {
 			Debug.Log("Game Over");
 		} else {
 			capital=capital-cost;
-			DevSteps.SetData(true,true,true,day*10,day*20,day*30);
+
+			// Atualiza passos
+			UpdateSteps();
+
 			// Save Data
 			newSave.day = day;
 			newSave.capital = capital;
@@ -80,18 +83,52 @@ public class PersistenceActivator : MonoBehaviour {
 
 			PersistenceHandler.SaveToFile(newSave, "save01", false);
 			ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
-			nextAmountCon = 20;
-			nextAmountDev = 20;
-			nextAmountMon = 20;
-			CovActive = true;
-			DevActive = true;
-			MonActive = true;
 			LoadAllData();
 		}
 	}
 	public void EndGame() {
 		ModalPanel.MessageBox(icon, "Game Over", "You have gone bankrupted ! You've Lost!\n\nYou can see your status from this game,\nbut you'll need to start a new game from the\nmenu to play again.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
 	}
+	public void UpdateSteps() {
+		if (conceptStepTotal > 0) {
+			ConActive = true;
+			conceptStep++;
+			nextAmountCon = (conceptStep*100/conceptStepTotal);
+			if(nextAmountCon >= 100) {
+				conceptStep = 0;
+				conceptStepTotal = 0;
+			}
+		} else {
+			ConActive = false;
+			nextAmountCon = 0;
+		}
+		if (devStepTotal > 0 && conceptStep == conceptStepTotal && !ConActive) {
+			DevActive = true;
+			devStep++;
+			nextAmountDev = (devStep*100/devStepTotal);
+			if(nextAmountDev >= 100) {
+				devStep = 0;
+				devStepTotal = 0;
+			}
+		} else {
+			DevActive = false;
+			nextAmountDev = 0;
+		}
+		if (monetStepTotal > 0 && devStep == devStepTotal && !DevActive) {
+			MonActive = true;
+			monetStep++;
+			nextAmountMon = (monetStep*100/monetStepTotal);
+			if(nextAmountMon >= 100) {
+				monetStep = 0;
+				monetStepTotal = 0;
+			}
+		} else {
+			MonActive = false;
+			nextAmountMon = 0;
+		}
+		DevSteps.SetData(ConActive,DevActive,MonActive,nextAmountCon,nextAmountDev,nextAmountMon);
+	}
+
 	// Do nothing on ok
 	void NothingFunction()
 	{

@@ -19,7 +19,7 @@ public class DevSteps : MonoBehaviour {
 	public bool DevActive = false;
 	public bool MonActive = false;
 	private static DevSteps MainDevSteps;
-	
+
 	public static DevSteps Instance()
 	  {
 		if (!MainDevSteps)
@@ -40,20 +40,28 @@ public class DevSteps : MonoBehaviour {
 				if(currentAmountCon < nextAmountCon) {
 					currentAmountCon += speed * Time.deltaTime;
 				}
+				LoadingBarCon.GetComponent<Image>().fillAmount = currentAmountCon / 100;
+			} else {
+				currentAmountCon = 0;
 			}
 			if(DevActive){
 				if(currentAmountDev < nextAmountDev) {
 					currentAmountDev += speed * Time.deltaTime;
 				}
+				LoadingBarDev.GetComponent<Image>().fillAmount = currentAmountDev / 100;
+			} else {
+				currentAmountDev = 0;
 			}
 			if(MonActive){
 				if(currentAmountMon < nextAmountMon) {
 					currentAmountMon += speed * Time.deltaTime;
 				}
+				// Enquanto ativo precisa adicionar dinheiro do produto ativo
+				// Ao ativar o MonActive a primeira vez precisa retornar msg de aviso sobre os dados de retorno financeiro e nota do produto
+				LoadingBarCon.GetComponent<Image>().fillAmount = currentAmountCon / 100;
+				LoadingBarDev.GetComponent<Image>().fillAmount = currentAmountDev / 100;
+				LoadingBarMon.GetComponent<Image>().fillAmount = (100 - currentAmountMon) / 100;
 			}
-			LoadingBarCon.GetComponent<Image>().fillAmount = currentAmountCon / 100;
-			LoadingBarDev.GetComponent<Image>().fillAmount = currentAmountDev / 100;
-			LoadingBarMon.GetComponent<Image>().fillAmount = currentAmountMon / 100;
 		}
 	}
 	public void SetData(bool CovActiveR, bool DevActiveR, bool MonActiveR, float nextAmountConR, float nextAmountDevR, float nextAmountMonR) {

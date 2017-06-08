@@ -4356,6 +4356,7 @@ GameObject:
   - component: {fileID: 1154643798}
   - component: {fileID: 1154643797}
   - component: {fileID: 1154643796}
+  - component: {fileID: 1154643800}
   m_Layer: 5
   m_Name: HUD
   m_TagString: HUD
@@ -4453,6 +4454,30 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154643794}
+--- !u!114 &1154643800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1154643794}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc0957e7c70c4762b43b9500085bf33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadingBarCon: {fileID: 7293578}
+  LoadingBarDev: {fileID: 1885824576}
+  LoadingBarMon: {fileID: 1143037092}
+  currentAmountCon: 0
+  currentAmountDev: 0
+  currentAmountMon: 0
+  nextAmountCon: 0
+  nextAmountDev: 0
+  nextAmountMon: 0
+  speed: 30
+  CovActive: 0
+  DevActive: 0
+  MonActive: 0
 --- !u!1 &1162160932
 GameObject:
   m_ObjectHideFlags: 0
@@ -7254,6 +7279,36 @@ MonoBehaviour:
   diaCalendarioUI: {fileID: 1965844742}
   capitalUI: {fileID: 2035555705}
   costUI: {fileID: 517619167}
+  nextAmountCon: 0
+  nextAmountDev: 0
+  nextAmountMon: 0
+  CovActive: 0
+  DevActive: 0
+  MonActive: 0
+--- !u!114 &1777905770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1777905768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc0957e7c70c4762b43b9500085bf33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadingBarCon: {fileID: 7293578}
+  LoadingBarDev: {fileID: 1885824576}
+  LoadingBarMon: {fileID: 1143037092}
+  currentAmountCon: 0
+  currentAmountDev: 0
+  currentAmountMon: 0
+  nextAmountCon: 0
+  nextAmountDev: 0
+  nextAmountMon: 0
+  speed: 30
+  CovActive: 0
+  DevActive: 0
+  MonActive: 0
 --- !u!114 &1777905775 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11488040, guid: 45616935e4fe10f48b62da1347801a16,
@@ -8844,7 +8899,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2071367191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fc0957e7c70c4762b43b9500085bf33, type: 3}
   m_Name: 
