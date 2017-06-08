@@ -64,7 +64,7 @@ public class PersistenceActivator : MonoBehaviour {
 			capital=capital-cost;
 
 			// Atualiza passos
-			UpdateSteps();
+			UpdateSteps(true);
 
 			// Save Data
 			newSave.day = day;
@@ -89,10 +89,10 @@ public class PersistenceActivator : MonoBehaviour {
 	public void EndGame() {
 		ModalPanel.MessageBox(icon, "Game Over", "You have gone bankrupted ! You've Lost!\n\nYou can see your status from this game,\nbut you'll need to start a new game from the\nmenu to play again.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
 	}
-	public void UpdateSteps() {
+	public void UpdateSteps(bool increase) {
 		if (conceptStepTotal > 0) {
 			ConActive = true;
-			conceptStep++;
+			if(increase){conceptStep++;}
 			nextAmountCon = (conceptStep*100/conceptStepTotal);
 			if(nextAmountCon >= 100) {
 				conceptStep = 0;
@@ -104,7 +104,7 @@ public class PersistenceActivator : MonoBehaviour {
 		}
 		if (devStepTotal > 0 && conceptStep == conceptStepTotal && !ConActive) {
 			DevActive = true;
-			devStep++;
+			if(increase){devStep++;}
 			nextAmountDev = (devStep*100/devStepTotal);
 			if(nextAmountDev >= 100) {
 				devStep = 0;
@@ -116,7 +116,7 @@ public class PersistenceActivator : MonoBehaviour {
 		}
 		if (monetStepTotal > 0 && devStep == devStepTotal && !DevActive) {
 			MonActive = true;
-			monetStep++;
+			if(increase){monetStep++;}
 			nextAmountMon = (monetStep*100/monetStepTotal);
 			if(nextAmountMon >= 100) {
 				monetStep = 0;
@@ -181,6 +181,7 @@ public class PersistenceActivator : MonoBehaviour {
 
 	public void LoadGame() {
 		LoadAllData();
+		UpdateSteps(false);
 		StartGameFunction();
 	}
 
