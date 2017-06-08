@@ -1,66 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProductConcepts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <productConcepts>
-	<concept>
+	<Concept>
 		<title>Imitação de Produto</title>
 		<id>ino_01</id>
 		<requisitions>0</requisitions>
 		<multiplier>2</multiplier>
 		<cost>1000</cost>
 		<active>true</active>
-	</concept>
-	<concept>
+	</Concept>
+	<Concept>
 		<title>Inovação Incremental</title>
 		<id>ino_02</id>
 		<requisitions>0</requisitions>
 		<multiplier>2</multiplier>
 		<cost>3000</cost>
 		<active>false</active>
-	</concept>
-	<concept>
+	</Concept>
+	<Concept>
 		<title>Inovação Arquitetural</title>
 		<id>ino_03</id>
 		<requisitions>1</requisitions>
 		<multiplier>3</multiplier>
 		<cost>3000</cost>
 		<active>false</active>
-	</concept>
-	<concept>
+	</Concept>
+	<Concept>
 		<title>Inovação Radical</title>
 		<id>ino_04</id>
 		<requisitions>2</requisitions>
 		<multiplier>4</multiplier>
 		<cost>5000</cost>
 		<active>false</active>
-	</concept>
-	<concept>
+	</Concept>
+	<Concept>
 		<title>Mudança Organizacional</title>
 		<id>org_01</id>
 		<requisitions>0</requisitions>
 		<multiplier>2</multiplier>
 		<cost>5000</cost>
 		<active>false</active>
-	</concept>
-	<concept>
+	</Concept>
+	<Concept>
 		<title>Inovação Tecnológica I</title>
 		<id>tec_01</id>
 		<requisitions>0</requisitions>
 		<multiplier>2</multiplier>
 		<cost>2000</cost>
 		<active>false</active>
-	</concept>
-	<concept>
+	</Concept>
+	<Concept>
 		<title>Inovação Tecnológica II</title>
 		<id>tec_02</id>
 		<requisitions>1</requisitions>
 		<multiplier>3</multiplier>
 		<cost>5000</cost>
 		<active>false</active>
-	</concept>
-	<concept>
+	</Concept>
+	<Concept>
 		<title>Inovação Tecnológica III</title>
 		<id>tec_03</id>
 		<requisitions>2</requisitions>
 		<multiplier>5</multiplier>
 		<cost>10000</cost>
 		<active>false</active>
-	</concept>
+	</Concept>
 </productConcepts>
+</ProductConcepts>

@@ -2193,6 +2193,7 @@ GameObject:
   - component: {fileID: 445155219}
   - component: {fileID: 445155217}
   - component: {fileID: 445155218}
+  - component: {fileID: 445155221}
   m_Layer: 5
   m_Name: ProductsPanel
   m_TagString: Untagged
@@ -2284,6 +2285,19 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 445155215}
+--- !u!114 &445155221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 445155215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854a9f58d469ffc41acec94d904f0f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productConceptsAsset: {fileID: 4900000, guid: ec3e1a058bc0e4985a624a501f15c19c,
+    type: 3}
 --- !u!1 &469122694
 GameObject:
   m_ObjectHideFlags: 0
