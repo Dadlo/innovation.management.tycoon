@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProductsPanel : MonoBehaviour {
+public class ProductsPanel : ShowablePanel {
 
 	public Transform productsListParent;
 
@@ -26,13 +26,5 @@ public class ProductsPanel : MonoBehaviour {
 		for(int i = 0; i < productsListParent.childCount; i++) {
 			Destroy(productsListParent.GetChild(0).gameObject);
 		}
-	}
-
-	/// <summary>
-	/// mostra ou esconde esse painel
-	/// </summary>
-	/// <param name="shouldDisplay"></param>
-	public void ToggleDisplay(bool shouldDisplay) {
-		gameObject.SetActive(shouldDisplay);
 	}
 }
