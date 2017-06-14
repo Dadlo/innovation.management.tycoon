@@ -24,6 +24,16 @@ public class ProductCreationPanel : ShowablePanel {
 	/// </summary>
 	public Text titleText;
 
+
+
+
+	public void DoneEditingProductName() {
+		titleText.text = prodNameInputField.text;
+	}
+
+    /// <summary>
+    /// reseta os conteudos desse painel, como se o usuario nunca tivesse mexido
+    /// </summary>
 	public void ResetPanels() {
 		titleText.text = "Novo Produto";
 		prodNameInputField.text = "Novo Produto";
@@ -68,5 +78,13 @@ public class ProductCreationPanel : ShowablePanel {
 	public void OnToldToChangeSections(Transform newSectionToggle) {
 		SetActivePanel(newSectionToggle.GetSiblingIndex());
 	}
+
+    /// <summary>
+    /// reune os dados contidos nesse painel e cria um novo produto, que entra na fase de concepcao
+    /// </summary>
+    public void CreateProduct()
+    {
+        //new Product ou algo assim, recebendo as porcentagens de foco, nome fornecido e etc
+    }
 	
 }
