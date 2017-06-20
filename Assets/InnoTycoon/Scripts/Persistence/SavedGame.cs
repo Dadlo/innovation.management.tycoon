@@ -13,7 +13,7 @@ public class SavedGame {
 	public string studiesList = "";
 	public string studyDoing = "";
 	public List<Product> productsList;
-	public Product productDoing;
+	public List<Product> productsDoing;
 	public int conceptStep = 0;
 	public int conceptStepTotal = 0;
 	public int devStep = 0;

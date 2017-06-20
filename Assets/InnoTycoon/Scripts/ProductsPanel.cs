@@ -14,7 +14,7 @@ public class ProductsPanel : ShowablePanel {
 	/// <param name="targetProduct"></param>
 	public void AddProductToList(Product targetProduct) {
 		GameObject newEntry = Instantiate(prodListEntryPrefab);
-		prodListEntryPrefab.transform.SetParent(productsListParent, false);
+		newEntry.transform.SetParent(productsListParent, false);
 		newEntry.GetComponent<ProductsPanelListEntry>().SetContent(targetProduct);
 	}
 
@@ -25,6 +25,13 @@ public class ProductsPanel : ShowablePanel {
 	public void ClearProductList() {
 		for(int i = 0; i < productsListParent.childCount; i++) {
 			Destroy(productsListParent.GetChild(0).gameObject);
+		}
+	}
+
+	void OnEnable() {
+		ClearProductList();
+		for(int i = 0; i < PersistenceActivator.instance.productsList.Count; i++) {
+			AddProductToList(PersistenceActivator.instance.productsList[i]);
 		}
 	}
 }

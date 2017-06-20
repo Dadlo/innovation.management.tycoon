@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class Product {
 
 	public bool isReady;
 
-	public List<int> optionIDs;
+	public List<string> optionIDs;
 
 	public float rentability;
 
@@ -17,5 +17,15 @@ public class Product {
 
 	public int curStep;
 
-	public Product() { }
+	public enum ProductPhase {
+		concept,
+		dev,
+		sales
+	}
+
+	public ProductPhase currentPhase = ProductPhase.concept;
+
+	public int conceptSteps, devSteps, saleSteps;
+
+	public Product() {}
 }

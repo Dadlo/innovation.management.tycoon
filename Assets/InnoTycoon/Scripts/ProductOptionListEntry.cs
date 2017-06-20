@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,15 +30,20 @@ public class ProductOptionListEntry : MonoBehaviour {
     {
         nameText.text = theInfo.title;
         costText.text = string.Concat("+", theInfo.cost.ToString(), "/dia");
-        activeToggle.isOn = theInfo.active;
         theOptionRepresented = theInfo;
         this.myOptionType = myOptionType;
-        if (theInfo.active)
-        {
-            //ja adicionamos o custo dessa opcao entao
-            onToggled(this);
-        }
+
+		//o onMyValueChanged ja roda caso essa opcao ja venha ativa
+		activeToggle.isOn = theInfo.active;
     }
+
+	/// <summary>
+	/// a entrada como um todo pode ser clicada para a pessoa nao ter que ficar clicando so na caixinha do toggle.
+	/// esse metodo cuida dessa parte de fazer a ligacao botao gigante-toggle
+	/// </summary>
+	public void BigButtonPress() {
+		activeToggle.isOn = !activeToggle.isOn;
+	}
 
     public void OnMyValueChanged(bool active)
     {

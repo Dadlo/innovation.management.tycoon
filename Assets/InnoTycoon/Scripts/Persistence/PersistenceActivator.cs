@@ -15,7 +15,7 @@ public class PersistenceActivator : MonoBehaviour {
 	public string studiesList;
 	public string studyDoing;
 	public List<Product> productsList;
-	public Product productDoing;
+	public List<Product> productsDoing;
 	public int conceptStep;
 	public int conceptStepTotal;
 	public int devStep;
@@ -33,6 +33,7 @@ public class PersistenceActivator : MonoBehaviour {
 	private ModalPanel ModalPanel;           //reference to the ModalPanel Class
 	private ShowPanels showPanels;
 	private Sprite icon = null;
+
 
 	// Use this for initialization
 	void Awake () {
@@ -61,7 +62,7 @@ public class PersistenceActivator : MonoBehaviour {
 			newSave.studiesList = studiesList;
 			newSave.studyDoing = studyDoing;
 			newSave.productsList = productsList;
-			newSave.productDoing = productDoing;
+			newSave.productsDoing = productsDoing;
 			newSave.conceptStep = conceptStep;
 			newSave.conceptStepTotal = conceptStepTotal;
 			newSave.devStep = devStep;
@@ -71,7 +72,7 @@ public class PersistenceActivator : MonoBehaviour {
 
 			PersistenceHandler.SaveToFile(newSave, "save01", false);
 			ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
-			LoadAllData();
+			//LoadAllData();
 		}
 	}
 	public void EndGame() {
@@ -107,7 +108,7 @@ public class PersistenceActivator : MonoBehaviour {
 		else {
 			productsList = new List<Product>();
 		}
-		productDoing = null;
+		productsDoing = null;
 		conceptStep = 0;
 		conceptStepTotal = 0;
 		devStep = 0;
@@ -157,7 +158,7 @@ public class PersistenceActivator : MonoBehaviour {
 		studiesList = theSave.studiesList;
 		studyDoing = theSave.studyDoing;
 		productsList = theSave.productsList;
-		productDoing = theSave.productDoing;
+		productsDoing = theSave.productsDoing;
 		conceptStep = theSave.conceptStep;
 		conceptStepTotal = theSave.conceptStepTotal;
 		devStep = theSave.devStep;
