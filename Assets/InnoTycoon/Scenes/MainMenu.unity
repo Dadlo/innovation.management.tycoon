@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 332551603}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -14609,6 +14609,17 @@ MonoBehaviour:
   diaCalendarioUI: {fileID: 1965844742}
   capitalUI: {fileID: 2035555705}
   costUI: {fileID: 517619167}
+--- !u!114 &1777905770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1777905768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45f252b9bcb1ad48a367e30281e2270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1777905775 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11488040, guid: 45616935e4fe10f48b62da1347801a16,

@@ -228,9 +228,9 @@ public class ProductCreationPanel : ShowablePanel {
 			createdProduct.optionIDs.Add(pickedMonetOptions[i].id);
 		}
 
-		PersistenceActivator.instance.productsDoing.Add(createdProduct);
-
-		PersistenceActivator.instance.productsList.Add(createdProduct);
+		GameManager.instance.AddNewPlayerProduct(createdProduct);
+		
+		
 
 	}
 	
