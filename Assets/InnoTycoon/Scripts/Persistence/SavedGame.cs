@@ -12,8 +12,8 @@ public class SavedGame {
 	public int cost=2000;
 	public string studiesList = "";
 	public string studyDoing = "";
-	public string productsList = "";
-	public string productDoing = "";
+	public List<Product> productsList;
+	public List<Product> productsDoing;
 	public int conceptStep = 0;
 	public int conceptStepTotal = 0;
 	public int devStep = 0;

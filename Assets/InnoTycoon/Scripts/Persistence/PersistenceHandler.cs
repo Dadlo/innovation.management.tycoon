@@ -29,6 +29,19 @@ public class PersistenceHandler {
 		}
 	}
 
+	public static T LoadFromFile<T>(TextAsset textAssetFile) {
+		try {
+			XmlSerializer serializer = new XmlSerializer(typeof(T));
+			using(StringReader reader = new StringReader(textAssetFile.text)) {
+				return (T)serializer.Deserialize(reader);
+			}
+		}
+		catch (Exception e) {
+			Debug.LogError("an error occurred when trying to load textAsset xml file " + textAssetFile.name + "! error: " + e.ToString());
+			return default(T);
+		}
+	}
+
 	public static void SaveToFile<T>(T dataToSave, string fileName, bool notifyMsg = true) {
 		try {
 			XmlSerializer serializer = new XmlSerializer(typeof(T));

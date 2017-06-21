@@ -1,50 +1,53 @@
-<productMonetization>
-	<monetization>
+<?xml version="1.0" encoding="utf-8"?>
+<ProductOptionsContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <productOptionsList>
+	<ProductOption>
  		<title>Campanha Básica</title>
 		<id>mkt_01</id>
 		<requisitions>0</requisitions>
 		<multiplier>2</multiplier>
 		<cost>1000</cost>
 		<active>false</active>
-	</monetization>
-	<monetization>
+	</ProductOption>
+	<ProductOption>
 		<title>Análise de Mercado</title>
 		<id>mkt_02</id>
 		<requisitions>1</requisitions>
 		<multiplier>2</multiplier>
 		<cost>3000</cost>
 		<active>false</active>
-	</monetization>
-	<monetization>
+	</ProductOption>
+	<ProductOption>
 		<title>Planejamento de Vendas</title>
 		<id>mkt_03</id>
 		<requisitions>1</requisitions>
 		<multiplier>2</multiplier>
 		<cost>3000</cost>
 		<active>false</active>
-	</monetization>
-	<monetization>
+	</ProductOption>
+	<ProductOption>
 		<title>Mídias Digitais</title>
 		<id>mkt_04</id>
 		<requisitions>2</requisitions>
 		<multiplier>3</multiplier>
 		<cost>5000</cost>
 		<active>false</active>
-	</monetization>
-	<monetization>
+	</ProductOption>
+	<ProductOption>
 		<title>Pós-Venda</title>
 		<id>ana_01</id>
 		<requisitions>0</requisitions>
 		<multiplier>3</multiplier>
 		<cost>7000</cost>
 		<active>false</active>
-	</monetization>
-	<monetization>
+	</ProductOption>
+	<ProductOption>
 		<title>Comunicação Interna</title>
 		<id>ana_01</id>
 		<requisitions>0</requisitions>
 		<multiplier>3</multiplier>
 		<cost>7000</cost>
 		<active>false</active>
-	</monetization>
-</productMonetization>
+	</ProductOption>
+  </productOptionsList>
+</ProductOptionsContainer>

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ShowPanels : MonoBehaviour {
@@ -8,7 +8,9 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
 	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
 	public GameObject HUDPanel;								//Store a reference to the Game Object HUD 
-	public GameObject ScrollerPanel;						//Store a reference to the Game Object Scroller 
+	public GameObject ScrollerPanel;                        //Store a reference to the Game Object Scroller 
+	public ProductsPanel productsPanel;
+	public ProductCreationPanel pCreationPanel;
 
 
 
@@ -75,5 +77,13 @@ public class ShowPanels : MonoBehaviour {
 		pausePanel.SetActive (false);
 		optionsTint.SetActive(false);
 
+	}
+
+	public void ToggleProductPanelsDisplay(bool shouldDisplay) {
+		productsPanel.ToggleDisplay(shouldDisplay);
+	}
+
+	public void ToggleCreationPanelsDisplay(bool shouldDisplay) {
+		pCreationPanel.ToggleDisplay(shouldDisplay);
 	}
 }
