@@ -47,12 +47,12 @@ public class PersistenceActivator : MonoBehaviour {
 		SavedGame newSave = new SavedGame();
 		// Increase Day
 		day++;
-		// Take cost from capital
 		// EndGame Conditional
 		if(capital <= cost) {
 			EndGame();
 			Debug.Log("Game Over");
 		} else {
+			// Take cost from capital
 			capital=capital-cost;
 
 			// Save Data
@@ -73,6 +73,7 @@ public class PersistenceActivator : MonoBehaviour {
 			PersistenceHandler.SaveToFile(newSave, "save01", false);
 			ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
 			//LoadAllData();
+			RenderAllChanges();
 		}
 	}
 	public void EndGame() {
