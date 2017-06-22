@@ -16,12 +16,6 @@ public class PersistenceActivator : MonoBehaviour {
 	public string studyDoing;
 	public List<Product> productsList;
 	public List<Product> productsDoing;
-	public int conceptStep;
-	public int conceptStepTotal;
-	public int devStep;
-	public int devStepTotal;
-	public int monetStep;
-	public int monetStepTotal;
 
 	// UI text fields
 	public Text diaCalendarioUI;
@@ -31,6 +25,7 @@ public class PersistenceActivator : MonoBehaviour {
 	public static PersistenceActivator instance;
 	private StartOptions startoptions;
 	private ModalPanel ModalPanel;           //reference to the ModalPanel Class
+	private DevSteps DevSteps;
 	private ShowPanels showPanels;
 	private Sprite icon = null;
 
@@ -40,6 +35,7 @@ public class PersistenceActivator : MonoBehaviour {
 		instance = this;
 		startoptions = GetComponent<StartOptions> ();
 		ModalPanel = ModalPanel.Instance();         //Instantiate the panel
+		DevSteps = DevSteps.Instance();
 		showPanels = GetComponent<ShowPanels> ();
 	}
 
@@ -63,12 +59,6 @@ public class PersistenceActivator : MonoBehaviour {
 			newSave.studyDoing = studyDoing;
 			newSave.productsList = productsList;
 			newSave.productsDoing = productsDoing;
-			newSave.conceptStep = conceptStep;
-			newSave.conceptStepTotal = conceptStepTotal;
-			newSave.devStep = devStep;
-			newSave.devStepTotal = devStepTotal;
-			newSave.monetStep = monetStep;
-			newSave.monetStepTotal = monetStepTotal;
 
 			PersistenceHandler.SaveToFile(newSave, "save01", false);
 			ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
@@ -110,12 +100,6 @@ public class PersistenceActivator : MonoBehaviour {
 			productsList = new List<Product>();
 		}
 		productsDoing = null;
-		conceptStep = 0;
-		conceptStepTotal = 0;
-		devStep = 0;
-		devStepTotal = 0;
-		monetStep = 0;
-		monetStepTotal = 0;
 	}
 
 	/// <summary>
@@ -160,12 +144,6 @@ public class PersistenceActivator : MonoBehaviour {
 		studyDoing = theSave.studyDoing;
 		productsList = theSave.productsList;
 		productsDoing = theSave.productsDoing;
-		conceptStep = theSave.conceptStep;
-		conceptStepTotal = theSave.conceptStepTotal;
-		devStep = theSave.devStep;
-		devStepTotal = theSave.devStepTotal;
-		monetStep = theSave.monetStep;
-		monetStepTotal = theSave.monetStepTotal;
 
 		// render all ui
 		RenderAllChanges();

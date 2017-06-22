@@ -5,9 +5,21 @@ using UnityEngine.UI;
 
 public class DevSteps : MonoBehaviour {
 	
-	public Transform LoadingBarCon;
-	public Transform LoadingBarDev;
-	public Transform LoadingBarMon;
+	public Transform LoadingBarCon1;
+	public Transform LoadingBarCon2;
+	public Transform LoadingBarCon3;
+	public Transform LoadingBarCon4;
+	public Transform LoadingBarCon5;
+	public Transform LoadingBarDev1;
+	public Transform LoadingBarDev2;
+	public Transform LoadingBarDev3;
+	public Transform LoadingBarDev4;
+	public Transform LoadingBarDev5;
+	public Transform LoadingBarMon1;
+	public Transform LoadingBarMon2;
+	public Transform LoadingBarMon3;
+	public Transform LoadingBarMon4;
+	public Transform LoadingBarMon5;
 	[SerializeField] public float currentAmountCon = 0;
 	[SerializeField] public float currentAmountDev = 0;
 	[SerializeField] public float currentAmountMon = 0;
@@ -40,7 +52,7 @@ public class DevSteps : MonoBehaviour {
 				if(currentAmountCon < nextAmountCon) {
 					currentAmountCon += speed * Time.deltaTime;
 				}
-				LoadingBarCon.GetComponent<Image>().fillAmount = currentAmountCon / 100;
+				LoadingBarCon1.GetComponent<Image>().fillAmount = currentAmountCon / 100;
 			} else {
 				currentAmountCon = 0;
 			}
@@ -48,7 +60,7 @@ public class DevSteps : MonoBehaviour {
 				if(currentAmountDev < nextAmountDev) {
 					currentAmountDev += speed * Time.deltaTime;
 				}
-				LoadingBarDev.GetComponent<Image>().fillAmount = currentAmountDev / 100;
+				LoadingBarDev1.GetComponent<Image>().fillAmount = currentAmountDev / 100;
 			} else {
 				currentAmountDev = 0;
 			}
@@ -58,9 +70,9 @@ public class DevSteps : MonoBehaviour {
 				}
 				// Enquanto ativo precisa adicionar dinheiro do produto ativo
 				// Ao ativar o MonActive a primeira vez precisa retornar msg de aviso sobre os dados de retorno financeiro e nota do produto
-				LoadingBarCon.GetComponent<Image>().fillAmount = currentAmountCon / 100;
-				LoadingBarDev.GetComponent<Image>().fillAmount = currentAmountDev / 100;
-				LoadingBarMon.GetComponent<Image>().fillAmount = (100 - currentAmountMon) / 100;
+				LoadingBarCon1.GetComponent<Image>().fillAmount = currentAmountCon / 100;
+				LoadingBarDev1.GetComponent<Image>().fillAmount = currentAmountDev / 100;
+				LoadingBarMon1.GetComponent<Image>().fillAmount = (100 - currentAmountMon) / 100;
 			}
 		}
 	}
