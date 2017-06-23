@@ -9,13 +9,7 @@ public class PersistenceActivator : MonoBehaviour {
 	public int sceneToStart = 1;
 
 	// saved Data
-	public int day;
-	public int capital;
-	public int cost;
-	public string studiesList;
-	public string studyDoing;
-	public List<Product> productsList;
-	public List<Product> productsDoing;
+	public SavedGame curGameData;
 
 	// UI text fields
 	public Text diaCalendarioUI;
@@ -40,29 +34,15 @@ public class PersistenceActivator : MonoBehaviour {
 	}
 
 	public void SaveAllData() {
-		SavedGame newSave = new SavedGame();
 		// Increase Day
-		day++;
+		GameManager.instance.GoToNextDay();
 		// EndGame Conditional
-		if(capital <= cost) {
+		if (curGameData.capital <= curGameData.cost) {
 			EndGame();
 			Debug.Log("Game Over");
 		} else {
-			// Take cost from capital
-			capital=capital-cost;
-
-			// Save Data
-			newSave.day = day;
-			newSave.capital = capital;
-			newSave.cost = cost;
-			newSave.studiesList = studiesList;
-			newSave.studyDoing = studyDoing;
-			newSave.productsList = productsList;
-			newSave.productsDoing = productsDoing;
-
-			PersistenceHandler.SaveToFile(newSave, "save01", false);
+			PersistenceHandler.SaveToFile(curGameData, "save01", false);
 			ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
-			//LoadAllData();
 			RenderAllChanges();
 		}
 	}
@@ -88,18 +68,18 @@ public class PersistenceActivator : MonoBehaviour {
 	void ResetAllValues()
 	{
 		// reset values
-		day = 1;
-		capital = 20000;
-		cost = 2000;
-		studiesList = "";
-		studyDoing = "";
-		if(productsList != null) {
-			productsList.Clear();
+		curGameData.day = 1;
+		curGameData.capital = 20000;
+		curGameData.cost = 2000;
+		curGameData.studiesList = "";
+		curGameData.studyDoing = "";
+		if(curGameData.productsList != null) {
+			curGameData.productsList.Clear();
 		}
 		else {
-			productsList = new List<Product>();
+			curGameData.productsList = new List<Product>();
 		}
-		productsDoing = null;
+		curGameData.productsDoing = null;
 	}
 
 	/// <summary>
@@ -137,21 +117,15 @@ public class PersistenceActivator : MonoBehaviour {
 
 	public void GetDataFromSave(SavedGame theSave) {
 		// load all data from SavedGame
-		day = theSave.day;
-		capital = theSave.capital;
-		cost = theSave.cost;
-		studiesList = theSave.studiesList;
-		studyDoing = theSave.studyDoing;
-		productsList = theSave.productsList;
-		productsDoing = theSave.productsDoing;
+		curGameData = theSave;
 
 		// render all ui
 		RenderAllChanges();
 	}
 	public void RenderAllChanges() {
 		// update UI
-		diaCalendarioUI.text = day.ToString(); // atualiza dia do calendario
-		capitalUI.text = capital.ToString(); // atualiza capital total
-		costUI.text = cost.ToString(); // atualiza custo	
+		diaCalendarioUI.text = curGameData.day.ToString(); // atualiza dia do calendario
+		capitalUI.text = curGameData.capital.ToString(); // atualiza capital total
+		costUI.text = curGameData.cost.ToString(); // atualiza custo	
 	}
 }

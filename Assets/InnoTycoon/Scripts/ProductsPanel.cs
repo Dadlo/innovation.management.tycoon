@@ -30,8 +30,8 @@ public class ProductsPanel : ShowablePanel {
 
 	void OnEnable() {
 		ClearProductList();
-		for(int i = 0; i < PersistenceActivator.instance.productsList.Count; i++) {
-			AddProductToList(PersistenceActivator.instance.productsList[i]);
+		for(int i = 0; i < PersistenceActivator.instance.curGameData.productsList.Count; i++) {
+			AddProductToList(PersistenceActivator.instance.curGameData.productsList[i]);
 		}
 	}
 }

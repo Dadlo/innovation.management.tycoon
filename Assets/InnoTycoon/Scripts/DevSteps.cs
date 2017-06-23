@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DevSteps : MonoBehaviour {
-	
+
+	public ProdPhaseLoadingBar[] loadingBarsCon, loadingBarsDev, loadingBarsMon;
+
+	public static float transitionDuration = 1.5f;
+
 	public Transform LoadingBarCon1;
 	public Transform LoadingBarCon2;
 	public Transform LoadingBarCon3;
@@ -26,7 +30,6 @@ public class DevSteps : MonoBehaviour {
 	[SerializeField] public float nextAmountCon = 0;
 	[SerializeField] public float nextAmountDev = 0;
 	[SerializeField] public float nextAmountMon = 0;
-	[SerializeField] public float speed = 30;
 	public bool CovActive = false;
 	public bool DevActive = false;
 	public bool MonActive = false;
@@ -45,37 +48,37 @@ public class DevSteps : MonoBehaviour {
 		return MainDevSteps;
 	  }
 
-	// Update is called onde per frame
-	void Update () {
-		if(CovActive || DevActive || MonActive){
-			if(CovActive){
-				if(currentAmountCon < nextAmountCon) {
-					currentAmountCon += speed * Time.deltaTime;
-				}
-				LoadingBarCon1.GetComponent<Image>().fillAmount = currentAmountCon / 100;
-			} else {
-				currentAmountCon = 0;
-			}
-			if(DevActive){
-				if(currentAmountDev < nextAmountDev) {
-					currentAmountDev += speed * Time.deltaTime;
-				}
-				LoadingBarDev1.GetComponent<Image>().fillAmount = currentAmountDev / 100;
-			} else {
-				currentAmountDev = 0;
-			}
-			if(MonActive){
-				if(currentAmountMon < nextAmountMon) {
-					currentAmountMon += speed * Time.deltaTime;
-				}
-				// Enquanto ativo precisa adicionar dinheiro do produto ativo
-				// Ao ativar o MonActive a primeira vez precisa retornar msg de aviso sobre os dados de retorno financeiro e nota do produto
-				LoadingBarCon1.GetComponent<Image>().fillAmount = currentAmountCon / 100;
-				LoadingBarDev1.GetComponent<Image>().fillAmount = currentAmountDev / 100;
-				LoadingBarMon1.GetComponent<Image>().fillAmount = (100 - currentAmountMon) / 100;
-			}
-		}
-	}
+	//// Update is called onde per frame
+	//void Update () {
+	//	if(CovActive || DevActive || MonActive){
+	//		if(CovActive){
+	//			if(currentAmountCon < nextAmountCon) {
+	//				currentAmountCon += speed * Time.deltaTime;
+	//			}
+	//			LoadingBarCon1.GetComponent<Image>().fillAmount = currentAmountCon / 100;
+	//		} else {
+	//			currentAmountCon = 0;
+	//		}
+	//		if(DevActive){
+	//			if(currentAmountDev < nextAmountDev) {
+	//				currentAmountDev += speed * Time.deltaTime;
+	//			}
+	//			LoadingBarDev1.GetComponent<Image>().fillAmount = currentAmountDev / 100;
+	//		} else {
+	//			currentAmountDev = 0;
+	//		}
+	//		if(MonActive){
+	//			if(currentAmountMon < nextAmountMon) {
+	//				currentAmountMon += speed * Time.deltaTime;
+	//			}
+	//			// Enquanto ativo precisa adicionar dinheiro do produto ativo
+	//			// Ao ativar o MonActive a primeira vez precisa retornar msg de aviso sobre os dados de retorno financeiro e nota do produto
+	//			LoadingBarCon1.GetComponent<Image>().fillAmount = currentAmountCon / 100;
+	//			LoadingBarDev1.GetComponent<Image>().fillAmount = currentAmountDev / 100;
+	//			LoadingBarMon1.GetComponent<Image>().fillAmount = (100 - currentAmountMon) / 100;
+	//		}
+	//	}
+	//}
 	public void SetData(bool CovActiveR, bool DevActiveR, bool MonActiveR, float nextAmountConR, float nextAmountDevR, float nextAmountMonR) {
 		// update vars
 		CovActive =	CovActiveR;
