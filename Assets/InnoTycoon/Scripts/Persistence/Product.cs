@@ -47,6 +47,7 @@ public class Product {
 				if (curStep >= devSteps) {
 					currentPhase = ProductPhase.sales;
 					curStep = 0;
+					//TODO aviso que o produto entrou na fase de vendas!
 				}
 				break;
 			case ProductPhase.sales:
