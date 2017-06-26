@@ -13,11 +13,23 @@ public class GameManager : MonoBehaviour {
 
 	public List<Product> productsDoneToday = new List<Product>();
 
+	public static int baseNumberOfConceptSteps = 1, baseNumberOfDevSteps = 3, baseNumberOfSaleSteps = 3;
+
+	public ProductOptionsContainer pConcepts, pDevOptions, pMonetOptions;
+
+	public TextAsset productConceptsAsset, productDevOptionsAsset, productMonetizationsAsset;
+
 	void Awake() {
 		instance = this;
+
+		pConcepts = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productConceptsAsset);
+		pDevOptions = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productDevOptionsAsset);
+		pMonetOptions = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productMonetizationsAsset);
 	}
 
 	public void GoToNextDay() {
+		DevSteps.Instance().ReleaseMarkedBars();
+
 		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
 		persInstanceSave.day++;
 		// Take cost from capital
@@ -34,12 +46,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		productsDoneToday.Clear();
-
-
-		RecalculateDailyCost();
 	}
-
-
 
 	public void AddNewPlayerProduct(Product newProduct) {
 		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
@@ -50,7 +57,24 @@ public class GameManager : MonoBehaviour {
 		if (persInstanceSave.productsList == null) persInstanceSave.productsList = new List<Product>();
 		persInstanceSave.productsList.Add(newProduct);
 
-		RecalculateDailyCost();
+		persInstanceSave.cost += CalculateProductCost(newProduct);
+		PersistenceActivator.instance.RenderAllChanges();
+	}
+
+	/// <summary>
+	/// metodo chamado quando um produto entra na fase de vendas.
+	/// nesse momento, calculamos qual o lucro fornecido pelo produto.
+	/// ele tambem deixa de ter custos para a empresa
+	/// </summary>
+	/// <param name="theProductSold"></param>
+	public void ProductEnteredSales(Product theProductSold) {
+		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
+
+		persInstanceSave.cost -= CalculateProductCost(theProductSold);
+
+		
+
+		//TODO o calculo do lucro e a janelinha de aviso de "produto entrou em venda"
 	}
 
 	/// <summary>
@@ -59,14 +83,40 @@ public class GameManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="doneProduct"></param>
 	public void ProductIsDone(Product doneProduct) {
-		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
-
 		//nao podemos remover assim que descobrimos que o produto se encerrou para nao dar problemas com o for que itera sobre os productsDoing
 		productsDoneToday.Add(doneProduct);
 
 	}
 
-	public void RecalculateDailyCost() {
+	ProductOption GetProductOptionByID(string optionID) {
+		for(int i = 0; i < pConcepts.productOptionsList.Count; i++) {
+			if(pConcepts.productOptionsList[i].id == optionID) {
+				return pConcepts.productOptionsList[i];
+			}
+		}
 
+		for (int i = 0; i < pDevOptions.productOptionsList.Count; i++) {
+			if (pDevOptions.productOptionsList[i].id == optionID) {
+				return pDevOptions.productOptionsList[i];
+			}
+		}
+
+		for (int i = 0; i < pMonetOptions.productOptionsList.Count; i++) {
+			if (pMonetOptions.productOptionsList[i].id == optionID) {
+				return pMonetOptions.productOptionsList[i];
+			}
+		}
+
+		return null;
 	}
+
+	public int CalculateProductCost(Product targetProduct) {
+		int totalProdCost = 0;
+		for(int i = 0; i < targetProduct.optionIDs.Count; i++) {
+			totalProdCost += GetProductOptionByID(targetProduct.optionIDs[i]).cost;
+		}
+
+		return totalProdCost;
+	}
+
 }

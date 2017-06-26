@@ -28,6 +28,10 @@ public class Product {
 
 	public int conceptSteps, devSteps, saleSteps;
 
+	private ProdPhaseLoadingBar currentLoadBar;
+
+	private Color loadBarsDisplayColor = Color.white;
+
 	public Product() {}
 
 	/// <summary>
@@ -36,24 +40,31 @@ public class Product {
 	public void OneStep() {
 		curStep++;
 
+		UpdateLoadBar();
+
 		switch (currentPhase) {
 			case ProductPhase.concept:
 				if(curStep >= conceptSteps) {
 					currentPhase = ProductPhase.dev;
 					curStep = 0;
+					ReleaseLoadBar();
 				}
 				break;
 			case ProductPhase.dev:
 				if (curStep >= devSteps) {
 					currentPhase = ProductPhase.sales;
 					curStep = 0;
-					//TODO aviso que o produto entrou na fase de vendas!
+					ReleaseLoadBar();
+					UpdateLoadBar(); //uma atualizacao a mais aqui para enchermos essa loadbar
+					GameManager.instance.ProductEnteredSales(this);
 				}
 				break;
 			case ProductPhase.sales:
 				if(curStep >= saleSteps) {
 					currentPhase = ProductPhase.done;
 					curStep = -1;
+					ReleaseLoadBar();
+					DevSteps.Instance().ReleaseLoadBarColor(loadBarsDisplayColor);
 					//esse produto esta encerrado entao
 					GameManager.instance.ProductIsDone(this);
 				}
@@ -63,4 +74,45 @@ public class Product {
 				break;
 		}
 	}
+
+
+	public void UpdateLoadBar() {
+		//pegamos uma cor para a gente caso ainda estejamos com o padrao (white com 1.0f alpha)
+		if(loadBarsDisplayColor == Color.white) {
+			loadBarsDisplayColor = DevSteps.Instance().GetALoadBarColor();
+		}
+
+		//tentamos pegar uma load bar para nos se ainda nao tivermos
+		if(currentLoadBar == null) {
+			currentLoadBar = DevSteps.Instance().GetALoadBar(currentPhase);
+			if(currentLoadBar != null) {
+				currentLoadBar.isBeingUsed = true;
+				currentLoadBar.ResetBarValue();
+				currentLoadBar.loadBarImg.CrossFadeAlpha(DevSteps.baseLoadBarOpacity, DevSteps.transitionDuration, true);
+				currentLoadBar.loadBarImg.color = loadBarsDisplayColor;
+			}
+		}
+
+		//se agora temos uma, vamos atualizar o valor dela de acordo com nosso progresso
+		if(currentLoadBar != null) {
+			switch (currentPhase) {
+				case ProductPhase.concept:
+					currentLoadBar.TransitionToValue((float) curStep / conceptSteps);
+					break;
+				case ProductPhase.dev:
+					currentLoadBar.TransitionToValue((float) curStep / devSteps);
+					break;
+				case ProductPhase.sales:
+					currentLoadBar.TransitionToValue((float) curStep / saleSteps);
+					break;
+			}
+			
+		}
+	}
+
+	public void ReleaseLoadBar() {
+		DevSteps.Instance().MarkBarForRelease(currentLoadBar);
+		currentLoadBar = null;
+	}
+
 }

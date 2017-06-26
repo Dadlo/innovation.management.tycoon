@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 5648319}
   - component: {fileID: 5648321}
   - component: {fileID: 5648320}
+  - component: {fileID: 5648322}
   m_Layer: 5
   m_Name: RadialLoadBar5
   m_TagString: Untagged
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.36862746, b: 0.74509805, a: 0.55}
+  m_Color: {r: 0, g: 0.74509805, b: 0.35077754, a: 0.55}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -159,6 +160,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 5648318}
+--- !u!114 &5648322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5648318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 5648320}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &9482009
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8088235, g: 0.8088235, b: 0.8088235, a: 0.366}
+  m_Color: {r: 0.8088235, g: 0.8088235, b: 0.8088235, a: 0.15686275}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1857,6 +1872,7 @@ GameObject:
   - component: {fileID: 171258560}
   - component: {fileID: 171258562}
   - component: {fileID: 171258561}
+  - component: {fileID: 171258563}
   m_Layer: 5
   m_Name: RadialLoadBar2
   m_TagString: Untagged
@@ -1872,15 +1888,15 @@ RectTransform:
   m_GameObject: {fileID: 171258559}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1368348907}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 218.5714, y: -50}
-  m_SizeDelta: {x: 48.57143, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &171258561
 MonoBehaviour:
@@ -1915,6 +1931,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 171258559}
+--- !u!114 &171258563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 171258559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 171258561}
+  isBeingUsed: 0
+  startsFull: 1
 --- !u!1 &172346009
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,12 +2072,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854a9f58d469ffc41acec94d904f0f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productConceptsAsset: {fileID: 4900000, guid: ec3e1a058bc0e4985a624a501f15c19c,
-    type: 3}
-  productDevOptionsAsset: {fileID: 4900000, guid: 44455291561614dcfb5ca17abf78238c,
-    type: 3}
-  productMonetizationsAsset: {fileID: 4900000, guid: 1f9d62d0755854ef39d4c9aaf4bc9873,
-    type: 3}
   sectionToggles:
   - {fileID: 2048612298}
   - {fileID: 1458322921}
@@ -2137,6 +2161,7 @@ GameObject:
   - component: {fileID: 190935022}
   - component: {fileID: 190935024}
   - component: {fileID: 190935023}
+  - component: {fileID: 190935025}
   m_Layer: 5
   m_Name: RadialLoadBar1
   m_TagString: Untagged
@@ -2152,15 +2177,15 @@ RectTransform:
   m_GameObject: {fileID: 190935021}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1368348907}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 233.74998, y: -50}
-  m_SizeDelta: {x: 42.5, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &190935023
 MonoBehaviour:
@@ -2195,6 +2220,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 190935021}
+--- !u!114 &190935025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 190935021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 190935023}
+  isBeingUsed: 0
+  startsFull: 1
 --- !u!1 &208597915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4125,6 +4164,7 @@ GameObject:
   - component: {fileID: 397550092}
   - component: {fileID: 397550094}
   - component: {fileID: 397550093}
+  - component: {fileID: 397550095}
   m_Layer: 5
   m_Name: RadialLoadBar4
   m_TagString: Untagged
@@ -4162,7 +4202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.36862746, b: 0.74509805, a: 0.55}
+  m_Color: {r: 0, g: 0.74509805, b: 0.68992573, a: 0.55}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4183,6 +4223,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 397550091}
+--- !u!114 &397550095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 397550091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 397550093}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &404350953
 GameObject:
   m_ObjectHideFlags: 0
@@ -4843,6 +4897,7 @@ GameObject:
   - component: {fileID: 482436690}
   - component: {fileID: 482436692}
   - component: {fileID: 482436691}
+  - component: {fileID: 482436693}
   m_Layer: 5
   m_Name: RadialLoadBar3
   m_TagString: Untagged
@@ -4858,15 +4913,15 @@ RectTransform:
   m_GameObject: {fileID: 482436689}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1341579844}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 141.66669, y: -50}
-  m_SizeDelta: {x: 56.666668, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &482436691
 MonoBehaviour:
@@ -4901,6 +4956,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 482436689}
+--- !u!114 &482436693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 482436689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 482436691}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &484408355
 GameObject:
   m_ObjectHideFlags: 0
@@ -4911,6 +4980,7 @@ GameObject:
   - component: {fileID: 484408356}
   - component: {fileID: 484408358}
   - component: {fileID: 484408357}
+  - component: {fileID: 484408359}
   m_Layer: 5
   m_Name: RadialLoadBar2
   m_TagString: Untagged
@@ -4926,15 +4996,15 @@ RectTransform:
   m_GameObject: {fileID: 484408355}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1341579844}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -50}
-  m_SizeDelta: {x: 68, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &484408357
 MonoBehaviour:
@@ -4969,6 +5039,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 484408355}
+--- !u!114 &484408359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 484408355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 484408357}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &510054890
 GameObject:
   m_ObjectHideFlags: 0
@@ -5854,6 +5938,7 @@ GameObject:
   - component: {fileID: 659721079}
   - component: {fileID: 659721081}
   - component: {fileID: 659721080}
+  - component: {fileID: 659721082}
   m_Layer: 5
   m_Name: RadialLoadBar5
   m_TagString: Untagged
@@ -5869,15 +5954,15 @@ RectTransform:
   m_GameObject: {fileID: 659721078}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1341579844}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 106.24997, y: -50}
-  m_SizeDelta: {x: 42.5, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &659721080
 MonoBehaviour:
@@ -5912,6 +5997,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 659721078}
+--- !u!114 &659721082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 659721078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 659721080}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &661607375
 GameObject:
   m_ObjectHideFlags: 0
@@ -7537,6 +7636,7 @@ GameObject:
   - component: {fileID: 795168246}
   - component: {fileID: 795168248}
   - component: {fileID: 795168247}
+  - component: {fileID: 795168249}
   m_Layer: 5
   m_Name: RadialLoadBar1
   m_TagString: Untagged
@@ -7552,15 +7652,15 @@ RectTransform:
   m_GameObject: {fileID: 795168245}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1341579844}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 212.50003, y: -50}
-  m_SizeDelta: {x: 85, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &795168247
 MonoBehaviour:
@@ -7595,6 +7695,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 795168245}
+--- !u!114 &795168249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 795168245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 795168247}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &811521888
 GameObject:
   m_ObjectHideFlags: 0
@@ -9033,6 +9147,7 @@ GameObject:
   - component: {fileID: 1061293005}
   - component: {fileID: 1061293007}
   - component: {fileID: 1061293006}
+  - component: {fileID: 1061293008}
   m_Layer: 5
   m_Name: RadialLoadBar4
   m_TagString: Untagged
@@ -9048,15 +9163,15 @@ RectTransform:
   m_GameObject: {fileID: 1061293004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1341579844}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 121.42859, y: -50}
-  m_SizeDelta: {x: 48.57143, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1061293006
 MonoBehaviour:
@@ -9091,6 +9206,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1061293004}
+--- !u!114 &1061293008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1061293004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 1061293006}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &1065656737
 GameObject:
   m_ObjectHideFlags: 0
@@ -9724,7 +9853,6 @@ GameObject:
   - component: {fileID: 1154643798}
   - component: {fileID: 1154643797}
   - component: {fileID: 1154643796}
-  - component: {fileID: 1154643800}
   m_Layer: 5
   m_Name: HUD
   m_TagString: HUD
@@ -9822,42 +9950,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154643794}
---- !u!114 &1154643800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1154643794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fc0957e7c70c4762b43b9500085bf33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LoadingBarCon1: {fileID: 1157521787}
-  LoadingBarCon2: {fileID: 1977912232}
-  LoadingBarCon3: {fileID: 1886087867}
-  LoadingBarCon4: {fileID: 397550092}
-  LoadingBarCon5: {fileID: 5648319}
-  LoadingBarDev1: {fileID: 795168246}
-  LoadingBarDev2: {fileID: 484408356}
-  LoadingBarDev3: {fileID: 482436690}
-  LoadingBarDev4: {fileID: 1061293005}
-  LoadingBarDev5: {fileID: 659721079}
-  LoadingBarMon1: {fileID: 190935022}
-  LoadingBarMon2: {fileID: 171258560}
-  LoadingBarMon3: {fileID: 1802398941}
-  LoadingBarMon4: {fileID: 1351586318}
-  LoadingBarMon5: {fileID: 1314517390}
-  currentAmountCon: 0
-  currentAmountDev: 0
-  currentAmountMon: 0
-  nextAmountCon: 0
-  nextAmountDev: 0
-  nextAmountMon: 0
-  speed: 30
-  CovActive: 0
-  DevActive: 0
-  MonActive: 0
 --- !u!1 &1157521786
 GameObject:
   m_ObjectHideFlags: 0
@@ -9868,6 +9960,7 @@ GameObject:
   - component: {fileID: 1157521787}
   - component: {fileID: 1157521789}
   - component: {fileID: 1157521788}
+  - component: {fileID: 1157521790}
   m_Layer: 5
   m_Name: RadialLoadBar1
   m_TagString: Untagged
@@ -9926,6 +10019,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1157521786}
+--- !u!114 &1157521790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1157521786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 1157521788}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &1162160932
 GameObject:
   m_ObjectHideFlags: 0
@@ -11408,6 +11515,7 @@ GameObject:
   - component: {fileID: 1314517390}
   - component: {fileID: 1314517392}
   - component: {fileID: 1314517391}
+  - component: {fileID: 1314517393}
   m_Layer: 5
   m_Name: RadialLoadBar5
   m_TagString: Untagged
@@ -11423,15 +11531,15 @@ RectTransform:
   m_GameObject: {fileID: 1314517389}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1368348907}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 127.49997, y: -50}
-  m_SizeDelta: {x: 85, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1314517391
 MonoBehaviour:
@@ -11466,6 +11574,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1314517389}
+--- !u!114 &1314517393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1314517389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 1314517391}
+  isBeingUsed: 0
+  startsFull: 1
 --- !u!1 &1317734407
 GameObject:
   m_ObjectHideFlags: 0
@@ -11928,7 +12050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.80784315, g: 0.80784315, b: 0.80784315, a: 0.3647059}
+  m_Color: {r: 0.8088235, g: 0.8088235, b: 0.8088235, a: 0.15686275}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -12065,6 +12187,7 @@ GameObject:
   - component: {fileID: 1351586318}
   - component: {fileID: 1351586320}
   - component: {fileID: 1351586319}
+  - component: {fileID: 1351586321}
   m_Layer: 5
   m_Name: RadialLoadBar4
   m_TagString: Untagged
@@ -12080,15 +12203,15 @@ RectTransform:
   m_GameObject: {fileID: 1351586317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1368348907}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 169.99997, y: -50}
-  m_SizeDelta: {x: 68, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1351586319
 MonoBehaviour:
@@ -12123,6 +12246,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1351586317}
+--- !u!114 &1351586321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1351586317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 1351586319}
+  isBeingUsed: 0
+  startsFull: 1
 --- !u!1 &1362329915
 GameObject:
   m_ObjectHideFlags: 0
@@ -12251,7 +12388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.80784315, g: 0.80784315, b: 0.80784315, a: 0.3647059}
+  m_Color: {r: 0.8088235, g: 0.8088235, b: 0.8088235, a: 0.15686275}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -14763,6 +14900,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 160884, guid: ecc0be9c3d4f1ed42bda45b243417e0a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecc0be9c3d4f1ed42bda45b243417e0a, type: 2}
   m_IsPrefabParent: 0
@@ -16080,13 +16221,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToStart: 1
-  day: 1
-  capital: 20000
-  cost: 2000
-  studiesList: 
-  studyDoing: 
-  productsList: []
-  productsDoing: []
+  curGameData:
+    day: 1
+    capital: 20000
+    cost: 2000
+    studiesList: 
+    studyDoing: 
+    productsList: []
+    productsDoing: []
+    conceptStep: 0
+    conceptStepTotal: 0
+    devStep: 0
+    devStepTotal: 0
+    monetStep: 0
+    monetStepTotal: 0
   diaCalendarioUI: {fileID: 1965844742}
   capitalUI: {fileID: 2035555705}
   costUI: {fileID: 517619167}
@@ -16101,6 +16249,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45f252b9bcb1ad48a367e30281e2270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  productsDoneToday: []
+  productConceptsAsset: {fileID: 4900000, guid: ec3e1a058bc0e4985a624a501f15c19c,
+    type: 3}
+  productDevOptionsAsset: {fileID: 4900000, guid: 44455291561614dcfb5ca17abf78238c,
+    type: 3}
+  productMonetizationsAsset: {fileID: 4900000, guid: 1f9d62d0755854ef39d4c9aaf4bc9873,
+    type: 3}
+--- !u!114 &1777905771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1777905768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc0957e7c70c4762b43b9500085bf33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingBarsCon:
+  - {fileID: 1157521790}
+  - {fileID: 1977912235}
+  - {fileID: 1886087870}
+  - {fileID: 397550095}
+  - {fileID: 5648322}
+  loadingBarsDev:
+  - {fileID: 795168249}
+  - {fileID: 484408359}
+  - {fileID: 482436693}
+  - {fileID: 1061293008}
+  - {fileID: 659721082}
+  loadingBarsMon:
+  - {fileID: 190935025}
+  - {fileID: 171258563}
+  - {fileID: 1802398944}
+  - {fileID: 1351586321}
+  - {fileID: 1314517393}
+  availableLoadBarColors:
+  - {r: 0, g: 0.13103437, b: 1, a: 0.54901963}
+  - {r: 0.18382353, g: 0.96622705, b: 1, a: 0.54901963}
+  - {r: 0.18382353, g: 1, b: 0.6284989, a: 0.54901963}
+  - {r: 0.7523323, g: 0.18382353, b: 1, a: 0.54901963}
+  - {r: 0.18382353, g: 1, b: 0.25699797, a: 0.54901963}
+  - {r: 0.7185598, g: 1, b: 0.18382353, a: 0.54901963}
+  - {r: 1, g: 0.60598373, b: 0.18382353, a: 0.54901963}
+  - {r: 1, g: 0.23448277, b: 0.18382353, a: 0.54901963}
+  - {r: 1, g: 0.18382353, b: 0.8423932, a: 0.54901963}
+  - {r: 0.18382353, g: 0.5947263, b: 1, a: 0.54901963}
+  - {r: 0.77609026, g: 0.73345584, b: 0.83823526, a: 0.54901963}
+  - {r: 0.5354761, g: 0.51967996, b: 0.6544118, a: 0.54901963}
+  - {r: 0, g: 0.47226158, b: 0.49264705, a: 0.54901963}
+  - {r: 0.52768165, g: 0.89705884, b: 0.43533736, a: 0.54901963}
+  - {r: 0.51362455, g: 0.9191176, b: 0.8352224, a: 0.54901963}
 --- !u!114 &1777905775 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11488040, guid: 45616935e4fe10f48b62da1347801a16,
@@ -16530,6 +16730,7 @@ GameObject:
   - component: {fileID: 1802398941}
   - component: {fileID: 1802398943}
   - component: {fileID: 1802398942}
+  - component: {fileID: 1802398944}
   m_Layer: 5
   m_Name: RadialLoadBar3
   m_TagString: Untagged
@@ -16545,15 +16746,15 @@ RectTransform:
   m_GameObject: {fileID: 1802398940}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999938, y: 0.9999938, z: 0.9999938}
   m_Children: []
   m_Father: {fileID: 1368348907}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 198.33334, y: -50}
-  m_SizeDelta: {x: 56.666668, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802398942
 MonoBehaviour:
@@ -16588,6 +16789,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1802398940}
+--- !u!114 &1802398944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1802398940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 1802398942}
+  isBeingUsed: 0
+  startsFull: 1
 --- !u!1 &1807884490
 GameObject:
   m_ObjectHideFlags: 0
@@ -17328,6 +17543,7 @@ GameObject:
   - component: {fileID: 1886087867}
   - component: {fileID: 1886087869}
   - component: {fileID: 1886087868}
+  - component: {fileID: 1886087870}
   m_Layer: 5
   m_Name: RadialLoadBar3
   m_TagString: Untagged
@@ -17365,7 +17581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.36862746, b: 0.74509805, a: 0.55}
+  m_Color: {r: 0.74509805, g: 0, b: 0, a: 0.55}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -17386,6 +17602,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1886087866}
+--- !u!114 &1886087870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1886087866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 1886087868}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &1935225473
 GameObject:
   m_ObjectHideFlags: 0
@@ -17680,6 +17910,7 @@ GameObject:
   - component: {fileID: 1977912232}
   - component: {fileID: 1977912234}
   - component: {fileID: 1977912233}
+  - component: {fileID: 1977912235}
   m_Layer: 5
   m_Name: RadialLoadBar2
   m_TagString: Untagged
@@ -17717,7 +17948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.36862746, b: 0.74509805, a: 0.55}
+  m_Color: {r: 0.4946588, g: 0, b: 0.74509805, a: 0.55}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -17738,6 +17969,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1977912231}
+--- !u!114 &1977912235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1977912231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232a6283e6a1db44b9a8831a70959ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadBarImg: {fileID: 1977912233}
+  isBeingUsed: 0
+  startsFull: 0
 --- !u!1 &1982845122
 GameObject:
   m_ObjectHideFlags: 0

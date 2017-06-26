@@ -12,7 +12,7 @@ public class ProductOption {
 	public string id;
 	public int requisitions;
     public int cost;
-	public float multiplier;
+	public int multiplier;
 	public bool active;
 
 	public ProductOption(){}

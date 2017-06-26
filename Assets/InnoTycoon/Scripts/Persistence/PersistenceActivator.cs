@@ -19,8 +19,6 @@ public class PersistenceActivator : MonoBehaviour {
 	public static PersistenceActivator instance;
 	private StartOptions startoptions;
 	private ModalPanel ModalPanel;           //reference to the ModalPanel Class
-	private DevSteps DevSteps;
-	private ShowPanels showPanels;
 	private Sprite icon = null;
 
 
@@ -29,18 +27,16 @@ public class PersistenceActivator : MonoBehaviour {
 		instance = this;
 		startoptions = GetComponent<StartOptions> ();
 		ModalPanel = ModalPanel.Instance();         //Instantiate the panel
-		DevSteps = DevSteps.Instance();
-		showPanels = GetComponent<ShowPanels> ();
 	}
 
 	public void SaveAllData() {
-		// Increase Day
-		GameManager.instance.GoToNextDay();
 		// EndGame Conditional
 		if (curGameData.capital <= curGameData.cost) {
 			EndGame();
 			Debug.Log("Game Over");
 		} else {
+			// Increase Day
+			GameManager.instance.GoToNextDay();
 			PersistenceHandler.SaveToFile(curGameData, "save01", false);
 			ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
 			RenderAllChanges();
@@ -99,8 +95,8 @@ public class PersistenceActivator : MonoBehaviour {
 	}
 
 	public void LoadGame() {
-		LoadAllData();
 		StartGameFunction();
+		LoadAllData();
 	}
 
 	public void NewGame() {
@@ -121,6 +117,9 @@ public class PersistenceActivator : MonoBehaviour {
 
 		// render all ui
 		RenderAllChanges();
+		for(int i = 0; i < curGameData.productsDoing.Count; i++) {
+			curGameData.productsDoing[i].UpdateLoadBar();
+		}
 	}
 	public void RenderAllChanges() {
 		// update UI

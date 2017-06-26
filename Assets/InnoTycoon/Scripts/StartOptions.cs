@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -136,12 +136,12 @@ public class StartOptions : MonoBehaviour {
 			Invoke ("PlayNewMusic", fadeAlphaAnimationClip.length);
 		}
 		//Set trigger for animator to start animation fading out Menu UI
-		Invoke("HideDelayed", fadeAlphaAnimationClip.length);
+		showPanels.HideMenu();
 		Debug.Log ("Game started in same scene!");
 
 
 		//Set trigger for animator to start animation fading in HUD UI
-		Invoke("ShowDelayed", fadeAlphaAnimationClip.length);
+		showPanels.ShowHUD();
 	}
 
 	public void ReturnToMenu()

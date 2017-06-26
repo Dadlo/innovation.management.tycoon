@@ -9,83 +9,98 @@ public class DevSteps : MonoBehaviour {
 
 	public static float transitionDuration = 1.5f;
 
-	public Transform LoadingBarCon1;
-	public Transform LoadingBarCon2;
-	public Transform LoadingBarCon3;
-	public Transform LoadingBarCon4;
-	public Transform LoadingBarCon5;
-	public Transform LoadingBarDev1;
-	public Transform LoadingBarDev2;
-	public Transform LoadingBarDev3;
-	public Transform LoadingBarDev4;
-	public Transform LoadingBarDev5;
-	public Transform LoadingBarMon1;
-	public Transform LoadingBarMon2;
-	public Transform LoadingBarMon3;
-	public Transform LoadingBarMon4;
-	public Transform LoadingBarMon5;
-	[SerializeField] public float currentAmountCon = 0;
-	[SerializeField] public float currentAmountDev = 0;
-	[SerializeField] public float currentAmountMon = 0;
-	[SerializeField] public float nextAmountCon = 0;
-	[SerializeField] public float nextAmountDev = 0;
-	[SerializeField] public float nextAmountMon = 0;
-	public bool CovActive = false;
-	public bool DevActive = false;
-	public bool MonActive = false;
+	public static float baseLoadBarOpacity = 0.6f;
+
+	public List<Color> availableLoadBarColors = new List<Color>();
+
+	private List<Color> currentlyUsedLoadBarColors = new List<Color>();
+
+	/// <summary>
+	/// lista de barras que serao soltas no dia seguinte.
+	/// a gente nao solta na hora para que ainda seja possivel ver a barra cheia ate o dia seguinte
+	/// </summary>
+	private List<ProdPhaseLoadingBar> barsMarkedForRelease = new List<ProdPhaseLoadingBar>();
+
 	private static DevSteps MainDevSteps;
 
-	public static DevSteps Instance()
-	  {
-		if (!MainDevSteps)
-		  {
+	public static DevSteps Instance() {
+		if (!MainDevSteps) {
 			MainDevSteps = FindObjectOfType(typeof(DevSteps)) as DevSteps;
-			if (!MainDevSteps)
-			  {
+			if (!MainDevSteps) {
 				Debug.LogError("There needs to be one active DevSteps script on a GameObject in your scene.");
-			  }
-		  }
+			}
+		}
 		return MainDevSteps;
-	  }
-
-	//// Update is called onde per frame
-	//void Update () {
-	//	if(CovActive || DevActive || MonActive){
-	//		if(CovActive){
-	//			if(currentAmountCon < nextAmountCon) {
-	//				currentAmountCon += speed * Time.deltaTime;
-	//			}
-	//			LoadingBarCon1.GetComponent<Image>().fillAmount = currentAmountCon / 100;
-	//		} else {
-	//			currentAmountCon = 0;
-	//		}
-	//		if(DevActive){
-	//			if(currentAmountDev < nextAmountDev) {
-	//				currentAmountDev += speed * Time.deltaTime;
-	//			}
-	//			LoadingBarDev1.GetComponent<Image>().fillAmount = currentAmountDev / 100;
-	//		} else {
-	//			currentAmountDev = 0;
-	//		}
-	//		if(MonActive){
-	//			if(currentAmountMon < nextAmountMon) {
-	//				currentAmountMon += speed * Time.deltaTime;
-	//			}
-	//			// Enquanto ativo precisa adicionar dinheiro do produto ativo
-	//			// Ao ativar o MonActive a primeira vez precisa retornar msg de aviso sobre os dados de retorno financeiro e nota do produto
-	//			LoadingBarCon1.GetComponent<Image>().fillAmount = currentAmountCon / 100;
-	//			LoadingBarDev1.GetComponent<Image>().fillAmount = currentAmountDev / 100;
-	//			LoadingBarMon1.GetComponent<Image>().fillAmount = (100 - currentAmountMon) / 100;
-	//		}
-	//	}
-	//}
-	public void SetData(bool CovActiveR, bool DevActiveR, bool MonActiveR, float nextAmountConR, float nextAmountDevR, float nextAmountMonR) {
-		// update vars
-		CovActive =	CovActiveR;
-		DevActive =	DevActiveR;
-		MonActive =	MonActiveR;
-		nextAmountCon =	nextAmountConR;
-		nextAmountDev =	nextAmountDevR;
-		nextAmountMon =	nextAmountMonR;
 	}
+
+	/// <summary>
+	/// tentamos pegar uma load bar que nao esteja sendo usada no momento.
+	/// se nao conseguirmos, retornamos null
+	/// </summary>
+	/// <param name="curProductPhase"></param>
+	/// <returns></returns>
+	public ProdPhaseLoadingBar GetALoadBar(Product.ProductPhase curProductPhase) {
+		switch (curProductPhase) {
+			case Product.ProductPhase.concept:
+				return LookForUnusedLoadBar(loadingBarsCon);
+			case Product.ProductPhase.dev:
+				return LookForUnusedLoadBar(loadingBarsDev);
+			case Product.ProductPhase.sales:
+				return LookForUnusedLoadBar(loadingBarsMon);
+		}
+
+		return null;
+	}
+
+	ProdPhaseLoadingBar LookForUnusedLoadBar(ProdPhaseLoadingBar[] loadBarArray) {
+		for(int i = 0; i < loadBarArray.Length; i++) {
+			if (!loadBarArray[i].isBeingUsed) {
+				return loadBarArray[i];
+			}
+		}
+
+		return null;
+	}
+
+	/// <summary>
+	/// pega uma cor para representar um produto de forma consistente durante as 3 etapas
+	/// </summary>
+	/// <returns></returns>
+	public Color GetALoadBarColor() {
+		Color pickedColor = Color.clear;//se nao acharmos nenhuma valida, pegamos uma completamente transparente
+		if (availableLoadBarColors.Count > 0) {
+			pickedColor = availableLoadBarColors[0];
+			currentlyUsedLoadBarColors.Add(pickedColor);
+			availableLoadBarColors.Remove(pickedColor);
+		}
+
+		return pickedColor;
+	}
+
+	/// <summary>
+	/// faz a cor alvo voltar para a lista de cores disponiveis para os produtos
+	/// </summary>
+	/// <param name="targetColor"></param>
+	public void ReleaseLoadBarColor(Color targetColor) {
+		currentlyUsedLoadBarColors.Remove(targetColor);
+		availableLoadBarColors.Add(targetColor);
+	}
+
+	public void MarkBarForRelease(ProdPhaseLoadingBar theBar) {
+		barsMarkedForRelease.Add(theBar);
+	}
+
+	/// <summary>
+	/// barras marcadas para serem soltas sao finalmente soltas aqui.
+	/// elas somem e ficam disponiveis novamente para outros produtos
+	/// </summary>
+	public void ReleaseMarkedBars() {
+		for(int i = 0; i < barsMarkedForRelease.Count; i++) {
+			barsMarkedForRelease[i].isBeingUsed = false;
+			barsMarkedForRelease[i].loadBarImg.CrossFadeAlpha(0, transitionDuration, true);
+		}
+
+		barsMarkedForRelease.Clear();
+	}
+
 }

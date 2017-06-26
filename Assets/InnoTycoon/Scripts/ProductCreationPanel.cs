@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public struct ProductOptionsContainer {
+	public List<ProductOption> productOptionsList;
+}
+
 public class ProductCreationPanel : ShowablePanel {
-
-	public struct ProductOptionsContainer {
-		public List<ProductOption> productOptionsList;
-	}
-
-	public ProductOptionsContainer pConcepts, pDevOptions, pMonetOptions;
-
-	public TextAsset productConceptsAsset, productDevOptionsAsset, productMonetizationsAsset;
 
 	public Toggle[] sectionToggles;
 
@@ -99,20 +95,16 @@ public class ProductCreationPanel : ShowablePanel {
 
 	// Use this for initialization
 	void Start () {
-		pConcepts = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productConceptsAsset);
-		pDevOptions = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productDevOptionsAsset);
-		pMonetOptions = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productMonetizationsAsset);
-
+		
 		//nos registramos nos eventos de cada toggle para ficar sabendo quando um foi clicado e fazer o que precisarmos fazer de acordo
 		for(int i = 0; i < sectionToggles.Length; i++) {
 			sectionToggles[i].GetComponent<ProductCreationSectionToggle>().onToggled += OnToldToChangeSections;
 		}
 
-
         //preenchemos as listas de opcoes...
-        FillOptionsList(pConcepts.productOptionsList, ProductOptionListEntry.OptionType.concept, conceptsListContainer);
-        FillOptionsList(pDevOptions.productOptionsList, ProductOptionListEntry.OptionType.dev, devListContainer);
-        FillOptionsList(pMonetOptions.productOptionsList, ProductOptionListEntry.OptionType.monet, monetListContainer);
+        FillOptionsList(GameManager.instance.pConcepts.productOptionsList, ProductOptionListEntry.OptionType.concept, conceptsListContainer);
+        FillOptionsList(GameManager.instance.pDevOptions.productOptionsList, ProductOptionListEntry.OptionType.dev, devListContainer);
+        FillOptionsList(GameManager.instance.pMonetOptions.productOptionsList, ProductOptionListEntry.OptionType.monet, monetListContainer);
 
 		ToggleProductFinalizationOption(pickedConcepts.Count > 0);
     }
@@ -216,16 +208,23 @@ public class ProductCreationPanel : ShowablePanel {
 
 		createdProduct.optionIDs = new List<string>();
 
+		createdProduct.conceptSteps = GameManager.baseNumberOfConceptSteps;
+		createdProduct.devSteps = GameManager.baseNumberOfDevSteps;
+		createdProduct.saleSteps = GameManager.baseNumberOfSaleSteps;
+
 		for(int i = 0; i < pickedConcepts.Count; i++) {
 			createdProduct.optionIDs.Add(pickedConcepts[i].id);
+			createdProduct.conceptSteps += Mathf.Max(pickedConcepts[i].multiplier - 1, 0);
         }
 
 		for (int i = 0; i < pickedDevOptions.Count; i++) {
 			createdProduct.optionIDs.Add(pickedDevOptions[i].id);
+			createdProduct.devSteps += Mathf.Max(pickedDevOptions[i].multiplier - 1, 0);
 		}
 
 		for (int i = 0; i < pickedMonetOptions.Count; i++) {
 			createdProduct.optionIDs.Add(pickedMonetOptions[i].id);
+			createdProduct.saleSteps += Mathf.Max(pickedMonetOptions[i].multiplier - 1, 0);
 		}
 
 		GameManager.instance.AddNewPlayerProduct(createdProduct);
