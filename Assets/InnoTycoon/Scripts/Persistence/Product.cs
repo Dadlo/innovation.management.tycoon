@@ -35,6 +35,36 @@ public class Product {
 	public Product() {}
 
 	/// <summary>
+	/// retorna o numero de passos da fase em que o produto se encontra; -1 se o produto ja estiver pronto e fora da fase de vendas ("done")
+	/// </summary>
+	/// <returns></returns>
+	public int GetCurrentPhaseSteps() {
+		switch (currentPhase) {
+			case ProductPhase.concept:
+				return conceptSteps;
+			case ProductPhase.dev:
+				return devSteps;
+			case ProductPhase.sales:
+				return saleSteps;
+			default:
+				return -1;
+		}
+	}
+
+	public string GetCurrentPhaseName() {
+		switch (currentPhase) {
+			case ProductPhase.concept:
+				return "Concep\u00E7\u00E3o";
+			case ProductPhase.dev:
+				return "Desenvolvimento";
+			case ProductPhase.sales:
+				return "Comercializa\u00E7\u00E3o";
+			default:
+				return "Pronto";
+        }
+	}
+
+	/// <summary>
 	/// incrementa o curStep desse produto e altera sua fase caso tenha chegado ao limite de passos da fase atual
 	/// </summary>
 	public void OneStep() {
