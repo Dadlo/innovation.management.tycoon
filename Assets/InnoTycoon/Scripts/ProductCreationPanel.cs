@@ -22,6 +22,8 @@ public class ProductCreationPanel : ShowablePanel {
 
     public GameObject prodOptionEntryPrefab;
 
+	public ProductCreationSlidersGroup creationFocusSlidersGroup;
+
     public int totalConceptsCost, totalDevCost, totalMonetCost;
 
     public Text totalConceptsCostText, totalDevCostText, totalMonetCostText;
@@ -206,26 +208,30 @@ public class ProductCreationPanel : ShowablePanel {
 		Product createdProduct = new Product();
 		createdProduct.name = prodNameInputField.text;
 
-		createdProduct.optionIDs = new List<string>();
+		createdProduct.pickedOptions = new List<ProductOption>();
 
 		createdProduct.conceptSteps = GameManager.baseNumberOfConceptSteps;
 		createdProduct.devSteps = GameManager.baseNumberOfDevSteps;
 		createdProduct.saleSteps = GameManager.baseNumberOfSaleSteps;
 
 		for(int i = 0; i < pickedConcepts.Count; i++) {
-			createdProduct.optionIDs.Add(pickedConcepts[i].id);
+			createdProduct.pickedOptions.Add(pickedConcepts[i]);
 			createdProduct.conceptSteps += Mathf.Max(pickedConcepts[i].multiplier - 1, 0);
         }
 
 		for (int i = 0; i < pickedDevOptions.Count; i++) {
-			createdProduct.optionIDs.Add(pickedDevOptions[i].id);
+			createdProduct.pickedOptions.Add(pickedDevOptions[i]);
 			createdProduct.devSteps += Mathf.Max(pickedDevOptions[i].multiplier - 1, 0);
 		}
 
 		for (int i = 0; i < pickedMonetOptions.Count; i++) {
-			createdProduct.optionIDs.Add(pickedMonetOptions[i].id);
+			createdProduct.pickedOptions.Add(pickedMonetOptions[i]);
 			createdProduct.saleSteps += Mathf.Max(pickedMonetOptions[i].multiplier - 1, 0);
 		}
+
+		createdProduct.conceptFocusPercentage = creationFocusSlidersGroup.sliders[0].value / 100;
+		createdProduct.devFocusPercentage = creationFocusSlidersGroup.sliders[1].value / 100;
+		createdProduct.saleFocusPercentage = creationFocusSlidersGroup.sliders[2].value / 100;
 
 		GameManager.instance.AddNewPlayerProduct(createdProduct);
 		

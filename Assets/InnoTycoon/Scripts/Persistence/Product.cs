@@ -9,7 +9,7 @@ public class Product {
 
 	public bool isReady;
 
-	public List<string> optionIDs;
+	public List<ProductOption> pickedOptions;
 
 	public float rentability;
 
@@ -25,6 +25,8 @@ public class Product {
 	}
 
 	public ProductPhase currentPhase = ProductPhase.concept;
+
+	public float conceptFocusPercentage, devFocusPercentage, saleFocusPercentage;
 
 	public int conceptSteps, devSteps, saleSteps;
 
@@ -143,6 +145,42 @@ public class Product {
 	public void ReleaseLoadBar() {
 		DevSteps.Instance().MarkBarForRelease(currentLoadBar);
 		currentLoadBar = null;
+	}
+
+	public void CalculateRating() {
+		//soma dos multiplicadores de cada opcao escolhida para o produto
+		float totalConceptModifier = 0, totalDevModifier = 0, totalSalesModifier = 0;
+
+		for(int i = 0; i < pickedOptions.Count; i++) {
+			switch (GameManager.instance.GetProductOptionPhase(pickedOptions[i])) {
+				case ProductPhase.concept:
+					totalConceptModifier += pickedOptions[i].multiplier;
+					break;
+				case ProductPhase.dev:
+					totalDevModifier += pickedOptions[i].multiplier;
+					break;
+				case ProductPhase.sales:
+					totalSalesModifier += pickedOptions[i].multiplier;
+					break;
+				default:
+					Debug.LogWarning(string.Concat("Failed trying to get product phase from product option ", pickedOptions[i].title));
+					break;
+			}
+		}
+
+		//lucky modifier
+		totalConceptModifier += Random.Range(0, GameManager.luckyFactor);
+		totalDevModifier += Random.Range(0, GameManager.luckyFactor);
+		totalSalesModifier += Random.Range(0, GameManager.luckyFactor);
+
+		//multiplicacao pelos fatores de foco do produto
+		totalConceptModifier *= conceptFocusPercentage;
+		totalDevModifier *= devFocusPercentage;
+		totalSalesModifier *= saleFocusPercentage;
+
+		//TODO DETRIMENTO
+
+		//TODO - o resto e a ligacao com o resto
 	}
 
 }

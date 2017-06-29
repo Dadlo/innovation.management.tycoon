@@ -7,13 +7,17 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour {
 
-	public static int baseDailyCost = 2000;
+	public const int baseDailyCost = 2000;
 
 	public static GameManager instance;
 
 	public List<Product> productsDoneToday = new List<Product>();
 
-	public static int baseNumberOfConceptSteps = 1, baseNumberOfDevSteps = 3, baseNumberOfSaleSteps = 3;
+	public const int baseNumberOfConceptSteps = 1, baseNumberOfDevSteps = 3, baseNumberOfSaleSteps = 3;
+
+	public const int baseConceptProfit = 3000, baseDevProfit = 3000, baseSalesProfit = 3000;
+
+	public const float luckyFactor = 0.3f;
 
 	public ProductOptionsContainer pConcepts, pDevOptions, pMonetOptions;
 
@@ -110,10 +114,22 @@ public class GameManager : MonoBehaviour {
 		return null;
 	}
 
+	public Product.ProductPhase GetProductOptionPhase(ProductOption targetOption) {
+		if (pConcepts.productOptionsList.Contains(targetOption)) {
+			return Product.ProductPhase.concept;
+		}else if (pDevOptions.productOptionsList.Contains(targetOption)) {
+			return Product.ProductPhase.dev;
+		}else if (pMonetOptions.productOptionsList.Contains(targetOption)) {
+			return Product.ProductPhase.sales;
+		}
+
+		return Product.ProductPhase.done;
+	}
+
 	public int CalculateProductCost(Product targetProduct) {
 		int totalProdCost = 0;
-		for(int i = 0; i < targetProduct.optionIDs.Count; i++) {
-			totalProdCost += GetProductOptionByID(targetProduct.optionIDs[i]).cost;
+		for(int i = 0; i < targetProduct.pickedOptions.Count; i++) {
+			totalProdCost += targetProduct.pickedOptions[i].cost;
 		}
 
 		return totalProdCost;
