@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour {
 
 	public const int baseNumberOfConceptSteps = 1, baseNumberOfDevSteps = 3, baseNumberOfSaleSteps = 3;
 
-	public const int baseConceptProfit = 3000, baseDevProfit = 3000, baseSalesProfit = 3000;
+	public const int baseConceptProfit = 9000, baseDevProfit = 9000, baseSalesProfit = 9000;
+
+	public const float baseRatingDivisor = 10.5f, salesStepsDivisor = 3;
 
 	public const float luckyFactor = 0.3f;
 
@@ -46,12 +48,18 @@ public class GameManager : MonoBehaviour {
 
 		//products marked as "done" are removed from productsDoing
 		for(int i = 0; i < productsDoneToday.Count; i++) {
+			persInstanceSave.cost += productsDoneToday[i].rentability;
 			persInstanceSave.productsDoing.Remove(productsDoneToday[i]);
 		}
 
 		productsDoneToday.Clear();
 	}
 
+	/// <summary>
+	/// adiciona o produto newProduct a lista de produtos geral (productsList) e a lista de produtos sendo feitos (productsDoing).
+	/// tambem atualiza o custo diario para o jogador e mostra esse novo custo adequadamente
+	/// </summary>
+	/// <param name="newProduct"></param>
 	public void AddNewPlayerProduct(Product newProduct) {
 		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
 
@@ -67,8 +75,8 @@ public class GameManager : MonoBehaviour {
 
 	/// <summary>
 	/// metodo chamado quando um produto entra na fase de vendas.
-	/// nesse momento, calculamos qual o lucro fornecido pelo produto.
-	/// ele tambem deixa de ter custos para a empresa
+	/// nesse momento, ele tambem deixa de ter custos para a empresa,
+	/// passando a dar lucro, e tem a sua nota calculada
 	/// </summary>
 	/// <param name="theProductSold"></param>
 	public void ProductEnteredSales(Product theProductSold) {
@@ -76,20 +84,20 @@ public class GameManager : MonoBehaviour {
 
 		persInstanceSave.cost -= CalculateProductCost(theProductSold);
 
-		
+		//TODO a janelinha de aviso de "produto entrou em venda"
+		theProductSold.CalculateRating();
 
-		//TODO o calculo do lucro e a janelinha de aviso de "produto entrou em venda"
+		persInstanceSave.cost -= theProductSold.rentability;
 	}
 
 	/// <summary>
 	/// esse metodo e chamado quando um produto encerra sua fase de vendas.
-	/// esse produto "morreu"
+	/// esse produto "morreu", e deixa de dar lucro
 	/// </summary>
 	/// <param name="doneProduct"></param>
 	public void ProductIsDone(Product doneProduct) {
 		//nao podemos remover assim que descobrimos que o produto se encerrou para nao dar problemas com o for que itera sobre os productsDoing
 		productsDoneToday.Add(doneProduct);
-
 	}
 
 	ProductOption GetProductOptionByID(string optionID) {
@@ -111,6 +119,21 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
+		return null;
+	}
+
+	/// <summary>
+	/// retorna o produto com o nome desejado (name) ou null se nao achar
+	/// </summary>
+	/// <param name="name"></param>
+	/// <returns></returns>
+	public Product GetProductByName(string name) {
+		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
+		for (int i = 0; i < persInstanceSave.productsList.Count; i++) {
+			if(persInstanceSave.productsList[i].name == name) {
+				return persInstanceSave.productsList[i];
+			}
+		}
 		return null;
 	}
 

@@ -26,7 +26,11 @@ public class ProductCreationPanel : ShowablePanel {
 
     public int totalConceptsCost, totalDevCost, totalMonetCost;
 
+	public int totalConceptDays, totalDevDays, totalMonetDays;
+
     public Text totalConceptsCostText, totalDevCostText, totalMonetCostText;
+
+	public Text totalConceptDaysText, totalDevDaysText, totalMonetDaysText;
 
     public RectTransform conceptsListContainer, devListContainer, monetListContainer;
 
@@ -36,7 +40,7 @@ public class ProductCreationPanel : ShowablePanel {
 
 	public int totalProductCost;
 
-	public Text totalProductCostText, pCreationWarningsText;
+	public Text totalProductCostText, totalProductPaidDaysText, totalProductProfitDaysText, pCreationWarningsText;
 
 	public Button createProductBtn;
 
@@ -97,7 +101,14 @@ public class ProductCreationPanel : ShowablePanel {
 
 	// Use this for initialization
 	void Start () {
-		
+
+		totalConceptDays = GameManager.baseNumberOfConceptSteps;
+		totalConceptDaysText.text = totalConceptDays.ToString();
+		totalDevDays = GameManager.baseNumberOfDevSteps;
+		totalDevDaysText.text = totalDevDays.ToString();
+		totalMonetDays = GameManager.baseNumberOfSaleSteps;
+		totalMonetDaysText.text = totalMonetDays.ToString();
+
 		//nos registramos nos eventos de cada toggle para ficar sabendo quando um foi clicado e fazer o que precisarmos fazer de acordo
 		for(int i = 0; i < sectionToggles.Length; i++) {
 			sectionToggles[i].GetComponent<ProductCreationSectionToggle>().onToggled += OnToldToChangeSections;
@@ -137,7 +148,9 @@ public class ProductCreationPanel : ShowablePanel {
 	/// atualiza o valor da variavel de custo total do produto
 	/// e o texto responsavel por mostra-la
 	/// </summary>
-	void RefreshTotalProductCost() {
+	void RefreshTotalProductInfo() {
+		totalProductPaidDaysText.text = (totalDevDays + totalConceptDays).ToString();
+		totalProductProfitDaysText.text = totalMonetDays.ToString();
 		totalProductCost = totalConceptsCost + totalDevCost + totalMonetCost;
 		totalProductCostText.text = totalProductCost.ToString();
 	}
@@ -151,16 +164,19 @@ public class ProductCreationPanel : ShowablePanel {
                 {
                     pickedConcepts.Add(pickedOption.theOptionRepresented);
                     totalConceptsCost += pickedOption.theOptionRepresented.cost;
+					totalConceptDays += Mathf.Max(pickedOption.theOptionRepresented.multiplier - 1, 0);
                 }
                 else
                 {
                     pickedConcepts.Remove(pickedOption.theOptionRepresented);
-                    totalConceptsCost -= pickedOption.theOptionRepresented.cost;                    
-                }
+					totalConceptsCost -= pickedOption.theOptionRepresented.cost;
+					totalConceptDays -= Mathf.Max(pickedOption.theOptionRepresented.multiplier - 1, 0);
+				}
 
 				totalConceptsCostText.text = totalConceptsCost.ToString();
+				totalConceptDaysText.text = totalConceptDays.ToString();
 				ToggleProductFinalizationOption(pickedConcepts.Count > 0);
-				RefreshTotalProductCost();
+				RefreshTotalProductInfo();
 
 				break;
             case ProductOptionListEntry.OptionType.dev:
@@ -168,15 +184,18 @@ public class ProductCreationPanel : ShowablePanel {
                 {
                     pickedDevOptions.Add(pickedOption.theOptionRepresented);
                     totalDevCost += pickedOption.theOptionRepresented.cost;
-                }
+					totalDevDays += Mathf.Max(pickedOption.theOptionRepresented.multiplier - 1, 0);
+				}
                 else
                 {
                     pickedDevOptions.Remove(pickedOption.theOptionRepresented);
                     totalDevCost -= pickedOption.theOptionRepresented.cost;
-                }
+					totalDevDays -= Mathf.Max(pickedOption.theOptionRepresented.multiplier - 1, 0);
+				}
 
+				totalDevDaysText.text = totalDevDays.ToString();
 				totalDevCostText.text = totalDevCost.ToString();
-				RefreshTotalProductCost();
+				RefreshTotalProductInfo();
 
 				break;
             case ProductOptionListEntry.OptionType.monet:
@@ -184,15 +203,18 @@ public class ProductCreationPanel : ShowablePanel {
                 {
                     pickedMonetOptions.Add(pickedOption.theOptionRepresented);
                     totalMonetCost += pickedOption.theOptionRepresented.cost;
-                }
+					totalMonetDays += Mathf.Max(pickedOption.theOptionRepresented.multiplier - 1, 0);
+				}
                 else
                 {
                     pickedMonetOptions.Remove(pickedOption.theOptionRepresented);
                     totalMonetCost -= pickedOption.theOptionRepresented.cost;
-                }
+					totalMonetDays -= Mathf.Max(pickedOption.theOptionRepresented.multiplier - 1, 0);
+				}
 
+				totalMonetDaysText.text = totalMonetDays.ToString();
 				totalMonetCostText.text = totalMonetCost.ToString();
-				RefreshTotalProductCost();
+				RefreshTotalProductInfo();
 
                 break;
         }
@@ -208,25 +230,31 @@ public class ProductCreationPanel : ShowablePanel {
 		Product createdProduct = new Product();
 		createdProduct.name = prodNameInputField.text;
 
+		//se tivermos nome repetido, lancar o 2, ou 3...
+		if(GameManager.instance.GetProductByName(createdProduct.name) != null) {
+			int sequelNumber = 2;
+			while(GameManager.instance.GetProductByName(string.Concat(createdProduct.name, " ", sequelNumber.ToString())) != null) {
+				sequelNumber++;
+			}
+			createdProduct.name = string.Concat(createdProduct.name, " ", sequelNumber.ToString());
+        }
+
 		createdProduct.pickedOptions = new List<ProductOption>();
 
-		createdProduct.conceptSteps = GameManager.baseNumberOfConceptSteps;
-		createdProduct.devSteps = GameManager.baseNumberOfDevSteps;
-		createdProduct.saleSteps = GameManager.baseNumberOfSaleSteps;
+		createdProduct.conceptSteps = totalConceptDays;
+		createdProduct.devSteps = totalDevDays;
+		createdProduct.saleSteps = totalMonetDays;
 
 		for(int i = 0; i < pickedConcepts.Count; i++) {
 			createdProduct.pickedOptions.Add(pickedConcepts[i]);
-			createdProduct.conceptSteps += Mathf.Max(pickedConcepts[i].multiplier - 1, 0);
         }
 
 		for (int i = 0; i < pickedDevOptions.Count; i++) {
 			createdProduct.pickedOptions.Add(pickedDevOptions[i]);
-			createdProduct.devSteps += Mathf.Max(pickedDevOptions[i].multiplier - 1, 0);
 		}
 
 		for (int i = 0; i < pickedMonetOptions.Count; i++) {
 			createdProduct.pickedOptions.Add(pickedMonetOptions[i]);
-			createdProduct.saleSteps += Mathf.Max(pickedMonetOptions[i].multiplier - 1, 0);
 		}
 
 		createdProduct.conceptFocusPercentage = creationFocusSlidersGroup.sliders[0].value / 100;
@@ -234,9 +262,6 @@ public class ProductCreationPanel : ShowablePanel {
 		createdProduct.saleFocusPercentage = creationFocusSlidersGroup.sliders[2].value / 100;
 
 		GameManager.instance.AddNewPlayerProduct(createdProduct);
-		
-		
-
 	}
 	
 }

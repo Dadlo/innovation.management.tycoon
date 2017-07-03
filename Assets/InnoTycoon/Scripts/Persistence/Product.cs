@@ -11,9 +11,9 @@ public class Product {
 
 	public List<ProductOption> pickedOptions;
 
-	public float rentability;
+	public int rentability;
 
-	public int rating;
+	public float rating = -1;
 
 	public int curStep;
 
@@ -87,8 +87,8 @@ public class Product {
 					currentPhase = ProductPhase.sales;
 					curStep = 0;
 					ReleaseLoadBar();
-					UpdateLoadBar(); //uma atualizacao a mais aqui para enchermos essa loadbar
 					GameManager.instance.ProductEnteredSales(this);
+					UpdateLoadBar(); //uma atualizacao a mais aqui para enchermos essa loadbar
 				}
 				break;
 			case ProductPhase.sales:
@@ -147,9 +147,10 @@ public class Product {
 		currentLoadBar = null;
 	}
 
+
 	public void CalculateRating() {
 		//soma dos multiplicadores de cada opcao escolhida para o produto
-		float totalConceptModifier = 0, totalDevModifier = 0, totalSalesModifier = 0;
+		float totalConceptModifier = 1, totalDevModifier = 1, totalSalesModifier = 1;
 
 		for(int i = 0; i < pickedOptions.Count; i++) {
 			switch (GameManager.instance.GetProductOptionPhase(pickedOptions[i])) {
@@ -173,6 +174,10 @@ public class Product {
 		totalDevModifier += Random.Range(0, GameManager.luckyFactor);
 		totalSalesModifier += Random.Range(0, GameManager.luckyFactor);
 
+		rating = Mathf.Min((totalConceptModifier / GameManager.baseRatingDivisor) +
+						   (totalDevModifier / GameManager.baseRatingDivisor) +
+						   (totalSalesModifier / GameManager.baseRatingDivisor), 10);
+
 		//multiplicacao pelos fatores de foco do produto
 		totalConceptModifier *= conceptFocusPercentage;
 		totalDevModifier *= devFocusPercentage;
@@ -180,7 +185,10 @@ public class Product {
 
 		//TODO DETRIMENTO
 
-		//TODO - o resto e a ligacao com o resto
+		rentability = (int) (GameManager.baseConceptProfit * totalConceptModifier + GameManager.baseDevProfit * totalDevModifier +
+			GameManager.baseSalesProfit * totalSalesModifier);
+
+		saleSteps = GameManager.baseNumberOfSaleSteps + Mathf.FloorToInt(totalSalesModifier / GameManager.salesStepsDivisor);
 	}
 
 }

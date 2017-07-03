@@ -16,6 +16,11 @@ public class PersistenceActivator : MonoBehaviour {
 	public Text capitalUI;
 	public Text costUI;
 
+	public Text costPrefixUI;
+	public Text costSuffixUI;
+
+	public Color profitCostColor, lossCostColor;
+
 	public static PersistenceActivator instance;
 	private StartOptions startoptions;
 	private ModalPanel ModalPanel;           //reference to the ModalPanel Class
@@ -38,7 +43,7 @@ public class PersistenceActivator : MonoBehaviour {
 			// Increase Day
 			GameManager.instance.GoToNextDay();
 			PersistenceHandler.SaveToFile(curGameData, "save01", false);
-			ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
+			//ModalPanel.MessageBox(icon, "Saving data...", "All data was saved.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
 			RenderAllChanges();
 		}
 	}
@@ -125,6 +130,19 @@ public class PersistenceActivator : MonoBehaviour {
 		// update UI
 		diaCalendarioUI.text = curGameData.day.ToString(); // atualiza dia do calendario
 		capitalUI.text = curGameData.capital.ToString(); // atualiza capital total
-		costUI.text = curGameData.cost.ToString(); // atualiza custo	
+		// atualiza custo
+		if (curGameData.cost > 0) {
+			costUI.color = lossCostColor;
+			costPrefixUI.color = lossCostColor;
+			costSuffixUI.color = lossCostColor;
+		}
+		else {
+			costUI.color = profitCostColor;
+			costPrefixUI.color = profitCostColor;
+			costSuffixUI.color = profitCostColor;
+		}
+
+		costUI.text = Mathf.Abs(curGameData.cost).ToString();
+
 	}
 }

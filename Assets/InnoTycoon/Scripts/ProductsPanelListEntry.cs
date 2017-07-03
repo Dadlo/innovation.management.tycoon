@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ProductsPanelListEntry : MonoBehaviour {
 
-
-
 	public Text nameText;
 
 	public Text curStepText;
@@ -29,6 +27,13 @@ public class ProductsPanelListEntry : MonoBehaviour {
 		}
 
 		phaseText.text = productData.GetCurrentPhaseName();
+
+		if(productData.rating == -1) {
+			ratingText.text = "?";
+		}
+		else {
+			ratingText.text = productData.rating.ToString("n2");
+		}
 
 	}
 	
