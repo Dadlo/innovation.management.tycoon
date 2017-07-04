@@ -149,6 +149,7 @@ public class StartOptions : MonoBehaviour {
 		inMainMenu = true;
 		HideHUD();
 		ShowMainMenu();
+        DevSteps.Instance().ResetAllBars();
 		Debug.Log ("Game returned to menu!");
 
 	}

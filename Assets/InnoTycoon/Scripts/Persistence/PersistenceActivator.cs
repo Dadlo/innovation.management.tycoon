@@ -122,6 +122,17 @@ public class PersistenceActivator : MonoBehaviour {
 
 		// render all ui
 		RenderAllChanges();
+
+        //setup productsDoing
+        curGameData.productsDoing = new List<Product>();
+
+        for(int i = 0; i < curGameData.productsList.Count; i++)
+        {
+            if(curGameData.productsList[i].madeByPlayer && curGameData.productsList[i].currentPhase != Product.ProductPhase.done)
+            {
+                curGameData.productsDoing.Add(curGameData.productsList[i]);
+            }
+        }
 		for(int i = 0; i < curGameData.productsDoing.Count; i++) {
 			curGameData.productsDoing[i].UpdateLoadBar();
 		}

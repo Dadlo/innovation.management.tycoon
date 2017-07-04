@@ -7,9 +7,7 @@ public class Product {
 
 	public string name;
 
-	public bool isReady;
-
-	public List<ProductOption> pickedOptions;
+	public List<string> pickedOptionIDs;
 
 	public int rentability;
 
@@ -29,6 +27,8 @@ public class Product {
 	public float conceptFocusPercentage, devFocusPercentage, saleFocusPercentage;
 
 	public int conceptSteps, devSteps, saleSteps;
+
+    public bool madeByPlayer = false;
 
 	private ProdPhaseLoadingBar currentLoadBar;
 
@@ -152,19 +152,21 @@ public class Product {
 		//soma dos multiplicadores de cada opcao escolhida para o produto
 		float totalConceptModifier = 1, totalDevModifier = 1, totalSalesModifier = 1;
 
-		for(int i = 0; i < pickedOptions.Count; i++) {
-			switch (GameManager.instance.GetProductOptionPhase(pickedOptions[i])) {
+		for(int i = 0; i < pickedOptionIDs.Count; i++) {
+            ProductOption theOption = GameManager.instance.GetProductOptionByID(pickedOptionIDs[i]);
+            if (theOption == null) continue; //deu algo de errado na hora de pegar essa opcao. deixa ela pra la
+			switch (GameManager.instance.GetProductOptionPhase(theOption)) {
 				case ProductPhase.concept:
-					totalConceptModifier += pickedOptions[i].multiplier;
+					totalConceptModifier += theOption.multiplier;
 					break;
 				case ProductPhase.dev:
-					totalDevModifier += pickedOptions[i].multiplier;
+					totalDevModifier += theOption.multiplier;
 					break;
 				case ProductPhase.sales:
-					totalSalesModifier += pickedOptions[i].multiplier;
+					totalSalesModifier += theOption.multiplier;
 					break;
 				default:
-					Debug.LogWarning(string.Concat("Failed trying to get product phase from product option ", pickedOptions[i].title));
+					Debug.LogWarning(string.Concat("Failed trying to get product phase from product option ", theOption.title));
 					break;
 			}
 		}
@@ -183,7 +185,18 @@ public class Product {
 		totalDevModifier *= devFocusPercentage;
 		totalSalesModifier *= saleFocusPercentage;
 
-		//TODO DETRIMENTO
+        //detrimento... (fixo, dependendo apenas da existencia ou nao de um produto igual a esse no mercado)
+        float detriment = 1.0f;
+
+        //ver se algum outro produto tem exatamente as mesmas opcoes que esse
+        if (GameManager.instance.ProductHasRepeatedOptions(this))
+        {
+            detriment = GameManager.repetitionDetrimentFactor;
+        }
+
+        totalConceptModifier *= detriment;
+        totalDevModifier *= detriment;
+        totalSalesModifier *= detriment;
 
 		rentability = (int) (GameManager.baseConceptProfit * totalConceptModifier + GameManager.baseDevProfit * totalDevModifier +
 			GameManager.baseSalesProfit * totalSalesModifier);

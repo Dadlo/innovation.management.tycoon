@@ -24,7 +24,7 @@ public class ProductsPanel : ShowablePanel {
 	/// </summary>
 	public void ClearProductList() {
 		for(int i = 0; i < productsListParent.childCount; i++) {
-			Destroy(productsListParent.GetChild(0).gameObject);
+			Destroy(productsListParent.GetChild(i).gameObject);
 		}
 	}
 

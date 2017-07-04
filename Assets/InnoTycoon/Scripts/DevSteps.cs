@@ -103,4 +103,28 @@ public class DevSteps : MonoBehaviour {
 		barsMarkedForRelease.Clear();
 	}
 
+
+    /// <summary>
+    /// faz todas as barras serem marcadas para release e, depois, da o release (todas somem e ficam disponiveis)
+    /// </summary>
+    public void ResetAllBars()
+    {
+        for(int i = 0; i < loadingBarsCon.Length; i++)
+        {
+            MarkBarForRelease(loadingBarsCon[i]);
+        }
+
+        for (int i = 0; i < loadingBarsDev.Length; i++)
+        {
+            MarkBarForRelease(loadingBarsDev[i]);
+        }
+
+        for (int i = 0; i < loadingBarsMon.Length; i++)
+        {
+            MarkBarForRelease(loadingBarsMon[i]);
+        }
+
+        ReleaseMarkedBars();
+    }
+
 }

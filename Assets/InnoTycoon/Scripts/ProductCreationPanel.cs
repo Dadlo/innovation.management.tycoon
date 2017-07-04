@@ -239,22 +239,22 @@ public class ProductCreationPanel : ShowablePanel {
 			createdProduct.name = string.Concat(createdProduct.name, " ", sequelNumber.ToString());
         }
 
-		createdProduct.pickedOptions = new List<ProductOption>();
+		createdProduct.pickedOptionIDs = new List<string>();
 
 		createdProduct.conceptSteps = totalConceptDays;
 		createdProduct.devSteps = totalDevDays;
 		createdProduct.saleSteps = totalMonetDays;
 
 		for(int i = 0; i < pickedConcepts.Count; i++) {
-			createdProduct.pickedOptions.Add(pickedConcepts[i]);
+			createdProduct.pickedOptionIDs.Add(pickedConcepts[i].id);
         }
 
 		for (int i = 0; i < pickedDevOptions.Count; i++) {
-			createdProduct.pickedOptions.Add(pickedDevOptions[i]);
+			createdProduct.pickedOptionIDs.Add(pickedDevOptions[i].id);
 		}
 
 		for (int i = 0; i < pickedMonetOptions.Count; i++) {
-			createdProduct.pickedOptions.Add(pickedMonetOptions[i]);
+			createdProduct.pickedOptionIDs.Add(pickedMonetOptions[i].id);
 		}
 
 		createdProduct.conceptFocusPercentage = creationFocusSlidersGroup.sliders[0].value / 100;

@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour {
 
 	public const float luckyFactor = 0.3f;
 
+    public const float repetitionDetrimentFactor = 0.7f;
+
 	public ProductOptionsContainer pConcepts, pDevOptions, pMonetOptions;
 
 	public TextAsset productConceptsAsset, productDevOptionsAsset, productMonetizationsAsset;
@@ -61,6 +63,8 @@ public class GameManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="newProduct"></param>
 	public void AddNewPlayerProduct(Product newProduct) {
+        newProduct.madeByPlayer = true;
+
 		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
 
 		if (persInstanceSave.productsDoing == null) persInstanceSave.productsDoing = new List<Product>();
@@ -94,13 +98,13 @@ public class GameManager : MonoBehaviour {
 	/// esse metodo e chamado quando um produto encerra sua fase de vendas.
 	/// esse produto "morreu", e deixa de dar lucro
 	/// </summary>
-	/// <param name="doneProduct"></param>
+	/// <param name="doneProduct">o produto que foi terminado</param>
 	public void ProductIsDone(Product doneProduct) {
 		//nao podemos remover assim que descobrimos que o produto se encerrou para nao dar problemas com o for que itera sobre os productsDoing
 		productsDoneToday.Add(doneProduct);
 	}
 
-	ProductOption GetProductOptionByID(string optionID) {
+	public ProductOption GetProductOptionByID(string optionID) {
 		for(int i = 0; i < pConcepts.productOptionsList.Count; i++) {
 			if(pConcepts.productOptionsList[i].id == optionID) {
 				return pConcepts.productOptionsList[i];
@@ -125,8 +129,8 @@ public class GameManager : MonoBehaviour {
 	/// <summary>
 	/// retorna o produto com o nome desejado (name) ou null se nao achar
 	/// </summary>
-	/// <param name="name"></param>
-	/// <returns></returns>
+	/// <param name="name">o nome do produto que queremos</param>
+	/// <returns>o produto achado, ou null se nao houver</returns>
 	public Product GetProductByName(string name) {
 		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
 		for (int i = 0; i < persInstanceSave.productsList.Count; i++) {
@@ -149,10 +153,69 @@ public class GameManager : MonoBehaviour {
 		return Product.ProductPhase.done;
 	}
 
+    /// <summary>
+    /// retorna true caso testedProduct tenha as mesmas opcoes (nem mais nem menos) que outro produto ja lancado
+    /// </summary>
+    /// <param name="testedProduct"></param>
+    /// <returns></returns>
+    public bool ProductHasRepeatedOptions(Product testedProduct)
+    {
+        List<Product> existingProducts = PersistenceActivator.instance.curGameData.productsList;
+        for (int i = 0; i < existingProducts.Count; i++)
+        {
+            if (existingProducts[i] == testedProduct || existingProducts[i].currentPhase == Product.ProductPhase.concept ||
+                existingProducts[i].currentPhase == Product.ProductPhase.dev)
+            {
+                continue; //nao precisa testar contra nos mesmos ou contra produtos ainda sendo feitos
+            }
+            else
+            {
+                if(testedProduct.pickedOptionIDs.Count == existingProducts[i].pickedOptionIDs.Count)
+                {
+                    bool isClone = true; 
+                    //comecamos pensando que temos um clone aqui, mas o for abaixo vai nos dizer a verdade
+                    for (int j = 0; j < testedProduct.pickedOptionIDs.Count; j++)
+                    {
+                        if (!existingProducts[i].pickedOptionIDs.Contains(testedProduct.pickedOptionIDs[j]))
+                        {
+                            isClone = false;
+                            break;
+                        }
+                    }
+
+                    //se ainda acreditamos que temos um clone, temos um clone mesmo
+                    if (isClone)
+                    {
+                        Debug.Log(string.Concat("product ", testedProduct.name, " is a clone! detriment should be applied"));
+                        return true;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    
+                }
+                else
+                {
+                    continue; //pode ate ter varias igualdades, mas um produto tem mais opcoes que o outro
+                }
+                
+            }
+
+        }
+
+        return false;
+    }
+
 	public int CalculateProductCost(Product targetProduct) {
 		int totalProdCost = 0;
-		for(int i = 0; i < targetProduct.pickedOptions.Count; i++) {
-			totalProdCost += targetProduct.pickedOptions[i].cost;
+		for(int i = 0; i < targetProduct.pickedOptionIDs.Count; i++) {
+            ProductOption theOption = GetProductOptionByID(targetProduct.pickedOptionIDs[i]);
+            if(theOption != null)
+            {
+                totalProdCost += theOption.cost;
+            }
+			
 		}
 
 		return totalProdCost;

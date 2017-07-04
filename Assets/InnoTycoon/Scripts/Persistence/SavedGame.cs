@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Xml.Serialization;
 
 [System.Serializable]
 public class SavedGame {
@@ -13,7 +14,15 @@ public class SavedGame {
 	public string studiesList = "";
 	public string studyDoing = "";
 	public List<Product> productsList;
+
+    /// <summary>
+    /// produtos sendo feitos pelo jogador.
+    /// nao e salva, pois pegamos os produtos que estao sendo feitos pelo jogador
+    /// via checagem da variavel "madeByPlayer"
+    /// </summary>
+    [XmlIgnore]
 	public List<Product> productsDoing;
+
 	public int conceptStep = 0;
 	public int conceptStepTotal = 0;
 	public int devStep = 0;
