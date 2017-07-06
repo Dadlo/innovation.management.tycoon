@@ -72,7 +72,7 @@ public class PersistenceActivator : MonoBehaviour {
 		curGameData.day = 1;
 		curGameData.capital = 20000;
 		curGameData.cost = 2000;
-		curGameData.studiesList = "";
+		curGameData.studiesList = new List<string>();
 		curGameData.studyDoing = "";
 		if(curGameData.productsList != null) {
 			curGameData.productsList.Clear();

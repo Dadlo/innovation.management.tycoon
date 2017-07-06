@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StudyOptionsContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<studyOptionsList>
+	<StudyOption>
+		<title>Introdução à Inovação I</title>
+		<description>aprendizado de Inovação Incremental</description>
+		<steps>2</steps>
+		<cost>5000</cost>
+		<skill>Invenção Componentes</skill>
+		<skillId>ino_02</skillId>
+		<type>Concepção</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Introdução à Inovação II</title>	
+		<description>aprendizado de Inovação Arquitetural</description>
+		<steps>2</steps>
+		<cost>5000</cost>
+		<skill>Invenção Arquitetura</skill>
+		<skillId>ino_03</skillId>
+		<type>Concepção</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Introdução à Inovação III</title>
+		<description>aprendizado de Inovação Radical</description>
+		<steps>3</steps>
+		<cost>10000</cost>
+		<skill>Relação entre Componentes</skill>
+		<skillId>ino_04</skillId>
+		<type>Concepção</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Inovação Organizacional</title>
+		<description>aprendizado de Mudança Organizacional</description>
+		<steps>4</steps>
+		<cost>25000</cost>
+		<skill>Mudança Organizacional</skill>
+		<skillId>org_01</skillId>
+		<type>Concepção</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Inovação Tecnológica I</title>
+		<description>aprendizado de Inovação Tecnológica</description>
+		<steps>2</steps>
+		<cost>5000</cost>
+		<skill>Mudança Tecnológica Baixa Complexidade</skill>
+		<skillId>tec_01</skillId>
+		<type>Concepção</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Inovação Tecnológica II</title>
+		<description>aprendizado de Inovação Tecnológica II</description>
+		<steps>3</steps>
+		<cost>10000</cost>
+		<skill>Mudança Tecnológica Média Complexidade</skill>
+		<skillId>tec_02</skillId>
+		<type>Concepção</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Inovação Tecnológica III</title>
+		<description>aprendizado de Inovação Tecnológica III</description>
+		<steps>4</steps>
+		<cost>25000</cost>
+		<skill>Mudança Tecnológica Alta Complexidade</skill>
+		<skillId>tec_03</skillId>
+		<type>Concepção</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Projetos I</title>
+		<description>aprendizado de Gerenciamento de Projeto </description>
+		<steps>2</steps>
+		<cost>3000</cost>
+		<skill>Gerenciamento de Projetos</skill>
+		<skillId>pmo_01</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Projetos II</title>
+		<description>aprendizado de Stage Gate básico</description>
+		<steps>3</steps>
+		<cost>5000</cost>
+		<skill>Stage Gate Simples</skill>
+		<skillId>pmo_02</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Projetos III</title>
+		<description>aprendizado de Funil </description>
+		<steps>5</steps>
+		<cost>25000</cost>
+		<skill>Funil Simples</skill>
+		<skillId>pmo_03</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Produtos I</title>
+		<description>aprendizado de Gerenciamento de Produtos básico</description>
+		<steps>3</steps>
+		<cost>10000</cost>
+		<skill>Gerenciamento de Produtos</skill>
+		<skillId>por_01</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Produtos II</title>
+		<description>aprendizado de Kanban</description>
+		<steps>3</steps>
+		<cost>5000</cost>
+		<skill>Kanban</skill>
+		<skillId>por_02</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Produtos III</title>
+		<description>aprendizado de Canvas</description>
+		<steps>3</steps>
+		<cost>5000</cost>
+		<skill>Canvas</skill>
+		<skillId>por_03</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Produtos IV</title>
+		<description>aprendizado de QA</description>
+		<steps>4</steps>
+		<cost>20000</cost>
+		<skill>QA</skill>
+		<skillId>tst_01</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Produtos VI</title>
+		<description>aprendizado de Testes</description>
+		<steps>4</steps>
+		<cost>10000</cost>
+		<skill>Testes</skill>
+		<skillId>tst_02</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Produtos VII</title>
+		<description>aprendizado de TDD</description>
+		<steps>5</steps>
+		<cost>25000</cost>
+		<skill>Testes</skill>
+		<skillId>tst_03</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Gerenciamento de Produtos VIII</title>
+		<description>aprendizado de SECI</description>
+		<steps>4</steps>
+		<cost>25000</cost>
+		<skill>SECI</skill>
+		<skillId>kno_01</skillId>
+		<type>Desenvolvimento</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Marketing Básico I</title>
+		<description>aprendizado de Criação de Campanha</description>
+		<steps>2</steps>
+		<cost>5000</cost>
+		<skill>Criação de Campanha</skill>
+		<skillId>mkt_01</skillId>
+		<type>Comercialização</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Marketing Básico II</title>
+		<description>aprendizado de Análise de Mercado</description>
+		<steps>3</steps>
+		<cost>15000</cost>
+		<skill>Campanha Análise de Mercado</skill>
+		<skillId>mkt_02</skillId>
+		<type>Comercialização</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Vendas I</title>
+		<description>aprendizado de Planejamento de Vendas</description>
+		<steps>2</steps>
+		<cost>5000</cost>
+		<skill>Planejamento de Vendas</skill>
+		<skillId>mkt_03</skillId>
+		<type>Comercialização</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Vendas II</title>
+		<description>aprendizado de Mídias Digitais</description>
+		<steps>3</steps>
+		<cost>15000</cost>
+		<skill>Planejamento de Mídias</skill>
+		<skillId>mkt_04</skillId>
+		<type>Comercialização</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Vendas III</title>
+		<description>aprendizado de Pós-Venda</description>
+		<steps>3</steps>
+		<cost>15000</cost>
+		<skill>Planejamento de Pós-Venda</skill>
+		<skillId>ana_01</skillId>
+		<type>Comercialização</type>
+	</StudyOption>
+	<StudyOption>
+		<title>Comunicação Interna</title>
+		<description>aprendizado de Comunicação Interna</description>
+		<steps>4</steps>
+		<cost>25000</cost>
+		<skill>Comunicação Interna</skill>
+		<skillId>ana_02</skillId>
+		<type>Comercialização</type>
+	</StudyOption>
+</studyOptionsList>
+</StudyOptionsContainer>

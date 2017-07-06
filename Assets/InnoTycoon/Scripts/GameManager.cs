@@ -25,7 +25,11 @@ public class GameManager : MonoBehaviour {
 
 	public ProductOptionsContainer pConcepts, pDevOptions, pMonetOptions;
 
-	public TextAsset productConceptsAsset, productDevOptionsAsset, productMonetizationsAsset;
+    public StudyOptionsContainer studies;
+
+	public TextAsset productConceptsAsset, productDevOptionsAsset, productMonetizationsAsset, studiesAsset;
+
+    public ShowPanels showPanels;
 
 	void Awake() {
 		instance = this;
@@ -33,7 +37,8 @@ public class GameManager : MonoBehaviour {
 		pConcepts = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productConceptsAsset);
 		pDevOptions = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productDevOptionsAsset);
 		pMonetOptions = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productMonetizationsAsset);
-	}
+        studies = PersistenceHandler.LoadFromFile<StudyOptionsContainer>(studiesAsset);
+    }
 
 	public void GoToNextDay() {
 		DevSteps.Instance().ReleaseMarkedBars();
@@ -55,6 +60,23 @@ public class GameManager : MonoBehaviour {
 		}
 
 		productsDoneToday.Clear();
+
+        //studies!!!
+        //one step forward if we are studying
+        if(persInstanceSave.studyDoing != "")
+        {
+            persInstanceSave.curStudyStep++;
+            StudyOption curStudy = GetStudyByName(persInstanceSave.studyDoing);
+            if(persInstanceSave.curStudyStep >= curStudy.steps)
+            {
+                //we are done studying!! reduce costs and add study to the saved studiesList
+                persInstanceSave.curStudyStep = 0;
+                persInstanceSave.studyDoing = "";
+                if (persInstanceSave.studiesList == null) persInstanceSave.studiesList = new List<string>();
+                persInstanceSave.studiesList.Add(curStudy.title);
+                persInstanceSave.cost -= curStudy.cost;
+            }
+        }
 	}
 
 	/// <summary>
@@ -76,6 +98,15 @@ public class GameManager : MonoBehaviour {
 		persInstanceSave.cost += CalculateProductCost(newProduct);
 		PersistenceActivator.instance.RenderAllChanges();
 	}
+
+    public void StartNewPlayerStudy(StudyOption theStudy)
+    {
+        SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
+        persInstanceSave.curStudyStep = 0;
+        persInstanceSave.studyDoing = theStudy.title;
+        persInstanceSave.cost += theStudy.cost;
+        PersistenceActivator.instance.RenderAllChanges();
+    }
 
 	/// <summary>
 	/// metodo chamado quando um produto entra na fase de vendas.
@@ -141,7 +172,24 @@ public class GameManager : MonoBehaviour {
 		return null;
 	}
 
-	public Product.ProductPhase GetProductOptionPhase(ProductOption targetOption) {
+    /// <summary>
+    /// retorna o estudo com o nome desejado "studyName" ou null se nao achar
+    /// </summary>
+    /// <param name="studyName"></param>
+    /// <returns></returns>
+    public StudyOption GetStudyByName(string studyName)
+    {
+        for (int i = 0; i < studies.studyOptionsList.Count; i++)
+        {
+            if (studies.studyOptionsList[i].title == studyName)
+            {
+                return studies.studyOptionsList[i];
+            }
+        }
+        return null;
+    }
+
+    public Product.ProductPhase GetProductOptionPhase(ProductOption targetOption) {
 		if (pConcepts.productOptionsList.Contains(targetOption)) {
 			return Product.ProductPhase.concept;
 		}else if (pDevOptions.productOptionsList.Contains(targetOption)) {
@@ -152,6 +200,8 @@ public class GameManager : MonoBehaviour {
 
 		return Product.ProductPhase.done;
 	}
+
+    
 
     /// <summary>
     /// retorna true caso testedProduct tenha as mesmas opcoes (nem mais nem menos) que outro produto ja lancado

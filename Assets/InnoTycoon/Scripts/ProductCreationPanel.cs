@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public struct ProductOptionsContainer {
-	public List<ProductOption> productOptionsList;
+public class ProductOptionsContainer
+{
+    public List<ProductOption> productOptionsList;
 }
 
 public class ProductCreationPanel : ShowablePanel {

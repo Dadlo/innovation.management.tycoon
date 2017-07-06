@@ -11,8 +11,9 @@ public class SavedGame {
 	public int day = 1;
 	public int capital=20000;
 	public int cost=2000;
-	public string studiesList = "";
+	public List<string> studiesList;
 	public string studyDoing = "";
+    public int curStudyStep = 0;
 	public List<Product> productsList;
 
     /// <summary>
@@ -22,13 +23,6 @@ public class SavedGame {
     /// </summary>
     [XmlIgnore]
 	public List<Product> productsDoing;
-
-	public int conceptStep = 0;
-	public int conceptStepTotal = 0;
-	public int devStep = 0;
-	public int devStepTotal = 0;
-	public int monetStep = 0;
-	public int monetStepTotal = 0;
 
 	public SavedGame() {}
 }
