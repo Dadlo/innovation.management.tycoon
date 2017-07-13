@@ -73,8 +73,21 @@ public class GameManager : MonoBehaviour {
                 persInstanceSave.curStudyStep = 0;
                 persInstanceSave.studyDoing = "";
                 if (persInstanceSave.studiesList == null) persInstanceSave.studiesList = new List<string>();
-                persInstanceSave.studiesList.Add(curStudy.title);
+                persInstanceSave.studiesList.Add(curStudy.skillId);
                 persInstanceSave.cost -= curStudy.cost;
+
+				switch (curStudy.type) {
+					case "Concep��o":
+						showPanels.pCreationPanel.RefreshOptionEntriesList(ProductOptionListEntry.OptionType.concept);
+                        break;
+					case "Desenvolvimento":
+						showPanels.pCreationPanel.RefreshOptionEntriesList(ProductOptionListEntry.OptionType.dev);
+						break;
+					case "Comercializa��o":
+						showPanels.pCreationPanel.RefreshOptionEntriesList(ProductOptionListEntry.OptionType.monet);
+						break;
+				}
+				
             }
         }
 	}
@@ -201,7 +214,13 @@ public class GameManager : MonoBehaviour {
 		return Product.ProductPhase.done;
 	}
 
-    
+    public bool HasProductOptionBeenUnlocked(ProductOption theOption) {
+		if (theOption.active) return true;
+
+		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
+
+		return persInstanceSave.studiesList.Contains(theOption.id);
+	}
 
     /// <summary>
     /// retorna true caso testedProduct tenha as mesmas opcoes (nem mais nem menos) que outro produto ja lancado
@@ -269,6 +288,15 @@ public class GameManager : MonoBehaviour {
 		}
 
 		return totalProdCost;
+	}
+
+	/// <summary>
+	/// adiciona o R$ e o ,00 a um numero fornecido e retorna essa string
+	/// </summary>
+	/// <param name="number"></param>
+	/// <returns></returns>
+	public static string ConvertNumberToCoinString(int number) {
+		return string.Concat("R$", number.ToString(), ",00");
 	}
 
 }

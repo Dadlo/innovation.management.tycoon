@@ -51,7 +51,7 @@ public class PersistenceActivator : MonoBehaviour {
 		ModalPanel.MessageBox(icon, "Game Over", "You have gone bankrupted ! You've Lost!\n\nYou can see your status from this game,\nbut you'll need to start a new game from the\nmenu to play again.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
 	}
 	// Do nothing on ok
-	void NothingFunction()
+	public static void NothingFunction()
 	{
 	//
 	}

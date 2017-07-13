@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,7 +39,7 @@ public class StudiesPanel : ShowablePanel {
     void OnEnable()
     {
         ClearProductList();
-        for (int i = 0; i < PersistenceActivator.instance.curGameData.productsList.Count; i++)
+        for (int i = 0; i < GameManager.instance.studies.studyOptionsList.Count; i++)
         {
             AddStudyToList(GameManager.instance.studies.studyOptionsList[i]);
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +7,7 @@ public class StudiesListEntry : MonoBehaviour {
 
     public StudyOption myOption;
 
-    public Text titleText, descriptionText, stepsText, costText;
+    public Text titleText, descriptionText, costText;
 
     public Button studyBtn;
 
@@ -18,11 +18,11 @@ public class StudiesListEntry : MonoBehaviour {
     {
         this.myOption = myOption;
         titleText.text = myOption.title;
-        stepsText.text = myOption.steps.ToString();
-        costText.text = myOption.cost.ToString();
+        costText.text = string.Concat(GameManager.ConvertNumberToCoinString(myOption.cost), "/dia");
         descriptionText.text = string.Concat(myOption.description, " (", myOption.type,")");
 
         studyBtn.interactable = false; //a menos que nao tenha um estudo sendo feito, nao podemos interagir com os botoes
+		studyBtnText.color = Color.white;
 
         if (PersistenceActivator.instance.curGameData.studiesList.Contains(myOption.title))
         {
@@ -39,15 +39,16 @@ public class StudiesListEntry : MonoBehaviour {
         }
         else
         {
-            studyBtnText.text = "Estudar";
+            studyBtnText.text = string.Concat("Estudar (", myOption.steps.ToString(), " dias)");
             studyBtn.interactable = true;
-        }
+			studyBtnText.color = Color.black;
+		}
     }
 
     public void OnMyButtonPressed()
     {
         ModalPanel.Instance().MessageBox(null, "Confirmar Estudo", string.Concat("Estudar '", myOption.title,"' por ",
-            myOption.steps.ToString(), " dias, pagando R$", myOption.cost.ToString(),",00 por dia?"), StartThisStudy, null, null, null, false, "YesNo");
+            myOption.steps.ToString(), " dias, pagando ", GameManager.ConvertNumberToCoinString(myOption.cost)," por dia?"), StartThisStudy, PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, false, "YesNo");
     }
 
     public void StartThisStudy()

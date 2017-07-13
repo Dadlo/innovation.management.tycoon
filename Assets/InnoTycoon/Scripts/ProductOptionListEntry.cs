@@ -9,6 +9,8 @@ public class ProductOptionListEntry : MonoBehaviour {
 
     public Toggle activeToggle;
 
+	public Button myBigBtn;
+
     public bool beingInteractedWith = false;
 
     public delegate void OnToggled(ProductOptionListEntry theOption);
@@ -35,6 +37,8 @@ public class ProductOptionListEntry : MonoBehaviour {
 
 		//o onMyValueChanged ja roda caso essa opcao ja venha ativa
 		activeToggle.isOn = theInfo.active;
+
+		CheckIfCanBeSelected();
     }
 
 	/// <summary>
@@ -51,4 +55,13 @@ public class ProductOptionListEntry : MonoBehaviour {
         onToggled(this);
         
     }
+
+	/// <summary>
+	/// confere se podemos ser selecionados de acordo com os estudos ja feitos.
+	/// se nao der, impossibilita a interacao
+	/// </summary>
+	public void CheckIfCanBeSelected() {
+		myBigBtn.interactable = GameManager.instance.HasProductOptionBeenUnlocked(theOptionRepresented);
+		activeToggle.interactable = myBigBtn.interactable;
+	}
 }

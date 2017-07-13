@@ -39,6 +39,10 @@ public class ProductCreationPanel : ShowablePanel {
         pickedDevOptions = new List<ProductOption>(), 
         pickedMonetOptions = new List<ProductOption>();
 
+	public List<ProductOptionListEntry> conceptOptionEntries = new List<ProductOptionListEntry>(),
+		devOptionEntries = new List<ProductOptionListEntry>(),
+		monetOptionEntries = new List<ProductOptionListEntry>();
+
 	public int totalProductCost;
 
 	public Text totalProductCostText, totalProductPaidDaysText, totalProductProfitDaysText, pCreationWarningsText;
@@ -116,14 +120,14 @@ public class ProductCreationPanel : ShowablePanel {
 		}
 
         //preenchemos as listas de opcoes...
-        FillOptionsList(GameManager.instance.pConcepts.productOptionsList, ProductOptionListEntry.OptionType.concept, conceptsListContainer);
-        FillOptionsList(GameManager.instance.pDevOptions.productOptionsList, ProductOptionListEntry.OptionType.dev, devListContainer);
-        FillOptionsList(GameManager.instance.pMonetOptions.productOptionsList, ProductOptionListEntry.OptionType.monet, monetListContainer);
+        FillOptionsList(GameManager.instance.pConcepts.productOptionsList, conceptOptionEntries, ProductOptionListEntry.OptionType.concept, conceptsListContainer);
+        FillOptionsList(GameManager.instance.pDevOptions.productOptionsList, devOptionEntries, ProductOptionListEntry.OptionType.dev, devListContainer);
+        FillOptionsList(GameManager.instance.pMonetOptions.productOptionsList, monetOptionEntries, ProductOptionListEntry.OptionType.monet, monetListContainer);
 
 		ToggleProductFinalizationOption(pickedConcepts.Count > 0);
     }
 
-    void FillOptionsList(List<ProductOption> theOptionsList, ProductOptionListEntry.OptionType optionType, RectTransform theOptionsContainer)
+    void FillOptionsList(List<ProductOption> theOptionsList, List<ProductOptionListEntry> optionEntryListToFill, ProductOptionListEntry.OptionType optionType, RectTransform theOptionsContainer)
     {
         for (int i = 0; i < theOptionsList.Count; i++)
         {
@@ -132,8 +136,30 @@ public class ProductCreationPanel : ShowablePanel {
             ProductOptionListEntry entryScript = newEntry.GetComponent<ProductOptionListEntry>();
             entryScript.onToggled += OnPickedProdOption;
             entryScript.SetContent(theOptionsList[i], optionType);
+			optionEntryListToFill.Add(entryScript);
         }
     }
+
+	public void RefreshOptionEntriesList(ProductOptionListEntry.OptionType targetTypeToRefresh) {
+		switch (targetTypeToRefresh) {
+			case ProductOptionListEntry.OptionType.concept:
+				RefreshAllEntriesInList(conceptOptionEntries);
+				break;
+			case ProductOptionListEntry.OptionType.dev:
+				RefreshAllEntriesInList(devOptionEntries);
+				break;
+			case ProductOptionListEntry.OptionType.monet:
+				RefreshAllEntriesInList(monetOptionEntries);
+				break;
+		}
+
+	}
+
+	public void RefreshAllEntriesInList(List<ProductOptionListEntry> entryOptions) {
+		for(int i = 0; i < entryOptions.Count; i++) {
+			entryOptions[i].CheckIfCanBeSelected();
+		}
+	}
 
 	/// <summary>
 	/// deixa possivel ou impossivel interagir com o botao de criar produto e 
