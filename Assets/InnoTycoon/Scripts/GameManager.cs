@@ -77,13 +77,13 @@ public class GameManager : MonoBehaviour {
                 persInstanceSave.cost -= curStudy.cost;
 
 				switch (curStudy.type) {
-					case "Concep��o":
+					case "Concep\u00E7\u00E3o":
 						showPanels.pCreationPanel.RefreshOptionEntriesList(ProductOptionListEntry.OptionType.concept);
                         break;
 					case "Desenvolvimento":
 						showPanels.pCreationPanel.RefreshOptionEntriesList(ProductOptionListEntry.OptionType.dev);
 						break;
-					case "Comercializa��o":
+					case "Comercializa\u00E7\u00E3o":
 						showPanels.pCreationPanel.RefreshOptionEntriesList(ProductOptionListEntry.OptionType.monet);
 						break;
 				}

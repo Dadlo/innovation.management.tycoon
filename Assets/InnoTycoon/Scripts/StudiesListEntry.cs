@@ -24,11 +24,11 @@ public class StudiesListEntry : MonoBehaviour {
         studyBtn.interactable = false; //a menos que nao tenha um estudo sendo feito, nao podemos interagir com os botoes
 		studyBtnText.color = Color.white;
 
-        if (PersistenceActivator.instance.curGameData.studiesList.Contains(myOption.title))
+        if (PersistenceActivator.instance.curGameData.studiesList.Contains(myOption.skillId))
         {
             studyBtnText.text = "Estudado";
         }
-        else if(PersistenceActivator.instance.curGameData.studyDoing == myOption.title)
+        else if(PersistenceActivator.instance.curGameData.studyDoing == myOption.skillId)
         {
             studyBtnText.text = string.Concat("Estudando... dia ", PersistenceActivator.instance.curGameData.curStudyStep.ToString(), " de ",
                 myOption.steps.ToString());
