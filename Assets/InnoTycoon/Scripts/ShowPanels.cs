@@ -9,6 +9,7 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
 	public GameObject HUDPanel;								//Store a reference to the Game Object HUD 
 	public GameObject ScrollerPanel;                        //Store a reference to the Game Object Scroller 
+    public GameObject gestaoPanel;
 	public ProductsPanel productsPanel;
     public StudiesPanel studiesPanel;
 	public ProductCreationPanel pCreationPanel;
@@ -80,7 +81,12 @@ public class ShowPanels : MonoBehaviour {
 
 	}
 
-	public void ToggleProductPanelsDisplay(bool shouldDisplay) {
+    public void ToggleGestaoPanelsDisplay(bool shouldDisplay)
+    {
+        gestaoPanel.SetActive(shouldDisplay);
+    }
+
+    public void ToggleProductPanelsDisplay(bool shouldDisplay) {
 		productsPanel.ToggleDisplay(shouldDisplay);
 	}
 
