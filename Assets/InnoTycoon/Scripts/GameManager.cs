@@ -27,7 +27,9 @@ public class GameManager : MonoBehaviour {
 
     public StudyOptionsContainer studies;
 
-	public TextAsset productConceptsAsset, productDevOptionsAsset, productMonetizationsAsset, studiesAsset;
+	public FeedbackTexts fbTexts;
+
+	public TextAsset productConceptsAsset, productDevOptionsAsset, productMonetizationsAsset, studiesAsset, feedbackTextsAsset;
 
     public ShowPanels showPanels;
 
@@ -38,6 +40,9 @@ public class GameManager : MonoBehaviour {
 		pDevOptions = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productDevOptionsAsset);
 		pMonetOptions = PersistenceHandler.LoadFromFile<ProductOptionsContainer>(productMonetizationsAsset);
         studies = PersistenceHandler.LoadFromFile<StudyOptionsContainer>(studiesAsset);
+		fbTexts = PersistenceHandler.LoadFromFile<FeedbackTexts>(feedbackTextsAsset);
+
+		fbTexts.GetOrganizedTextsFromList();
     }
 
 	public void GoToNextDay() {
@@ -132,8 +137,20 @@ public class GameManager : MonoBehaviour {
 
 		persInstanceSave.cost -= CalculateProductCost(theProductSold);
 
-		//TODO a janelinha de aviso de "produto entrou em venda"
-		theProductSold.CalculateRating();
+		bool produtoRepetido = theProductSold.CalculateRating();
+
+		string messageBoxContent = string.Concat(fbTexts.GetText("notaDaCritica"),
+			theProductSold.rating.ToString(), "\n", fbTexts.GetText("receitaPrevista"), theProductSold.rentability.ToString(), "\n",
+			fbTexts.GetText("periodoVendas"), theProductSold.saleSteps.ToString(), "\n",
+			fbTexts.GetText(string.Concat("fbProdNota", GetProductRatingIntervalText(theProductSold), "-", Random.Range(1, 4).ToString())));
+
+		if (produtoRepetido) {
+			messageBoxContent = string.Concat(messageBoxContent, "\n", fbTexts.GetText("alertaRepeticaoProd"));
+		}
+
+
+		ModalPanel.Instance().MessageBox(null, fbTexts.GetText("prodEntrouVendas"), messageBoxContent, PersistenceActivator.NothingFunction,
+			PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, false, "Ok");
 
 		persInstanceSave.cost -= theProductSold.rentability;
 	}
@@ -288,6 +305,26 @@ public class GameManager : MonoBehaviour {
 		}
 
 		return totalProdCost;
+	}
+
+	private string GetProductRatingIntervalText(Product targetProduct) {
+		float theRating = targetProduct.rating;
+		if(theRating < 3) {
+			return "0a3";
+		}else if(theRating < 5) {
+			return "3a5";
+		}else if(theRating < 7) {
+			return "5a7";
+		}else if(theRating < 9) {
+			return "7a9";
+		}
+		else {
+			return "9a10";
+		}
+	}
+
+	public string GetVariableText(string textID) {
+		return fbTexts.GetText(textID);
 	}
 
 	/// <summary>

@@ -147,8 +147,11 @@ public class Product {
 		currentLoadBar = null;
 	}
 
-
-	public void CalculateRating() {
+	/// <summary>
+	/// calcula a nota desse produto, retornando true caso o produto seja repetido ou false no caso contrario
+	/// </summary>
+	/// <returns></returns>
+	public bool CalculateRating() {
 		//soma dos multiplicadores de cada opcao escolhida para o produto
 		float totalConceptModifier = 1, totalDevModifier = 1, totalSalesModifier = 1;
 
@@ -188,8 +191,10 @@ public class Product {
         //detrimento... (fixo, dependendo apenas da existencia ou nao de um produto igual a esse no mercado)
         float detriment = 1.0f;
 
+		bool temosRepeticao = GameManager.instance.ProductHasRepeatedOptions(this);
+
         //ver se algum outro produto tem exatamente as mesmas opcoes que esse
-        if (GameManager.instance.ProductHasRepeatedOptions(this))
+        if (temosRepeticao)
         {
             detriment = GameManager.repetitionDetrimentFactor;
         }
@@ -202,6 +207,8 @@ public class Product {
 			GameManager.baseSalesProfit * totalSalesModifier);
 
 		saleSteps = GameManager.baseNumberOfSaleSteps + Mathf.FloorToInt(totalSalesModifier / GameManager.salesStepsDivisor);
+
+		return temosRepeticao;
 	}
 
 }
