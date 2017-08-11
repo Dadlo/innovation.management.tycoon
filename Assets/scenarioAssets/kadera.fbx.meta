@@ -1,23 +1,24 @@
 fileFormatVersion: 2
-guid: 548eba109756e442688abd74499b322b
-timeCreated: 1486767563
+guid: bb49a7a3c3af36a479f23ace677172aa
+timeCreated: 1502478956
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: polySurface20
-    100002: polySurface21
-    100004: //RootNode
-    400000: polySurface20
-    400002: polySurface21
-    400004: //RootNode
-    2300000: polySurface20
-    2300002: polySurface21
-    3300000: polySurface20
-    3300002: polySurface21
-    4300000: polySurface20
-    4300002: polySurface21
-    9500000: //RootNode
+    100000: cadera
+    100002: //RootNode
+    100004: privada
+    400000: cadera
+    400002: //RootNode
+    400004: privada
+    2300000: cadera
+    2300002: privada
+    2300004: //RootNode
+    3300000: cadera
+    3300002: privada
+    3300004: //RootNode
+    4300000: privada
+    4300002: cadera
   materials:
     importMaterials: 1
     materialName: 0
@@ -61,7 +62,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -80,7 +81,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
