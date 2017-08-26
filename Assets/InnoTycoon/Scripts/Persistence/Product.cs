@@ -22,13 +22,28 @@ public class Product {
 		done
 	}
 
+    public enum ProductCloneType
+    {
+        notAClone,
+        ownClone,
+        othersClone
+    }
+
 	public ProductPhase currentPhase = ProductPhase.concept;
 
 	public float conceptFocusPercentage, devFocusPercentage, saleFocusPercentage;
 
 	public int conceptSteps, devSteps, saleSteps;
 
-    public bool madeByPlayer = false;
+    public string owner = "Player";
+
+    public bool MadeByPlayer
+    {
+        get
+        {
+            return owner == "Player";
+        }
+    }
 
 	private ProdPhaseLoadingBar currentLoadBar;
 
@@ -72,34 +87,40 @@ public class Product {
 	public void OneStep() {
 		curStep++;
 
-		UpdateLoadBar();
+		if(MadeByPlayer) UpdateLoadBar();
 
 		switch (currentPhase) {
 			case ProductPhase.concept:
 				if(curStep >= conceptSteps) {
 					currentPhase = ProductPhase.dev;
 					curStep = 0;
-					ReleaseLoadBar();
+                    if (MadeByPlayer) ReleaseLoadBar();
 				}
 				break;
 			case ProductPhase.dev:
 				if (curStep >= devSteps) {
 					currentPhase = ProductPhase.sales;
 					curStep = 0;
-					ReleaseLoadBar();
-					GameManager.instance.ProductEnteredSales(this);
-					UpdateLoadBar(); //uma atualizacao a mais aqui para enchermos essa loadbar
-				}
+                    if (MadeByPlayer)
+                    {
+                        ReleaseLoadBar();
+                        UpdateLoadBar(); //uma atualizacao a mais aqui para enchermos essa loadbar
+                    }
+                    GameManager.instance.ProductEnteredSales(this);
+                }
 				break;
 			case ProductPhase.sales:
 				if(curStep >= saleSteps) {
 					currentPhase = ProductPhase.done;
 					curStep = -1;
-					ReleaseLoadBar();
-					DevSteps.Instance().ReleaseLoadBarColor(loadBarsDisplayColor);
-					//esse produto esta encerrado entao
-					GameManager.instance.ProductIsDone(this);
-				}
+                    if (MadeByPlayer)
+                    {
+                        ReleaseLoadBar();
+                        DevSteps.Instance().ReleaseLoadBarColor(loadBarsDisplayColor);
+                        //esse produto esta encerrado entao
+                    }
+                    GameManager.instance.ProductIsDone(this);
+                }
 				break;
 			default:
 				Debug.LogWarning(string.Concat("Product ", name, ", already completed, is trying to be updated as if it hadnt been completed"));
@@ -148,10 +169,10 @@ public class Product {
 	}
 
 	/// <summary>
-	/// calcula a nota desse produto, retornando true caso o produto seja repetido ou false no caso contrario
+	/// calcula a nota desse produto, retornando o tipo de copia que esse produto e (ou se nao e uma copia)
 	/// </summary>
 	/// <returns></returns>
-	public bool CalculateRating() {
+	public ProductCloneType CalculateRating() {
 		//soma dos multiplicadores de cada opcao escolhida para o produto
 		float totalConceptModifier = 1, totalDevModifier = 1, totalSalesModifier = 1;
 
@@ -191,12 +212,15 @@ public class Product {
         //detrimento... (fixo, dependendo apenas da existencia ou nao de um produto igual a esse no mercado)
         float detriment = 1.0f;
 
-		bool temosRepeticao = GameManager.instance.ProductHasRepeatedOptions(this);
+		ProductCloneType cloneType = GameManager.instance.ProductHasRepeatedOptions(this);
 
         //ver se algum outro produto tem exatamente as mesmas opcoes que esse
-        if (temosRepeticao)
+        if (cloneType == ProductCloneType.ownClone)
         {
-            detriment = GameManager.repetitionDetrimentFactor;
+            detriment = GameManager.ownRepetitionDetrimentFactor;
+        }else if(cloneType == ProductCloneType.othersClone)
+        {
+            detriment = GameManager.othersRepetitionDetrimentFactor;
         }
 
         totalConceptModifier *= detriment;
@@ -208,7 +232,7 @@ public class Product {
 
 		saleSteps = GameManager.baseNumberOfSaleSteps + Mathf.FloorToInt(totalSalesModifier / GameManager.salesStepsDivisor);
 
-		return temosRepeticao;
+		return cloneType;
 	}
 
 }

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
 
 	public const float luckyFactor = 0.3f;
 
-    public const float repetitionDetrimentFactor = 0.7f;
+    public const float ownRepetitionDetrimentFactor = 0.7f, othersRepetitionDetrimentFactor = 0.2f;
 
 	public ProductOptionsContainer pConcepts, pDevOptions, pMonetOptions;
 
@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour {
 
     public ShowPanels showPanels;
 
+    public List<string> studyNames = new List<string>();
+
 	void Awake() {
 		instance = this;
 
@@ -43,12 +45,25 @@ public class GameManager : MonoBehaviour {
 		fbTexts = PersistenceHandler.LoadFromFile<FeedbackTexts>(feedbackTextsAsset);
 
 		fbTexts.GetOrganizedTextsFromList();
+
+        //fill study list names for AI tycoons
+        for(int i = 0; i < studies.studyOptionsList.Count; i++)
+        {
+            studyNames.Add(studies.studyOptionsList[i].title);
+        }
     }
 
 	public void GoToNextDay() {
 		DevSteps.Instance().ReleaseMarkedBars();
 
 		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
+
+        //update AI tycoons
+        for(int i = 0; i < persInstanceSave.AiTycoons.Count; i++)
+        {
+            persInstanceSave.AiTycoons[i].Tick();
+        }
+
 		persInstanceSave.day++;
 		// Take cost from capital
 		persInstanceSave.capital -= persInstanceSave.cost;
@@ -74,6 +89,7 @@ public class GameManager : MonoBehaviour {
             StudyOption curStudy = GetStudyByName(persInstanceSave.studyDoing);
             if(persInstanceSave.curStudyStep >= curStudy.steps)
             {
+                ModalPanel.Instance().OkBox(fbTexts.GetText("studyRdy"), fbTexts.GetText("studyRdyTxt", curStudy.title));
                 //we are done studying!! reduce costs and add study to the saved studiesList
                 persInstanceSave.curStudyStep = 0;
                 persInstanceSave.studyDoing = "";
@@ -103,7 +119,7 @@ public class GameManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="newProduct"></param>
 	public void AddNewPlayerProduct(Product newProduct) {
-        newProduct.madeByPlayer = true;
+        newProduct.owner = "Player";
 
 		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
 
@@ -133,26 +149,37 @@ public class GameManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="theProductSold"></param>
 	public void ProductEnteredSales(Product theProductSold) {
-		SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
+        Product.ProductCloneType produtoRepetido = theProductSold.CalculateRating();
 
-		persInstanceSave.cost -= CalculateProductCost(theProductSold);
+        if (theProductSold.MadeByPlayer)
+        {
+            SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
 
-		bool produtoRepetido = theProductSold.CalculateRating();
+            persInstanceSave.cost -= CalculateProductCost(theProductSold);
 
-		string messageBoxContent = string.Concat(fbTexts.GetText("notaDaCritica"),
-			theProductSold.rating.ToString(), "\n", fbTexts.GetText("receitaPrevista"), theProductSold.rentability.ToString(), "\n",
-			fbTexts.GetText("periodoVendas"), theProductSold.saleSteps.ToString(), "\n",
-			fbTexts.GetText(string.Concat("fbProdNota", GetProductRatingIntervalText(theProductSold), "-", Random.Range(1, 4).ToString())));
+            string messageBoxContent = string.Concat(fbTexts.GetText("criticsGrade"),
+                theProductSold.rating.ToString(), "\n", fbTexts.GetText("estimIncome"), theProductSold.rentability.ToString(), "\n",
+                fbTexts.GetText("salesPeriod"), theProductSold.saleSteps.ToString(), "\n",
+                fbTexts.GetText(string.Concat("fbProdGrade", GetProductRatingIntervalText(theProductSold), "-", Random.Range(1, 4).ToString())));
 
-		if (produtoRepetido) {
-			messageBoxContent = string.Concat(messageBoxContent, "\n", fbTexts.GetText("alertaRepeticaoProd"));
-		}
+            if (produtoRepetido != Product.ProductCloneType.notAClone)
+            {
+                messageBoxContent = string.Concat(messageBoxContent, "\n", fbTexts.GetText("prodRepeatAlert"));
+            }
 
 
-		ModalPanel.Instance().MessageBox(null, fbTexts.GetText("prodEntrouVendas"), messageBoxContent, PersistenceActivator.NothingFunction,
-			PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, false, "Ok");
+            ModalPanel.Instance().OkBox(fbTexts.GetText("prodEnteredSales"), messageBoxContent);
 
-		persInstanceSave.cost -= theProductSold.rentability;
+            persInstanceSave.cost -= theProductSold.rentability;
+        }
+        else
+        {
+            AITycoon prodOwner = GetAITycoByName(theProductSold.owner);
+
+            prodOwner.curIncome += CalculateProductCost(theProductSold);
+            prodOwner.curIncome += theProductSold.rentability;
+        }
+		
 	}
 
 	/// <summary>
@@ -161,8 +188,19 @@ public class GameManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="doneProduct">o produto que foi terminado</param>
 	public void ProductIsDone(Product doneProduct) {
-		//nao podemos remover assim que descobrimos que o produto se encerrou para nao dar problemas com o for que itera sobre os productsDoing
-		productsDoneToday.Add(doneProduct);
+        if (doneProduct.MadeByPlayer)
+        {
+            //nao podemos remover assim que descobrimos que o produto se encerrou para nao dar problemas com o for que itera sobre os productsDoing
+            productsDoneToday.Add(doneProduct);
+        }
+        else
+        {
+            AITycoon prodOwner = GetAITycoByName(doneProduct.owner);
+
+            prodOwner.curIncome -= doneProduct.rentability;
+            prodOwner.productDoing = null;
+        }
+		
 	}
 
 	public ProductOption GetProductOptionByID(string optionID) {
@@ -199,7 +237,18 @@ public class GameManager : MonoBehaviour {
 				return persInstanceSave.productsList[i];
 			}
 		}
-		return null;
+        for (int i = 0; i < persInstanceSave.AiTycoons.Count; i++)
+        {
+            for (int j = 0; j < persInstanceSave.AiTycoons[i].products.Count; j++)
+            {
+                if (persInstanceSave.AiTycoons[i].products[j].name == name)
+                {
+                    return persInstanceSave.AiTycoons[i].products[j];
+                }
+            }
+
+        }
+        return null;
 	}
 
     /// <summary>
@@ -216,6 +265,20 @@ public class GameManager : MonoBehaviour {
                 return studies.studyOptionsList[i];
             }
         }
+        return null;
+    }
+
+    public AITycoon GetAITycoByName(string tycoName)
+    {
+        SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
+        for (int i = 0; i < persInstanceSave.AiTycoons.Count; i++)
+        {
+            if(persInstanceSave.AiTycoons[i].name == tycoName)
+            {
+                return persInstanceSave.AiTycoons[i];
+            }
+        }
+
         return null;
     }
 
@@ -244,7 +307,7 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     /// <param name="testedProduct"></param>
     /// <returns></returns>
-    public bool ProductHasRepeatedOptions(Product testedProduct)
+    public Product.ProductCloneType ProductHasRepeatedOptions(Product testedProduct)
     {
         List<Product> existingProducts = PersistenceActivator.instance.curGameData.productsList;
         for (int i = 0; i < existingProducts.Count; i++)
@@ -273,7 +336,7 @@ public class GameManager : MonoBehaviour {
                     if (isClone)
                     {
                         Debug.Log(string.Concat("product ", testedProduct.name, " is a clone! detriment should be applied"));
-                        return true;
+                        return Product.ProductCloneType.ownClone;
                     }
                     else
                     {
@@ -290,7 +353,7 @@ public class GameManager : MonoBehaviour {
 
         }
 
-        return false;
+        return Product.ProductCloneType.notAClone;
     }
 
 	public int CalculateProductCost(Product targetProduct) {

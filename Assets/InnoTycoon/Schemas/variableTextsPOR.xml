@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FeedbackTexts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <theTextList>
-    <string>alertaRepeticaoProd|Repetições de produtos possuem menor impacto no mercado, seja repetição interna ou de sua concorrência direta!</string>
-    <string>fbProdNota0a3-1|Lorem ipsum productus bastancti ruinis variatio 1</string>
-    <string>fbProdNota0a3-2|Lorem ipsum productus bastancti ruinis variatio 2</string>
-    <string>fbProdNota0a3-3|Lorem ipsum productus bastancti ruinis variatio 3</string>
-    <string>fbProdNota3a5-1|Lorem ipsum productus ruinis variatio 1</string>
-    <string>fbProdNota3a5-2|Lorem ipsum productus ruinis variatio 2</string>
-    <string>fbProdNota3a5-3|Lorem ipsum productus ruinis variatio 3</string>
-    <string>fbProdNota5a7-1|Lorem ipsum productus maedium variatio 1</string>
-    <string>fbProdNota5a7-2|Lorem ipsum productus maedium variatio 2</string>
-    <string>fbProdNota5a7-3|Lorem ipsum productus maedium variatio 3</string>
-    <string>fbProdNota7a9-1|Lorem ipsum productus bonis variatio 1</string>
-    <string>fbProdNota7a9-2|Lorem ipsum productus bonis variatio 2</string>
-    <string>fbProdNota7a9-3|Lorem ipsum productus bonis variatio 3</string> 
-    <string>fbProdNota9a10-1|Lorem ipsum productus bastancti bonis variatio 1</string>
-    <string>fbProdNota9a10-2|Lorem ipsum productus bastancti bonis variatio 2</string>
-    <string>fbProdNota9a10-3|Lorem ipsum productus bastancti bonis variatio 3</string>
-    <string>notaDaCritica|Nota da crítica: </string>
-    <string>periodoVendas|Período de vendas: </string>
-    <string>prodEntrouVendas|Produto entrou em fase de vendas</string>
-    <string>receitaPrevista|Receita prevista: </string>
+    <string>prodRepeatAlert|Repetições de produtos possuem menor impacto no mercado, seja repetição interna ou de sua concorrência direta!</string>
+    <string>fbProdGrade0a3-1|Lorem ipsum productus bastancti ruinis variatio 1</string>
+    <string>fbProdGrade0a3-2|Lorem ipsum productus bastancti ruinis variatio 2</string>
+    <string>fbProdGrade0a3-3|Lorem ipsum productus bastancti ruinis variatio 3</string>
+    <string>fbProdGrade3a5-1|Lorem ipsum productus ruinis variatio 1</string>
+    <string>fbProdGrade3a5-2|Lorem ipsum productus ruinis variatio 2</string>
+    <string>fbProdGrade3a5-3|Lorem ipsum productus ruinis variatio 3</string>
+    <string>fbProdGrade5a7-1|Lorem ipsum productus maedium variatio 1</string>
+    <string>fbProdGrade5a7-2|Lorem ipsum productus maedium variatio 2</string>
+    <string>fbProdGrade5a7-3|Lorem ipsum productus maedium variatio 3</string>
+    <string>fbProdGrade7a9-1|Lorem ipsum productus bonis variatio 1</string>
+    <string>fbProdGrade7a9-2|Lorem ipsum productus bonis variatio 2</string>
+    <string>fbProdGrade7a9-3|Lorem ipsum productus bonis variatio 3</string> 
+    <string>fbProdGrade9a10-1|Lorem ipsum productus bastancti bonis variatio 1</string>
+    <string>fbProdGrade9a10-2|Lorem ipsum productus bastancti bonis variatio 2</string>
+    <string>fbProdGrade9a10-3|Lorem ipsum productus bastancti bonis variatio 3</string>
+    <string>criticsGrade|Nota da crítica: </string>
+    <string>salesPeriod|Período de vendas: </string>
+    <string>prodEnteredSales|Produto entrou em fase de vendas</string>
+    <string>estimIncome|Receita prevista: </string>
+    <string>studyRdy|Estudo finalizado</string>
+    <string>studyRdyTxt|O estudo {0} foi finalizado. Outro estudo pode ser iniciado agora.</string>
   </theTextList>
 </FeedbackTexts>

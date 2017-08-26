@@ -107,6 +107,29 @@ public class ModalPanel : MonoBehaviour
 		MessageBox(info.iconPic, info.title, info.question, info.yesEvent, info.noEvent, info.cancelEvent, info.okEvent, info.iconActive, info.messageType);
 	}
 
+    /// <summary>
+    /// janela com opcoes de sim e nao que podem fazer algo
+    /// </summary>
+    /// <param name="windowTitle"></param>
+    /// <param name="windowText"></param>
+    /// <param name="yesEvent"></param>
+    /// <param name="noEvent"></param>
+    public void YesNoBox(string windowTitle, string windowText, UnityAction yesEvent, UnityAction noEvent)
+    {
+        MessageBox(null, windowTitle, windowText, yesEvent, noEvent, PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, false, "YesNo");
+    }
+
+    /// <summary>
+    /// janela que aparece apenas para notificar o jogador sobre algo
+    /// </summary>
+    /// <param name="windowTitle"></param>
+    /// <param name="windowText"></param>
+    public void OkBox(string windowTitle, string windowText)
+    {
+        MessageBox(null, windowTitle, windowText, PersistenceActivator.NothingFunction,
+            PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, false, "Ok");
+    }
+
 	void ClosePanel()
 	  {
 		ModalPanelObject.SetActive(false); //Close the Modal Dialog

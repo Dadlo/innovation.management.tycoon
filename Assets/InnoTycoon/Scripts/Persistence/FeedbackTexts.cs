@@ -18,7 +18,12 @@ public class FeedbackTexts {
 		return organizedTextsDict[textID];
 	}
 
-	public void GetOrganizedTextsFromList() {
+    public string GetText(string textID, string content0)
+    {
+        return organizedTextsDict[textID].Replace("{0}", content0);
+    }
+
+    public void GetOrganizedTextsFromList() {
 		for (int i = 0; i < theTextList.Count; i++) {
 			string[] textAndId = theTextList[i].Split('|');
 			organizedTextsDict.Add(textAndId[0], textAndId[1]);
