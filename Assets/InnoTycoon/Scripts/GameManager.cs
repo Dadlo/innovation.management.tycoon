@@ -21,9 +21,19 @@ public class GameManager : MonoBehaviour {
 
 	public const float luckyFactor = 0.3f;
 
-    public const float ownRepetitionDetrimentFactor = 0.7f, othersRepetitionDetrimentFactor = 0.2f;
+    /// <summary>
+    /// fator que multiplica a importancia de cada etapa no retorno final do produto.
+    /// quanto menor esse valor, maior seu impacto
+    /// </summary>
+    public const float ownRepetitionDetrimentFactor = 0.2f, othersRepetitionDetrimentFactor = 0.7f;
 
-	public ProductOptionsContainer pConcepts, pDevOptions, pMonetOptions;
+    public const int startingAiMoney = 150000;
+
+    public const int aiWeeksOutWhenBankrupted = 6, aiMoneyWhenRespawned = 250000;
+
+    public const int aiSafeAmountWhenStudying = 100000;
+
+    public ProductOptionsContainer pConcepts, pDevOptions, pMonetOptions;
 
     public StudyOptionsContainer studies;
 
@@ -89,7 +99,7 @@ public class GameManager : MonoBehaviour {
             StudyOption curStudy = GetStudyByName(persInstanceSave.studyDoing);
             if(persInstanceSave.curStudyStep >= curStudy.steps)
             {
-                ModalPanel.Instance().OkBox(fbTexts.GetText("studyRdy"), fbTexts.GetText("studyRdyTxt", curStudy.title));
+                ModalPanel.Instance().OkBox(fbTexts.GetText("studyRdyHdr"), fbTexts.GetText("studyRdyTxt", curStudy.title));
                 //we are done studying!! reduce costs and add study to the saved studiesList
                 persInstanceSave.curStudyStep = 0;
                 persInstanceSave.studyDoing = "";
@@ -157,10 +167,20 @@ public class GameManager : MonoBehaviour {
 
             persInstanceSave.cost -= CalculateProductCost(theProductSold);
 
+            int productLevel = GetProductRatingLevel(theProductSold);
+
+            //graphic feedback!
+            string shownFeedback = GraphicFeedbacksManager.instance.ShowANewFeedback(productLevel);
+
+            if(!string.IsNullOrEmpty(shownFeedback))
+            {
+                persInstanceSave.displayedFeedbackGraphics.Add(string.Concat(productLevel.ToString(), "-", shownFeedback.ToString()));
+            }
+
             string messageBoxContent = string.Concat(fbTexts.GetText("criticsGrade"),
                 theProductSold.rating.ToString(), "\n", fbTexts.GetText("estimIncome"), theProductSold.rentability.ToString(), "\n",
                 fbTexts.GetText("salesPeriod"), theProductSold.saleSteps.ToString(), "\n",
-                fbTexts.GetText(string.Concat("fbProdGrade", GetProductRatingIntervalText(theProductSold), "-", Random.Range(1, 4).ToString())));
+                fbTexts.GetText(string.Concat("fbProdGrade", productLevel.ToString(), "-", Random.Range(1, 4).ToString())));
 
             if (produtoRepetido != Product.ProductCloneType.notAClone)
             {
@@ -168,7 +188,7 @@ public class GameManager : MonoBehaviour {
             }
 
 
-            ModalPanel.Instance().OkBox(fbTexts.GetText("prodEnteredSales"), messageBoxContent);
+            ModalPanel.Instance().OkBox(fbTexts.GetText("prodEnteredSalesHdr"), messageBoxContent);
 
             persInstanceSave.cost -= theProductSold.rentability;
         }
@@ -294,6 +314,28 @@ public class GameManager : MonoBehaviour {
 		return Product.ProductPhase.done;
 	}
 
+    /// <summary>
+    /// retorna o numero de produtos prontos (incluindo ou nao os que estao em fase de vendas) feitos pelo jogador
+    /// </summary>
+    /// <param name="include"></param>
+    /// <param name=""></param>
+    /// <returns></returns>
+    public int GetNumberOfPlayerCompletedProducts(bool includeProductsInSalesPhase = true)
+    {
+        SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
+        int returnedNumber = 0;
+        for (int i = 0; i < persInstanceSave.productsList.Count; i++)
+        {
+            if(persInstanceSave.productsList[i].currentPhase == Product.ProductPhase.done ||
+                (includeProductsInSalesPhase && persInstanceSave.productsList[i].currentPhase == Product.ProductPhase.sales))
+            {
+                returnedNumber++;
+            }
+        }
+
+        return returnedNumber;
+    }
+
     public bool HasProductOptionBeenUnlocked(ProductOption theOption) {
 		if (theOption.active) return true;
 
@@ -353,13 +395,63 @@ public class GameManager : MonoBehaviour {
 
         }
 
+        //vamos conferir com os produtos dos outros tycoons se ainda nao achamos um clone
+        List<AITycoon> otherTycos = PersistenceActivator.instance.curGameData.AiTycoons;
+        for (int i = 0; i < otherTycos.Count; i++)
+        {
+            existingProducts = otherTycos[i].products;
+            for (int j = 0; j < existingProducts.Count; j++)
+            {
+                if (existingProducts[j] == testedProduct || existingProducts[j].currentPhase == Product.ProductPhase.concept ||
+                    existingProducts[j].currentPhase == Product.ProductPhase.dev)
+                {
+                    continue; //nao precisa testar contra nos mesmos ou contra produtos ainda sendo feitos
+                }
+                else
+                {
+                    if (testedProduct.pickedOptionIDs.Count == existingProducts[j].pickedOptionIDs.Count)
+                    {
+                        bool isClone = true;
+                        //comecamos pensando que temos um clone aqui, mas o for abaixo vai nos dizer a verdade
+                        for (int k = 0; k < testedProduct.pickedOptionIDs.Count; k++)
+                        {
+                            if (!existingProducts[k].pickedOptionIDs.Contains(testedProduct.pickedOptionIDs[k]))
+                            {
+                                isClone = false;
+                                break;
+                            }
+                        }
+
+                        //se ainda acreditamos que temos um clone, temos um clone mesmo
+                        if (isClone)
+                        {
+                            Debug.Log(string.Concat("product ", testedProduct.name, " is a clone from another tycoon! light detriment should be applied"));
+                            return Product.ProductCloneType.othersClone;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                    }
+                    else
+                    {
+                        continue; //pode ate ter varias igualdades, mas um produto tem mais opcoes que o outro
+                    }
+
+                }
+
+            }
+        }
+        
+
         return Product.ProductCloneType.notAClone;
     }
 
-	public int CalculateProductCost(Product targetProduct) {
+	public static int CalculateProductCost(Product targetProduct) {
 		int totalProdCost = 0;
 		for(int i = 0; i < targetProduct.pickedOptionIDs.Count; i++) {
-            ProductOption theOption = GetProductOptionByID(targetProduct.pickedOptionIDs[i]);
+            ProductOption theOption = instance.GetProductOptionByID(targetProduct.pickedOptionIDs[i]);
             if(theOption != null)
             {
                 totalProdCost += theOption.cost;
@@ -370,33 +462,43 @@ public class GameManager : MonoBehaviour {
 		return totalProdCost;
 	}
 
-	private string GetProductRatingIntervalText(Product targetProduct) {
+	private int GetProductRatingLevel(Product targetProduct) {
 		float theRating = targetProduct.rating;
 		if(theRating < 3) {
-			return "0a3";
+			return 0;
 		}else if(theRating < 5) {
-			return "3a5";
+			return 1;
 		}else if(theRating < 7) {
-			return "5a7";
+			return 2;
 		}else if(theRating < 9) {
-			return "7a9";
+			return 3;
 		}
 		else {
-			return "9a10";
+			return 4;
 		}
 	}
 
-	public string GetVariableText(string textID) {
-		return fbTexts.GetText(textID);
+	public static string GetVariableText(string textID) {
+		return instance.fbTexts.GetText(textID);
 	}
 
-	/// <summary>
-	/// adiciona o R$ e o ,00 a um numero fornecido e retorna essa string
-	/// </summary>
-	/// <param name="number"></param>
-	/// <returns></returns>
-	public static string ConvertNumberToCoinString(int number) {
+    public static string GetVariableText(string textID, string specialTextContent)
+    {
+        return instance.fbTexts.GetText(textID, specialTextContent);
+    }
+
+    /// <summary>
+    /// adiciona o R$ e o ,00 a um numero fornecido e retorna essa string
+    /// </summary>
+    /// <param name="number"></param>
+    /// <returns></returns>
+    public static string ConvertNumberToCoinString(int number) {
 		return string.Concat("R$", number.ToString(), ",00");
 	}
+
+    public static int GetStartingAiMoneyWithRandomness()
+    {
+        return startingAiMoney + Random.Range(0, startingAiMoney);
+    }
 
 }

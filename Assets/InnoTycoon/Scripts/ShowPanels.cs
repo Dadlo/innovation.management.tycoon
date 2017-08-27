@@ -9,11 +9,9 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
 	public GameObject HUDPanel;								//Store a reference to the Game Object HUD 
 	public GameObject ScrollerPanel;                        //Store a reference to the Game Object Scroller 
-    public GameObject gestaoPanel;
 	public ProductsPanel productsPanel;
     public StudiesPanel studiesPanel;
 	public ProductCreationPanel pCreationPanel;
-
 
 
 	//Call this function to activate and display the Options panel during the main menu
@@ -81,9 +79,14 @@ public class ShowPanels : MonoBehaviour {
 
 	}
 
-    public void ToggleGestaoPanelsDisplay(bool shouldDisplay)
+    public void ShowObj(GameObject targetObj)
     {
-        gestaoPanel.SetActive(shouldDisplay);
+        targetObj.SetActive(true);
+    }
+
+    public void HideObj(GameObject targetObj)
+    {
+        targetObj.SetActive(false);
     }
 
     public void ToggleProductPanelsDisplay(bool shouldDisplay) {

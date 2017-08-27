@@ -223,6 +223,11 @@ public class Product {
             detriment = GameManager.othersRepetitionDetrimentFactor;
         }
 
+        if (!MadeByPlayer && detriment < 1)
+        {
+            detriment = 0.9f; //menos punicao para a IA falir menos
+        }
+
         totalConceptModifier *= detriment;
         totalDevModifier *= detriment;
         totalSalesModifier *= detriment;

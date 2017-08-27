@@ -64,6 +64,7 @@ public class PersistenceActivator : MonoBehaviour {
 		ResetAllValues();
 		RenderAllChanges();
 		startoptions.StartGameInScene();
+        GraphicFeedbacksManager.instance.ClearAllGraphics();
 	}
 
 	void ResetAllValues()
@@ -81,10 +82,11 @@ public class PersistenceActivator : MonoBehaviour {
 			curGameData.productsList = new List<Product>();
 		}
         curGameData.productsDoing = new List<Product>();
+        curGameData.displayedFeedbackGraphics = new List<string>();
 
         curGameData.AiTycoons = new List<AITycoon>();
-        curGameData.AiTycoons.Add(new AITycoon() { name = "Dumb Tycoon", intelligence = 0.2f});
-        curGameData.AiTycoons.Add(new AITycoon() { name = "Average Tycoon", intelligence = 0.65f});
+        curGameData.AiTycoons.Add(new AITycoon() { name = "Dumb Tycoon", intelligence = 0.2f, curMoney = GameManager.GetStartingAiMoneyWithRandomness(), curIncome = -GameManager.baseDailyCost });
+        curGameData.AiTycoons.Add(new AITycoon() { name = "Average Tycoon", intelligence = 0.65f, curMoney = GameManager.GetStartingAiMoneyWithRandomness(), curIncome = -GameManager.baseDailyCost });
     }
 
 	/// <summary>
@@ -121,6 +123,8 @@ public class PersistenceActivator : MonoBehaviour {
 	}
 
 	public void GetDataFromSave(SavedGame theSave) {
+
+        GraphicFeedbacksManager.instance.ClearAllGraphics();
 		// load all data from SavedGame
 		curGameData = theSave;
 
@@ -140,6 +144,14 @@ public class PersistenceActivator : MonoBehaviour {
 		for(int i = 0; i < curGameData.productsDoing.Count; i++) {
 			curGameData.productsDoing[i].UpdateLoadBar();
 		}
+
+        for(int i = 0; i < curGameData.displayedFeedbackGraphics.Count; i++)
+        {
+            //os feedbacks sao salvos como level-nome; 2-lataLixo, por exemplo
+            string[] levelAndName = curGameData.displayedFeedbackGraphics[i].Split('-');
+            int level = int.Parse(levelAndName[0]);
+            GraphicFeedbacksManager.instance.ShowSpecificGraphic(level, levelAndName[1]);
+        }
 	}
 	public void RenderAllChanges() {
 		// update UI

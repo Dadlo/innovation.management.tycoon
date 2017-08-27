@@ -2,26 +2,32 @@
 <FeedbackTexts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <theTextList>
     <string>prodRepeatAlert|Repetições de produtos possuem menor impacto no mercado, seja repetição interna ou de sua concorrência direta!</string>
-    <string>fbProdGrade0a3-1|Lorem ipsum productus bastancti ruinis variatio 1</string>
-    <string>fbProdGrade0a3-2|Lorem ipsum productus bastancti ruinis variatio 2</string>
-    <string>fbProdGrade0a3-3|Lorem ipsum productus bastancti ruinis variatio 3</string>
-    <string>fbProdGrade3a5-1|Lorem ipsum productus ruinis variatio 1</string>
-    <string>fbProdGrade3a5-2|Lorem ipsum productus ruinis variatio 2</string>
-    <string>fbProdGrade3a5-3|Lorem ipsum productus ruinis variatio 3</string>
-    <string>fbProdGrade5a7-1|Lorem ipsum productus maedium variatio 1</string>
-    <string>fbProdGrade5a7-2|Lorem ipsum productus maedium variatio 2</string>
-    <string>fbProdGrade5a7-3|Lorem ipsum productus maedium variatio 3</string>
-    <string>fbProdGrade7a9-1|Lorem ipsum productus bonis variatio 1</string>
-    <string>fbProdGrade7a9-2|Lorem ipsum productus bonis variatio 2</string>
-    <string>fbProdGrade7a9-3|Lorem ipsum productus bonis variatio 3</string> 
-    <string>fbProdGrade9a10-1|Lorem ipsum productus bastancti bonis variatio 1</string>
-    <string>fbProdGrade9a10-2|Lorem ipsum productus bastancti bonis variatio 2</string>
-    <string>fbProdGrade9a10-3|Lorem ipsum productus bastancti bonis variatio 3</string>
+    <string>fbProdGrade0-1|Lorem ipsum productus bastancti ruinis variatio 1</string>
+    <string>fbProdGrade0-2|Lorem ipsum productus bastancti ruinis variatio 2</string>
+    <string>fbProdGrade0-3|Lorem ipsum productus bastancti ruinis variatio 3</string>
+    <string>fbProdGrade1-1|Lorem ipsum productus ruinis variatio 1</string>
+    <string>fbProdGrade1-2|Lorem ipsum productus ruinis variatio 2</string>
+    <string>fbProdGrade1-3|Lorem ipsum productus ruinis variatio 3</string>
+    <string>fbProdGrade2-1|Lorem ipsum productus maedium variatio 1</string>
+    <string>fbProdGrade2-2|Lorem ipsum productus maedium variatio 2</string>
+    <string>fbProdGrade2-3|Lorem ipsum productus maedium variatio 3</string>
+    <string>fbProdGrade3-1|Lorem ipsum productus bonis variatio 1</string>
+    <string>fbProdGrade3-2|Lorem ipsum productus bonis variatio 2</string>
+    <string>fbProdGrade3-3|Lorem ipsum productus bonis variatio 3</string> 
+    <string>fbProdGrade4-1|Lorem ipsum productus bastancti bonis variatio 1</string>
+    <string>fbProdGrade4-2|Lorem ipsum productus bastancti bonis variatio 2</string>
+    <string>fbProdGrade4-3|Lorem ipsum productus bastancti bonis variatio 3</string>
     <string>criticsGrade|Nota da crítica: </string>
     <string>salesPeriod|Período de vendas: </string>
-    <string>prodEnteredSales|Produto entrou em fase de vendas</string>
+    <string>prodEnteredSalesHdr|Produto entrou em fase de vendas</string>
     <string>estimIncome|Receita prevista: </string>
-    <string>studyRdy|Estudo finalizado</string>
+    <string>studyRdyHdr|Estudo finalizado</string>
     <string>studyRdyTxt|O estudo {0} foi finalizado. Outro estudo pode ser iniciado agora.</string>
+    <string>aiBankruptedHdr|Concorrente faliu</string>
+    <string>aiBankruptedTxt|A empresa concorrente {0} está passando por dificuldades financeiras! Ela deve ficar fora do mercado por um tempo.</string>
+    <string>aiBackToBusinessHdr|Concorrente está de volta</string>
+    <string>aiBackToBusinessTxt|A empresa concorrente {0} recebeu novos investimentos e está de volta à ativa.</string>
+    <string>bankrupted|Falida</string>
+    <string>you|Você</string>
   </theTextList>
 </FeedbackTexts>

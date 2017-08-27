@@ -20,6 +20,10 @@ public class AITycoon
 
     public int curIncome = 0;
 
+    public int curMoney = 0;
+
+    public int weeksDownRemaining = 0;
+
     /// <summary>
     /// quanto maior esse valor (0 a 1), maior a chance desse cara fazer estudos e produtos diferentes ao inves de fazer um igual toda vez
     /// </summary>
@@ -40,6 +44,28 @@ public class AITycoon
 
     public void Tick()
     {
+        if(weeksDownRemaining > 0)
+        {
+            weeksDownRemaining--;
+            if(weeksDownRemaining <= 0)
+            {
+                ModalPanel.Instance().OkBox(GameManager.GetVariableText("aiBackToBusinessHdr"), GameManager.GetVariableText("aiBackToBusinessTxt", name));
+                curMoney = GameManager.aiMoneyWhenRespawned + Random.Range(0, GameManager.aiMoneyWhenRespawned / 2);
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        curMoney += curIncome;
+
+        if(curMoney <= 0)
+        {
+            GoBankrupt();
+            return;
+        }
+
         if (!string.IsNullOrEmpty(studyDoing))
         {
             curStudyStep++;
@@ -54,7 +80,7 @@ public class AITycoon
         }
         else
         {
-            if(Random.Range(0f, 0.6f) < intelligence)
+            if(Random.Range(0f, 1.0f) < intelligence)
             {
                 DoNewStudy();
             }
@@ -81,8 +107,14 @@ public class AITycoon
             if (availableStudies.Count() > 0)
             {
                 //pegamos um estudo que ainda nao estudamos
-                studyDoing = availableStudies.ElementAt(Random.Range(0, availableStudies.Count()));
-                curIncome -= GameManager.instance.GetStudyByName(studyDoing).cost;
+                StudyOption chosenStudy = GameManager.instance.GetStudyByName(availableStudies.ElementAt(Random.Range(0, availableStudies.Count())));
+                //se tivermos dinheiro, estudamos
+                if(curMoney > GameManager.aiSafeAmountWhenStudying + ((GameManager.baseDailyCost + chosenStudy.cost) * chosenStudy.steps))
+                {
+                    studyDoing = chosenStudy.title;
+                    curIncome -= chosenStudy.cost;
+                }
+                
             }
         }
     }
@@ -108,25 +140,63 @@ public class AITycoon
 
         createdProduct.pickedOptionIDs.Add("ino_01"); //mesmo se nenhuma opcao for escolhida, essa ja vem haha
 
-        for(int i = 0; i < studiesDone.Count; i++)
+        createdProduct.conceptSteps = GameManager.baseNumberOfConceptSteps;
+        createdProduct.devSteps = GameManager.baseNumberOfDevSteps;
+        createdProduct.saleSteps = GameManager.baseNumberOfSaleSteps;
+
+        int numPickedConcepts = 0, numPickedDevs = 0, numPickedSales = 0;
+
+        for (int i = 0; i < studiesDone.Count; i++)
         {
             if(Random.Range(0, 1.0f) < intelligence)
             {
-                createdProduct.pickedOptionIDs.Add(GameManager.instance.GetStudyByName(studiesDone[i]).skillId);
+                string skillId = GameManager.instance.GetStudyByName(studiesDone[i]).skillId;
+                
+                //adicionamos os passos (tudo em concepcao caso nao seja marketing)
+                ProductOption chosenOption = GameManager.instance.GetProductOptionByID(skillId);
+                switch (GameManager.instance.GetProductOptionPhase(chosenOption))
+                {
+                    case Product.ProductPhase.concept:
+                        if(numPickedConcepts < 2)
+                        {
+                            createdProduct.conceptSteps += chosenOption.multiplier / 2;
+                            createdProduct.pickedOptionIDs.Add(skillId);
+                            numPickedConcepts++;
+                        }
+                        break;
+                    case Product.ProductPhase.dev:
+                        if (numPickedDevs < 2)
+                        {
+                            createdProduct.devSteps += chosenOption.multiplier / 2;
+                            createdProduct.pickedOptionIDs.Add(skillId);
+                            numPickedDevs++;
+                        }
+                        break;
+                    case Product.ProductPhase.sales:
+                        if (numPickedSales < 2)
+                        {
+                            createdProduct.saleSteps += chosenOption.multiplier;
+                            createdProduct.pickedOptionIDs.Add(skillId);
+                            numPickedSales++;
+                        }
+                        break;
+                }
+
             }
         }
-
-        //a IA faz produtos bem mais rapido e vende por mais tempo pra dar uma ajuda
-        createdProduct.conceptSteps = GameManager.baseNumberOfConceptSteps;
-        createdProduct.devSteps = GameManager.baseNumberOfDevSteps;
-        createdProduct.saleSteps = GameManager.baseNumberOfSaleSteps * 2;
 
         createdProduct.conceptFocusPercentage = 0.33f;
         createdProduct.devFocusPercentage = 0.33f;
         createdProduct.saleFocusPercentage = 0.34f;
 
-        curIncome -= GameManager.instance.CalculateProductCost(createdProduct);
+        curIncome -= GameManager.CalculateProductCost(createdProduct);
         productDoing = createdProduct;
         products.Add(createdProduct);
+    }
+
+    public void GoBankrupt()
+    {
+        ModalPanel.Instance().OkBox(GameManager.GetVariableText("aiBankruptedHdr"), GameManager.GetVariableText("aiBankruptedTxt", name));
+        weeksDownRemaining = GameManager.aiWeeksOutWhenBankrupted + Random.Range(0, GameManager.aiWeeksOutWhenBankrupted);
     }
 }

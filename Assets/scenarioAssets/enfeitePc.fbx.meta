@@ -1,72 +1,15 @@
 fileFormatVersion: 2
-guid: a4dc488881639456f9cb7a838a6e642d
-timeCreated: 1486767198
+guid: 11f3ddaa2b61cf549834f43420301fed
+timeCreated: 1503857570
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Bolt Caps
-    100002: Bowl
-    100004: Drainage Tube
-    100006: Flush Button
-    100008: Hinges
-    100010: Lid
-    100012: Seat
-    100014: Tank
-    100016: Tank cover
-    100018: //RootNode
-    100020: Valve
-    100022: Water
-    100024: Water Tube
-    400000: Bolt Caps
-    400002: Bowl
-    400004: Drainage Tube
-    400006: Flush Button
-    400008: Hinges
-    400010: Lid
-    400012: Seat
-    400014: Tank
-    400016: Tank cover
-    400018: //RootNode
-    400020: Valve
-    400022: Water
-    400024: Water Tube
-    2300000: Bolt Caps
-    2300002: Bowl
-    2300004: Drainage Tube
-    2300006: Flush Button
-    2300008: Hinges
-    2300010: Lid
-    2300012: Seat
-    2300014: Tank
-    2300016: Tank cover
-    2300018: Valve
-    2300020: Water
-    2300022: Water Tube
-    3300000: Bolt Caps
-    3300002: Bowl
-    3300004: Drainage Tube
-    3300006: Flush Button
-    3300008: Hinges
-    3300010: Lid
-    3300012: Seat
-    3300014: Tank
-    3300016: Tank cover
-    3300018: Valve
-    3300020: Water
-    3300022: Water Tube
-    4300000: Bowl
-    4300002: Water Tube
-    4300004: Bolt Caps
-    4300006: Seat
-    4300008: Flush Button
-    4300010: Tank cover
-    4300012: Lid
-    4300014: Water
-    4300016: Valve
-    4300018: Hinges
-    4300020: Tank
-    4300022: Drainage Tube
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: enfeitePc
   materials:
     importMaterials: 1
     materialName: 0
@@ -94,7 +37,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 0
+    importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

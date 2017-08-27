@@ -18,6 +18,8 @@ public class SavedGame {
 
     public List<AITycoon> AiTycoons;
 
+    public List<string> displayedFeedbackGraphics;
+
     /// <summary>
     /// produtos sendo feitos pelo jogador.
     /// nao e salva, pois pegamos os produtos que estao sendo feitos pelo jogador
