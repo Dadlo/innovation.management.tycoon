@@ -16,6 +16,10 @@ public class SavedGame {
     public int curStudyStep = 0;
 	public List<Product> productsList;
 
+    public List<AITycoon> AiTycoons;
+
+    public List<string> displayedFeedbackGraphics;
+
     /// <summary>
     /// produtos sendo feitos pelo jogador.
     /// nao e salva, pois pegamos os produtos que estao sendo feitos pelo jogador

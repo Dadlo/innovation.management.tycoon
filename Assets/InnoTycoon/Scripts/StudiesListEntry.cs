@@ -47,8 +47,9 @@ public class StudiesListEntry : MonoBehaviour {
 
     public void OnMyButtonPressed()
     {
-        ModalPanel.Instance().MessageBox(null, "Confirmar Estudo", string.Concat("Estudar '", myOption.title,"' por ",
-            myOption.steps.ToString(), " dias, pagando ", GameManager.ConvertNumberToCoinString(myOption.cost)," por dia?"), StartThisStudy, PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, PersistenceActivator.NothingFunction, false, "YesNo");
+        ModalPanel.Instance().YesNoBox("Confirmar Estudo", string.Concat("Estudar '", myOption.title,"' por ",
+            myOption.steps.ToString(), " dias, pagando ", GameManager.ConvertNumberToCoinString(myOption.cost)," por dia?"), StartThisStudy,
+            PersistenceActivator.NothingFunction);
     }
 
     public void StartThisStudy()

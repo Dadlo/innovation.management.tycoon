@@ -48,7 +48,7 @@ public class PersistenceActivator : MonoBehaviour {
 		}
 	}
 	public void EndGame() {
-		ModalPanel.MessageBox(icon, "Game Over", "You have gone bankrupted ! You've Lost!\n\nYou can see your status from this game,\nbut you'll need to start a new game from the\nmenu to play again.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
+		ModalPanel.OkBox("Game Over", "You have gone bankrupted ! You've Lost!\n\nYou can see your status from this game,\nbut you'll need to start a new game from the\nmenu to play again.");
 	}
 	// Do nothing on ok
 	public static void NothingFunction()
@@ -64,6 +64,7 @@ public class PersistenceActivator : MonoBehaviour {
 		ResetAllValues();
 		RenderAllChanges();
 		startoptions.StartGameInScene();
+        GraphicFeedbacksManager.instance.ClearAllGraphics();
 	}
 
 	void ResetAllValues()
@@ -80,8 +81,13 @@ public class PersistenceActivator : MonoBehaviour {
 		else {
 			curGameData.productsList = new List<Product>();
 		}
-		curGameData.productsDoing = null;
-	}
+        curGameData.productsDoing = new List<Product>();
+        curGameData.displayedFeedbackGraphics = new List<string>();
+
+        curGameData.AiTycoons = new List<AITycoon>();
+        curGameData.AiTycoons.Add(new AITycoon() { name = "Dumb Tycoon", intelligence = 0.2f, curMoney = GameManager.GetStartingAiMoneyWithRandomness(), curIncome = -GameManager.baseDailyCost });
+        curGameData.AiTycoons.Add(new AITycoon() { name = "Average Tycoon", intelligence = 0.65f, curMoney = GameManager.GetStartingAiMoneyWithRandomness(), curIncome = -GameManager.baseDailyCost });
+    }
 
 	/// <summary>
 	/// destroi todas as entradas da lista de saves e cria novas para cada save que for encontrado
@@ -94,7 +100,7 @@ public class PersistenceActivator : MonoBehaviour {
 			GetDataFromSave(loadedGame);
 		}
 		else {
-			ModalPanel.MessageBox(icon, "No load available", "No saved input to load \nA New Game will be started.", NothingFunction, NothingFunction, NothingFunction, NothingFunction, false, "Ok");
+			ModalPanel.OkBox("No load available", "No saved input to load \nA New Game will be started.");
 			Debug.Log("There is no data to load");
 		}
 	}
@@ -112,11 +118,13 @@ public class PersistenceActivator : MonoBehaviour {
 			StartNewGameFunction();
 		}
 		else { // there is a save - confirmation to button to remove data, if no: nothing, if yes: new game
-			ModalPanel.MessageBox(icon, "There is a saved file", "Do you want to start a New Game?\n\nAll data will be lost if you do!", StartNewGameFunction, NothingFunction, NothingFunction, NothingFunction, false, "YesNo");
+			ModalPanel.YesNoBox("There is a saved file", "Do you want to start a New Game?\n\nAll data will be lost if you do!", StartNewGameFunction, NothingFunction);
 		}
 	}
 
 	public void GetDataFromSave(SavedGame theSave) {
+
+        GraphicFeedbacksManager.instance.ClearAllGraphics();
 		// load all data from SavedGame
 		curGameData = theSave;
 
@@ -128,7 +136,7 @@ public class PersistenceActivator : MonoBehaviour {
 
         for(int i = 0; i < curGameData.productsList.Count; i++)
         {
-            if(curGameData.productsList[i].madeByPlayer && curGameData.productsList[i].currentPhase != Product.ProductPhase.done)
+            if(curGameData.productsList[i].MadeByPlayer && curGameData.productsList[i].currentPhase != Product.ProductPhase.done)
             {
                 curGameData.productsDoing.Add(curGameData.productsList[i]);
             }
@@ -136,6 +144,14 @@ public class PersistenceActivator : MonoBehaviour {
 		for(int i = 0; i < curGameData.productsDoing.Count; i++) {
 			curGameData.productsDoing[i].UpdateLoadBar();
 		}
+
+        for(int i = 0; i < curGameData.displayedFeedbackGraphics.Count; i++)
+        {
+            //os feedbacks sao salvos como level-nome; 2-lataLixo, por exemplo
+            string[] levelAndName = curGameData.displayedFeedbackGraphics[i].Split('-');
+            int level = int.Parse(levelAndName[0]);
+            GraphicFeedbacksManager.instance.ShowSpecificGraphic(level, levelAndName[1]);
+        }
 	}
 	public void RenderAllChanges() {
 		// update UI
