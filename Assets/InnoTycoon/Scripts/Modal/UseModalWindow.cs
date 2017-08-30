@@ -42,7 +42,7 @@ public class UseModalWindow : MonoBehaviour
 	//Test function:  Pop up the Modal Window with an Ok button and an Icon.
 	public void TestOkIcon()
 	  {
-		Sprite icon = InformationIcon;
+		Sprite icon = null;
 		ModalPanel.MessageBox(icon, "Test OK Icon", "Press Ok.", TestYesFunction, TestNoFunction, TestCancelFunction, TestOkFunction, true, "Ok");
 	  }
 	//Test function:  Do something if the "Yes" button is clicked.

@@ -65,9 +65,9 @@ public class ModalPanel : MonoBehaviour
 		if (MessageType == "YesNoCancel")  //If the user has asked for the Message Box type "YesNoCancel"
 		  {
 			//Button1 is on the far left; Button2 is in the center and Button3 is on the right.  Each can be activated and labeled individually.
-			Button1.onClick.RemoveAllListeners (); Button1.onClick.AddListener(YesEvent);    Button1.onClick.AddListener(ClosePanel); Button1.GetComponentInChildren<Text>().text = "Yes";
-			Button2.onClick.RemoveAllListeners (); Button2.onClick.AddListener(NoEvent);     Button2.onClick.AddListener(ClosePanel); Button2.GetComponentInChildren<Text>().text = "No";
-			Button3.onClick.RemoveAllListeners (); Button3.onClick.AddListener(CancelEvent); Button3.onClick.AddListener(ClosePanel); Button3.GetComponentInChildren<Text>().text = "Cancel";
+			Button1.onClick.RemoveAllListeners (); Button1.onClick.AddListener(YesEvent);    Button1.onClick.AddListener(ClosePanel); Button1.GetComponentInChildren<Text>().text = "Sim";
+			Button2.onClick.RemoveAllListeners (); Button2.onClick.AddListener(NoEvent);     Button2.onClick.AddListener(ClosePanel); Button2.GetComponentInChildren<Text>().text = "Não";
+			Button3.onClick.RemoveAllListeners (); Button3.onClick.AddListener(CancelEvent); Button3.onClick.AddListener(ClosePanel); Button3.GetComponentInChildren<Text>().text = "Cancelar";
 			Button1.gameObject.SetActive(true); //We always turn on ONLY the buttons we need, and leave the rest off.
 			Button2.gameObject.SetActive(true);
 			Button3.gameObject.SetActive(true);
@@ -75,8 +75,8 @@ public class ModalPanel : MonoBehaviour
 		if (MessageType == "YesNo")        //If the user has asked for the Message Box type "YesNo"
 		  {
 			Button1.onClick.RemoveAllListeners (); 
-			Button2.onClick.RemoveAllListeners (); Button2.onClick.AddListener(YesEvent);     Button2.onClick.AddListener(ClosePanel); Button2.GetComponentInChildren<Text>().text = "Yes";
-			Button3.onClick.RemoveAllListeners (); Button3.onClick.AddListener(NoEvent);      Button3.onClick.AddListener(ClosePanel); Button3.GetComponentInChildren<Text>().text = "No";
+			Button2.onClick.RemoveAllListeners (); Button2.onClick.AddListener(YesEvent);     Button2.onClick.AddListener(ClosePanel); Button2.GetComponentInChildren<Text>().text = "Sim";
+			Button3.onClick.RemoveAllListeners (); Button3.onClick.AddListener(NoEvent);      Button3.onClick.AddListener(ClosePanel); Button3.GetComponentInChildren<Text>().text = "Não";
 			Button1.gameObject.SetActive(false);
 			Button2.gameObject.SetActive(true);
 			Button3.gameObject.SetActive(true);
@@ -99,7 +99,7 @@ public class ModalPanel : MonoBehaviour
 		  }
 		else
 		  {
-			this.IconImage.gameObject.SetActive(false); //Turn off the icon.
+			//this.IconImage.gameObject.SetActive(false); //Turn off the icon.
 		  }
   	  }
 

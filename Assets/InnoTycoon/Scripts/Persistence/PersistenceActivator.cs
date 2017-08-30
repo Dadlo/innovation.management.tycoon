@@ -48,7 +48,7 @@ public class PersistenceActivator : MonoBehaviour {
 		}
 	}
 	public void EndGame() {
-		ModalPanel.OkBox("Game Over", "You have gone bankrupted ! You've Lost!\n\nYou can see your status from this game,\nbut you'll need to start a new game from the\nmenu to play again.");
+		ModalPanel.OkBox("Game Over", "Você faliu ! Você perdeu!\n\nVeja seus status dessa partida,\ne comece um novo jogo para\ntentar novamente.");
 	}
 	// Do nothing on ok
 	public static void NothingFunction()
@@ -118,7 +118,7 @@ public class PersistenceActivator : MonoBehaviour {
 			StartNewGameFunction();
 		}
 		else { // there is a save - confirmation to button to remove data, if no: nothing, if yes: new game
-			ModalPanel.YesNoBox("There is a saved file", "Do you want to start a New Game?\n\nAll data will be lost if you do!", StartNewGameFunction, NothingFunction);
+			ModalPanel.YesNoBox("Jogo Anterior Salvo", "Você gostaria de começar um novo jogo?\nTodos os dados anteriores serão perdidos!", StartNewGameFunction, NothingFunction);
 		}
 	}
 
