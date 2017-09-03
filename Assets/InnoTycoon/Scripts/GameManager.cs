@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 
     public const int aiWeeksOutWhenBankrupted = 6, aiMoneyWhenRespawned = 250000;
 
-    public const int aiSafeAmountWhenStudying = 100000;
+    public const int aiSafeAmountWhenStudying = 100000, aiSafeAmountWhenDesigningProduct = 20000;
 
     public ProductOptionsContainer pConcepts, pDevOptions, pMonetOptions;
 
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour {
 		if (persInstanceSave.productsList == null) persInstanceSave.productsList = new List<Product>();
 		persInstanceSave.productsList.Add(newProduct);
 
-		persInstanceSave.cost += CalculateProductCost(newProduct);
+		persInstanceSave.cost += CalculateProductDailyCost(newProduct);
 		PersistenceActivator.instance.RenderAllChanges();
 	}
 
@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour {
         {
             SavedGame persInstanceSave = PersistenceActivator.instance.curGameData;
 
-            persInstanceSave.cost -= CalculateProductCost(theProductSold);
+            persInstanceSave.cost -= CalculateProductDailyCost(theProductSold);
 
             int productLevel = GetProductRatingLevel(theProductSold);
 
@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour {
         {
             AITycoon prodOwner = GetAITycoByName(theProductSold.owner);
 
-            prodOwner.curIncome += CalculateProductCost(theProductSold);
+            prodOwner.curIncome += CalculateProductDailyCost(theProductSold);
             prodOwner.curIncome += theProductSold.rentability;
         }
 		
@@ -448,7 +448,7 @@ public class GameManager : MonoBehaviour {
         return Product.ProductCloneType.notAClone;
     }
 
-	public static int CalculateProductCost(Product targetProduct) {
+	public static int CalculateProductDailyCost(Product targetProduct) {
 		int totalProdCost = 0;
 		for(int i = 0; i < targetProduct.pickedOptionIDs.Count; i++) {
             ProductOption theOption = instance.GetProductOptionByID(targetProduct.pickedOptionIDs[i]);
@@ -462,7 +462,47 @@ public class GameManager : MonoBehaviour {
 		return totalProdCost;
 	}
 
-	private int GetProductRatingLevel(Product targetProduct) {
+    public static int CalculateProductTotalCost(Product targetProduct)
+    {
+        int paidTime = baseNumberOfConceptSteps + baseNumberOfDevSteps;
+        int dailyCost = 0;
+        for(int i = 0; i < targetProduct.pickedOptionIDs.Count; i++)
+        {
+            ProductOption theOption = instance.GetProductOptionByID(targetProduct.pickedOptionIDs[i]);
+            if (theOption != null)
+            {
+                dailyCost += theOption.cost;
+                Product.ProductPhase optionPhase = instance.GetProductOptionPhase(theOption);
+                if (optionPhase == Product.ProductPhase.concept || optionPhase == Product.ProductPhase.dev)
+                {
+                    paidTime += Mathf.Max(0, theOption.multiplier - 1);
+                }
+            }
+        }
+
+        return paidTime * dailyCost;
+    }
+
+    public static int CalculateProductPaidTime(Product targetProduct)
+    {
+        int paidTime = baseNumberOfConceptSteps + baseNumberOfDevSteps;
+        for (int i = 0; i < targetProduct.pickedOptionIDs.Count; i++)
+        {
+            ProductOption theOption = instance.GetProductOptionByID(targetProduct.pickedOptionIDs[i]);
+            if (theOption != null)
+            {
+                Product.ProductPhase optionPhase = instance.GetProductOptionPhase(theOption);
+                if (optionPhase == Product.ProductPhase.concept || optionPhase == Product.ProductPhase.dev)
+                {
+                    paidTime += Mathf.Max(0, theOption.multiplier - 1);
+                }
+            }
+        }
+
+        return paidTime;
+    }
+
+    private int GetProductRatingLevel(Product targetProduct) {
 		float theRating = targetProduct.rating;
 		if(theRating < 3) {
 			return 0;

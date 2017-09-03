@@ -144,8 +144,6 @@ public class AITycoon
         createdProduct.devSteps = GameManager.baseNumberOfDevSteps;
         createdProduct.saleSteps = GameManager.baseNumberOfSaleSteps;
 
-        int numPickedConcepts = 0, numPickedDevs = 0, numPickedSales = 0;
-
         for (int i = 0; i < studiesDone.Count; i++)
         {
             if(Random.Range(0, 1.0f) < intelligence)
@@ -154,32 +152,33 @@ public class AITycoon
                 
                 //adicionamos os passos (tudo em concepcao caso nao seja marketing)
                 ProductOption chosenOption = GameManager.instance.GetProductOptionByID(skillId);
-                switch (GameManager.instance.GetProductOptionPhase(chosenOption))
+
+                createdProduct.pickedOptionIDs.Add(skillId);
+
+                int projectedPaidTime = GameManager.CalculateProductPaidTime(createdProduct);
+
+                //se pudermos pagar, mantemos essa opcao
+                if (curMoney - GetMoneyThatWillBeSpentUntilStudyEnd() -
+                    ((GameManager.baseDailyCost * projectedPaidTime) + GameManager.CalculateProductTotalCost(createdProduct)) >
+                    GameManager.aiSafeAmountWhenDesigningProduct)
                 {
-                    case Product.ProductPhase.concept:
-                        if(numPickedConcepts < 2)
-                        {
-                            createdProduct.conceptSteps += chosenOption.multiplier / 2;
-                            createdProduct.pickedOptionIDs.Add(skillId);
-                            numPickedConcepts++;
-                        }
-                        break;
-                    case Product.ProductPhase.dev:
-                        if (numPickedDevs < 2)
-                        {
-                            createdProduct.devSteps += chosenOption.multiplier / 2;
-                            createdProduct.pickedOptionIDs.Add(skillId);
-                            numPickedDevs++;
-                        }
-                        break;
-                    case Product.ProductPhase.sales:
-                        if (numPickedSales < 2)
-                        {
-                            createdProduct.saleSteps += chosenOption.multiplier;
-                            createdProduct.pickedOptionIDs.Add(skillId);
-                            numPickedSales++;
-                        }
-                        break;
+                    switch (GameManager.instance.GetProductOptionPhase(chosenOption))
+                    {
+
+                        case Product.ProductPhase.concept:
+                            createdProduct.conceptSteps += Mathf.Max(0, chosenOption.multiplier - 1);
+                            break;
+                        case Product.ProductPhase.dev:
+                            createdProduct.devSteps += Mathf.Max(0, chosenOption.multiplier - 1);
+                            break;
+                        case Product.ProductPhase.sales:
+                            createdProduct.saleSteps += Mathf.Max(0, chosenOption.multiplier - 1);
+                            break;
+                    }
+                }
+                else
+                {
+                    createdProduct.pickedOptionIDs.Remove(skillId);
                 }
 
             }
@@ -189,7 +188,7 @@ public class AITycoon
         createdProduct.devFocusPercentage = 0.33f;
         createdProduct.saleFocusPercentage = 0.34f;
 
-        curIncome -= GameManager.CalculateProductCost(createdProduct);
+        curIncome -= GameManager.CalculateProductDailyCost(createdProduct);
         productDoing = createdProduct;
         products.Add(createdProduct);
     }
@@ -198,5 +197,19 @@ public class AITycoon
     {
         ModalPanel.Instance().OkBox(GameManager.GetVariableText("aiBankruptedHdr"), GameManager.GetVariableText("aiBankruptedTxt", name));
         weeksDownRemaining = GameManager.aiWeeksOutWhenBankrupted + Random.Range(0, GameManager.aiWeeksOutWhenBankrupted);
+    }
+
+    int GetMoneyThatWillBeSpentUntilStudyEnd()
+    {
+        if (!string.IsNullOrEmpty(studyDoing))
+        {
+            StudyOption curStudy = GameManager.instance.GetStudyByName(studyDoing);
+            return (curStudy.steps - curStudyStep) * curStudy.cost;
+        }
+        else
+        {
+            return 0;
+        }
+        
     }
 }
