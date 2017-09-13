@@ -2,21 +2,21 @@
 <FeedbackTexts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <theTextList>
     <string>prodRepeatAlert|Repetições de produtos possuem menor impacto no mercado, seja repetição interna ou de sua concorrência direta!</string>
-    <string>fbProdGrade0-1|Lorem ipsum productus bastancti ruinis variatio 1</string>
-    <string>fbProdGrade0-2|Lorem ipsum productus bastancti ruinis variatio 2</string>
-    <string>fbProdGrade0-3|Lorem ipsum productus bastancti ruinis variatio 3</string>
-    <string>fbProdGrade1-1|Lorem ipsum productus ruinis variatio 1</string>
-    <string>fbProdGrade1-2|Lorem ipsum productus ruinis variatio 2</string>
-    <string>fbProdGrade1-3|Lorem ipsum productus ruinis variatio 3</string>
-    <string>fbProdGrade2-1|Lorem ipsum productus maedium variatio 1</string>
-    <string>fbProdGrade2-2|Lorem ipsum productus maedium variatio 2</string>
-    <string>fbProdGrade2-3|Lorem ipsum productus maedium variatio 3</string>
-    <string>fbProdGrade3-1|Lorem ipsum productus bonis variatio 1</string>
-    <string>fbProdGrade3-2|Lorem ipsum productus bonis variatio 2</string>
-    <string>fbProdGrade3-3|Lorem ipsum productus bonis variatio 3</string> 
-    <string>fbProdGrade4-1|Lorem ipsum productus bastancti bonis variatio 1</string>
-    <string>fbProdGrade4-2|Lorem ipsum productus bastancti bonis variatio 2</string>
-    <string>fbProdGrade4-3|Lorem ipsum productus bastancti bonis variatio 3</string>
+    <string>fbProdGrade0-1|Produto parece uma xero vindo de uma copiadora quebrada</string>
+    <string>fbProdGrade0-2|Não havia expectativa, mas o resultado conseguiu ser abaixo do esperado</string>
+    <string>fbProdGrade0-3|Se péssima qualidade tiver um nome, é o deste produto</string>
+    <string>fbProdGrade1-1|Produto de baixa qualidade sem trazer nada novo ao mercado</string>
+    <string>fbProdGrade1-2|Sem novidades, sem atrativos, mais um produto no mercado</string>
+    <string>fbProdGrade1-3|Mais um produto que ficará encalhado nas prateleiras</string>
+    <string>fbProdGrade2-1|Sem grandes novidades, sem atrativos, produto sem sal</string>
+    <string>fbProdGrade2-2|Cumpre o que promete sem nenhum extra</string>
+    <string>fbProdGrade2-3|Produto de nível de entrada, mas sem diferenciais</string>
+    <string>fbProdGrade3-1|Bom produto, supera as expectativas</string>
+    <string>fbProdGrade3-2|Estética e funcionalidades incríveis, recomendado</string>
+    <string>fbProdGrade3-3|Um ótimo produto entrando no mercado para quebrar concorrencias</string> 
+    <string>fbProdGrade4-1|Disruptivo! Absurdamente além do esperado.</string>
+    <string>fbProdGrade4-2|Uma obra de arte sem precedentes, estética e funcionalidades em sinergia</string>
+    <string>fbProdGrade4-3|Sem dúvidas o melhor da categoria, Top of Mind em questãod e dias.</string>
     <string>criticsGrade|Nota da crítica: </string>
     <string>salesPeriod|Período de vendas: </string>
     <string>prodEnteredSalesHdr|Produto entrou em fase de vendas</string>
