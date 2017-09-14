@@ -41,7 +41,7 @@ public class StudiesListEntry : MonoBehaviour {
         {
             studyBtnText.text = string.Concat("Estudar (", myOption.steps.ToString(), " dias)");
             studyBtn.interactable = true;
-			studyBtnText.color = Color.black;
+			studyBtnText.color = Color.white;
 		}
     }
 
