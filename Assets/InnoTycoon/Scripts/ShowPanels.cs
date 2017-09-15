@@ -3,12 +3,11 @@ using System.Collections;
 
 public class ShowPanels : MonoBehaviour {
 
+	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
 	public GameObject optionsPanel;							//Store a reference to the Game Object OptionsPanel 
 	public GameObject optionsTint;							//Store a reference to the Game Object OptionsTint 
 	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
-	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
 	public GameObject HUDPanel;								//Store a reference to the Game Object HUD 
-	public GameObject ScrollerPanel;                        //Store a reference to the Game Object Scroller 
 	public ProductsPanel productsPanel;
     public StudiesPanel studiesPanel;
 	public ProductCreationPanel pCreationPanel;
@@ -17,8 +16,8 @@ public class ShowPanels : MonoBehaviour {
 	//Call this function to activate and display the Options panel during the main menu
 	public void ShowOptionsPanel()
 	{
-		optionsPanel.SetActive(true);
 		optionsTint.SetActive(true);
+		optionsPanel.SetActive(true);
 	}
 
 	//Call this function to deactivate and hide the Options panel during the main menu
@@ -39,24 +38,12 @@ public class ShowPanels : MonoBehaviour {
 	{
 		menuPanel.SetActive (false);
 	}
-	
-	//Call this function to activate and display the scroll menu panel during the main menu
-	public void ShowScroll()
-	{
-		ScrollerPanel.SetActive (true);
-	}
-
-	//Call this function to deactivate and hide the scroll menu panel during the main menu
-	public void HideScroll()
-	{
-		ScrollerPanel.SetActive (false);
-	}
 
 	//Call this function to activate and display the Pause panel during game play
 	public void ShowPausePanel()
 	{
-		pausePanel.SetActive (true);
 		optionsTint.SetActive(true);
+		pausePanel.SetActive (true);
 	}
 
 	//Call this function to activate and display the HUD during game play

@@ -9,7 +9,7 @@ public class DevSteps : MonoBehaviour {
 
 	public static float transitionDuration = 1.5f;
 
-	public static float baseLoadBarOpacity = 0.6f;
+	public static float baseLoadBarOpacity = 0.8f;
 
 	public List<Color> availableLoadBarColors = new List<Color>();
 

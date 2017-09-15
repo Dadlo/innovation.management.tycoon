@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
 
 	public const int baseConceptProfit = 9000, baseDevProfit = 9000, baseSalesProfit = 9000;
 
-	public const float baseRatingDivisor = 10.5f, salesStepsDivisor = 3;
+	public const float baseRatingDivisor = 4.5f, salesStepsDivisor = 3;
 
 	public const float luckyFactor = 0.3f;
 
