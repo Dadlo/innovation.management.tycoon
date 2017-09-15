@@ -90,7 +90,7 @@ public class PersistenceActivator : MonoBehaviour {
     }
 
 	/// <summary>
-	/// destroi todas as entradas da lista de saves e cria novas para cada save que for encontrado
+	/// carrega o jogo salvo no arquivo save01
 	/// </summary>
 	public void LoadAllData() {
 		SavedGame loadedGame = PersistenceHandler.LoadFromFile<SavedGame>("save01");

@@ -119,11 +119,6 @@ public class ProductCreationPanel : ShowablePanel {
 			sectionToggles[i].GetComponent<ProductCreationSectionToggle>().onToggled += OnToldToChangeSections;
 		}
 
-        //preenchemos as listas de opcoes...
-        FillOptionsList(GameManager.instance.pConcepts.productOptionsList, conceptOptionEntries, ProductOptionListEntry.OptionType.concept, conceptsListContainer);
-        FillOptionsList(GameManager.instance.pDevOptions.productOptionsList, devOptionEntries, ProductOptionListEntry.OptionType.dev, devListContainer);
-        FillOptionsList(GameManager.instance.pMonetOptions.productOptionsList, monetOptionEntries, ProductOptionListEntry.OptionType.monet, monetListContainer);
-
 		ToggleProductFinalizationOption(pickedConcepts.Count > 0);
     }
 
@@ -136,8 +131,49 @@ public class ProductCreationPanel : ShowablePanel {
             ProductOptionListEntry entryScript = newEntry.GetComponent<ProductOptionListEntry>();
             entryScript.onToggled += OnPickedProdOption;
             entryScript.SetContent(theOptionsList[i], optionType);
-			optionEntryListToFill.Add(entryScript);
+            optionEntryListToFill.Add(entryScript);
         }
+    }
+
+    /// <summary>
+    /// destroi todos os filhos do listContainer
+    /// </summary>
+    /// <param name="listContainer"></param>
+    void ClearOptionsList(Transform listContainer)
+    {
+        for(int i = 0; i < listContainer.childCount; i++)
+        {
+            Destroy(listContainer.GetChild(i).gameObject);
+        }
+    }
+
+    /// <summary>
+    /// limpa e adiciona de novo as opcoes de produto, para que nenhuma esteja selecionada
+    /// </summary>
+    public void ResetProdOptions()
+    {
+        ClearAllProdOptions();
+        FillAllProdOptions();
+    }
+
+    /// <summary>
+    /// adiciona as entradas de opcoes de produtos aos respectivos conteineres na UI
+    /// </summary>
+    public void FillAllProdOptions()
+    {
+        FillOptionsList(GameManager.instance.pConcepts.productOptionsList, conceptOptionEntries, ProductOptionListEntry.OptionType.concept, conceptsListContainer);
+        FillOptionsList(GameManager.instance.pDevOptions.productOptionsList, devOptionEntries, ProductOptionListEntry.OptionType.dev, devListContainer);
+        FillOptionsList(GameManager.instance.pMonetOptions.productOptionsList, monetOptionEntries, ProductOptionListEntry.OptionType.monet, monetListContainer);
+    }
+
+    /// <summary>
+    /// remove as entradas de opcoes de produtos de todas as listas de UI
+    /// </summary>
+    public void ClearAllProdOptions()
+    {
+        ClearOptionsList(conceptsListContainer);
+        ClearOptionsList(devListContainer);
+        ClearOptionsList(monetListContainer);
     }
 
 	public void RefreshOptionEntriesList(ProductOptionListEntry.OptionType targetTypeToRefresh) {

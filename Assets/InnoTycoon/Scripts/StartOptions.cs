@@ -142,6 +142,8 @@ public class StartOptions : MonoBehaviour {
 
 		//Set trigger for animator to start animation fading in HUD UI
 		showPanels.ShowHUD();
+
+        showPanels.pCreationPanel.ResetProdOptions();
 	}
 
 	public void ReturnToMenu()

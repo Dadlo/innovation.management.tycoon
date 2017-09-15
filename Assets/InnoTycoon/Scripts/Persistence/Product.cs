@@ -235,7 +235,9 @@ public class Product {
 		rentability = (int) (GameManager.baseConceptProfit * totalConceptModifier + GameManager.baseDevProfit * totalDevModifier +
 			GameManager.baseSalesProfit * totalSalesModifier);
 
-		saleSteps = GameManager.baseNumberOfSaleSteps + Mathf.FloorToInt(totalSalesModifier / GameManager.salesStepsDivisor);
+        //o modifier de vendas pode ate aumentar o numero de passos de vendas!
+        //para nao aumentar muito, existe o salesStepsDivisor
+		saleSteps += Mathf.FloorToInt(totalSalesModifier / GameManager.salesStepsDivisor);
 
 		return cloneType;
 	}
