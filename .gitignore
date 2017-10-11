@@ -4,6 +4,7 @@
 /[Bb]uild/
 /[Bb]uilds/
 /Assets/AssetStoreTools*
+/SBGames/
 
 # Visual Studio 2015 cache directory
 /.vs/
