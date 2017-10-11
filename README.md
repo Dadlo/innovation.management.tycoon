@@ -62,3 +62,40 @@ Open Source CC BY-NC (Creative Commons com atribuição + Uso não comercial)
 
 ### Música
 Música Royalty Free de [Bensound](http://www.bensound.com/)
+
+Projeto de Mestrado
+=======
+
+### Versão atual do projeto de mestrado em PDF
+
+* [Visualizar Projeto](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/projeto-mestrado-v14.pdf
+)
+
+SBGames
+=======
+
+SBGames 2017
+------------
+
+### Short Paper aprovado na Trilha Arte e Design
+
+"Game Design com foco em Interface: Influências do design iterativo com storyboard e prototipagem no desenvolvimento de jogos", por Danilo Barbato, Dr. Alexandre Santaella Braga e Dra Karla Vittori
+
+* [Visualizar Artigo](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/game-design-com-foco-em-interface.pdf)
+* [Visualizar Banner](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/banner-game-design-com-foco-em-interface.pdf)
+* [Visualizar Apresentação](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/apresentacao--game-design-com-foco-em-interface.pdf)
+
+### Short Paper aprovado na Trilha Indústria
+
+"Gestão da Inovação no desenvolvimento de produtos como serious games", por Danilo Barbato, Dr. Alexandre Santaella Braga e Dra Karla Vittori
+
+* [Visualizar Artigo](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/gestao-da-inovacao-no-desenvolvimento-de-produtos-como-serious-games.pdf)
+* [Visualizar Banner](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/banner-gestao-da-inovacao-no-desenvolvimento-de-produtos-como-serious-games.pdf)
+* [Visualizar Apresentação](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/apresentacao--game-design-com-foco-em-interface.pdf)
+
+SBGames 2016
+------------
+
+### Full Paper publicado na Trilha Indústria
+
+Visualizar artigo: ["Serious Games baseados em Simulações: Frameworks, definições e requisitos", por Danilo Barbato.](http://www.sbgames.org/sbgames2016/downloads/anais/160391.pdf)
