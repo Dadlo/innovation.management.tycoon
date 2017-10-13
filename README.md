@@ -26,7 +26,7 @@ Este protótipo tem como foco o build para Tablets e Smartphones de tela grande 
 
 A aplicação foi desenvolvida como parte do projeto de Mestrado de Danilo Sartorelli Barbato no programa de Pós-Graduação em Engenharia e Gestão da Inovação da Universidade Federal do ABC - UFABC, sob orientação do prof Dr. Alexandre Santaella Braga e co-orientação da profª Dra. Karla Vittori.
 
-![Tela principal do protótipo](https://github.com/Dadlo/innovation.management.tycoon/blob/master/SBGames/telaprincipal.png)
+![Tela principal do protótipo](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/telaprincipal.png)
 
 
 Instalação
@@ -35,7 +35,7 @@ Instalação
 Aplicativo disponível na Google Play.
 Basta acessar o [link](https://play.google.com/store/apps/details?id=innovation.management.tycoon) e instalar.
 
-[![Google Play](https://github.com/Dadlo/innovation.management.tycoon/blob/master/SBGames/googleplay.png)](https://play.google.com/store/apps/details?id=innovation.management.tycoon)
+[![Google Play](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/googleplay.png)](https://play.google.com/store/apps/details?id=innovation.management.tycoon)
 
 
 Customização
