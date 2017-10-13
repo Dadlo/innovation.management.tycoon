@@ -1,8 +1,8 @@
 InnoTycoon
 ==========
 
-Table of contents
-=================
+Sumário
+=======
 
   * [Innovation Management Tycoon](#innovation-management-tycoon)
   * [Autores e Contribuidores](#autores-e-contribuidores)
@@ -20,7 +20,7 @@ Innovation Management Tycoon
 Descrição
 ---------
 
-Protótipo de jogo em formato Tycoon desenvolvido em Unity3D como Serious Game de Gestão de Projetos com Conceitos de Inovação através de fluxo de criação de produtos.
+InnoTycoon (Innovation Management Tycoon) é um protótipo de jogo em formato Tycoon desenvolvido em Unity3D como Serious Game de Gestão de Projetos com Conceitos de Inovação através de fluxo de criação de produtos.
 
 Este protótipo tem como foco o build para Tablets e Smartphones de tela grande com sistema operacional Android.
 
