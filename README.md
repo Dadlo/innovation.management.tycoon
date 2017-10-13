@@ -128,7 +128,7 @@ SBGames 2017
 
 * [Visualizar Artigo](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/gestao-da-inovacao-no-desenvolvimento-de-produtos-como-serious-games.pdf)
 * [Visualizar Banner](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/banner-gestao-da-inovacao-no-desenvolvimento-de-produtos-como-serious-games.pdf)
-* [Visualizar Apresentação](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/apresentacao--game-design-com-foco-em-interface.pdf)
+* [Visualizar Apresentação](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/apresentacao-gestao-da-inovacao-no-desenvolvimento-de-produtos-como-serious-games.pdf)
 
 
 SBGames 2016
