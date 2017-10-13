@@ -1,10 +1,24 @@
 InnoTycoon
 ==========
 
-Innovation Management Tycoon
-----------------------------
+Table of contents
+=================
 
-### Descrição
+  * [Innovation Management Tycoon](#innovation-management-tycoon)
+  * [Autores e Contribuidores](#autores-e-contribuidores)
+  * [Projeto de Mestrado](#projeto-de-mestrado)
+  * [SBGames](#sbgames)
+    * [SBGames 2017](#sbgames-2017)
+    * [SBGames 2016](#sbgames-2016)
+
+
+
+Innovation Management Tycoon
+============================
+
+
+Descrição
+---------
 
 Protótipo de jogo em formato Tycoon desenvolvido em Unity3D como Serious Game de Gestão de Projetos com Conceitos de Inovação através de fluxo de criação de produtos.
 
@@ -12,20 +26,33 @@ Este protótipo tem como foco o build para Tablets e Smartphones de tela grande 
 
 A aplicação foi desenvolvida como parte do projeto de Mestrado de Danilo Sartorelli Barbato no programa de Pós-Graduação em Engenharia e Gestão da Inovação da Universidade Federal do ABC - UFABC, sob orientação do prof Dr. Alexandre Santaella Braga e co-orientação da profª Dra. Karla Vittori.
 
-### Instalação
+![Tela principal do protótipo](https://github.com/Dadlo/innovation.management.tycoon/blob/master/SBGames/telaprincipal.png)
+
+
+Instalação
+----------
+
+Aplicativo disponível na Google Play.
+Basta acessar o [link](https://play.google.com/store/apps/details?id=innovation.management.tycoon) e instalar.
+
+[![Google Play](https://github.com/Dadlo/innovation.management.tycoon/blob/master/SBGames/googleplay.png)](https://play.google.com/store/apps/details?id=innovation.management.tycoon)
+
+
+Customização
+------------
 
 Basta clonar o repositório ou baixar o pacote e descompactar e abrir em versão compatível do Unity 3D, com SDK configurado para build Android.
 Projeto criado com versão 5.5.0 (5.5.0xf3Linux)
 
-### Referências
 
-Menu inicial e GUI inicialmente criadas com base em Tutorial do Unity3D: https://unity3d.com/pt/learn/tutorials/modules/beginner/live-training-archive/game-jam-template
-
-### Estado
+Estado
+------
 
 Protótipo Funcional, com funcionalidades básicas aplicadas
 
-### Funcionalidades
+
+Funcionalidades
+---------------
 
 * Menu principal
 * Tela de Pause
@@ -43,28 +70,38 @@ Protótipo Funcional, com funcionalidades básicas aplicadas
 * Sistema de concorrência com algorítmos que controlam dois concorrentes automatizados, um com péssimo desempenho e outro com desempenho regular.
 * Controle de estudos e opções de criação de produtos em XML externo para facilitar futura manutenção e tradução
 
-### Próximos Desenvolvimentos
+
+Próximos Desenvolvimentos
+-------------------------
 
 * Funcionalidades da área de Gestão, com equipamentos, pessoas e salas
 * Implementação de sons de interface
 * Criação e implementação de personagem
 * Implementação de internacionalização
 
-### Autores / Contribuidores
+
+Autores e Contribuidores
+========================
 
 * Game Designer - Danilo Sartorelli Barbato (dadlo)
 * Programação - Lucas Vinícius (lucasvinbr) e Danilo Sartorelli Barbato (dadlo)
 * Design - Lucas Vinícius (lucasvinbr), Danilo Sartorelli Barbato (dadlo) e Kesia Ventura
 
-### Copyright e licença
+
+Copyright e licença
+-------------------
 
 Open Source CC BY-NC (Creative Commons com atribuição + Uso não comercial)
 
-### Música
+
+Música
+------
+
 Música Royalty Free de [Bensound](http://www.bensound.com/)
 
+
 Projeto de Mestrado
-=======
+===================
 
 ### Versão atual do projeto de mestrado em PDF
 
@@ -92,6 +129,7 @@ SBGames 2017
 * [Visualizar Artigo](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/gestao-da-inovacao-no-desenvolvimento-de-produtos-como-serious-games.pdf)
 * [Visualizar Banner](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/banner-gestao-da-inovacao-no-desenvolvimento-de-produtos-como-serious-games.pdf)
 * [Visualizar Apresentação](https://raw.githubusercontent.com/Dadlo/innovation.management.tycoon/master/SBGames/apresentacao--game-design-com-foco-em-interface.pdf)
+
 
 SBGames 2016
 ------------
